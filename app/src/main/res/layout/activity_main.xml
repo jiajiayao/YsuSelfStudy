@@ -16,7 +16,6 @@
                android:layout_height="wrap_content"
                android:textSize="26sp"
                android:textColor="#FFFFFF"
-               android:text="今日也是充满希望的一天"
                />
        </FrameLayout>
     <LinearLayout

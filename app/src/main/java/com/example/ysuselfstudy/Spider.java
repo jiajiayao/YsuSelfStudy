@@ -38,7 +38,7 @@ public class Spider {
     {
         Elements element = null;
         try {
-            Document document=Jsoup.connect(AllString.GuoLin).get();
+            Document document=Jsoup.connect(AllString.BiYing).get();
             element=document.select("body");
             Log.d(TAG, "SearchForBiYing: "+element.text());
 

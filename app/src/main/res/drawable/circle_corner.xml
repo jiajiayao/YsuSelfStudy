@@ -6,6 +6,6 @@
 
     <!-- 直接写成android:radius="5dp" 也可以 -->
     <corners
-       android:radius="10dp"
+       android:radius="30dp"
         />
 </shape>

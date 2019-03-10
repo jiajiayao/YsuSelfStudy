@@ -9,6 +9,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ysuselfstudy.CardShow;
 import com.example.ysuselfstudy.MainActivity;
 import com.example.ysuselfstudy.R;
 
@@ -38,10 +39,6 @@ public class RoomExAdapter extends BaseExpandableListAdapter {
     }
 
 
-    public RoomExAdapter()
-    {
-
-    }
     /**
      * 读取父级数据条数
      * @return 返回父级数据大小，也就是学有多少建筑
@@ -123,13 +120,6 @@ public class RoomExAdapter extends BaseExpandableListAdapter {
 
         final TextView textView = (TextView) view.findViewById(R.id.view_content);
         textView.setText(emptyRoom.getRoomName());
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context,"你点击了"+textView.getText(),Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(context,MainActivity.class);
-            }
-        });
         return view;
     }
 

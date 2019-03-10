@@ -23,14 +23,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageView
+            android:paddingLeft="20dp"
+            android:scaleType="fitCenter"
             android:id="@+id/time"
-            android:src="@drawable/clock"
+            android:src="@drawable/clock1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/showTime"
-            android:background="#82E978"
+
             android:textSize="26dp"
             android:gravity="center"
             android:layout_width="match_parent"

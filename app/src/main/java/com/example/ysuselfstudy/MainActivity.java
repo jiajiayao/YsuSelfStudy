@@ -1,5 +1,6 @@
 package com.example.ysuselfstudy;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -70,6 +71,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent,
+                                        View v,
+                                        int groupPosition,
+                                        int childPosition,
+                                        long id) {
+                EmptyRoom temp=(EmptyRoom) childlist.get(groupPosition).get(childPosition);
+                Toast.makeText(parent.getContext(),"你点击了"+temp.getRoomName(),Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(MainActivity.this,CardShow.class);
+                startActivity(intent);
+                return false;
+            }
+        });
+
     }
         /*
         * 加载必应每日一图，可以通过 Jsoup 来实现。
@@ -86,13 +102,15 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Glide.with(MainActivity.this ).load(temp).into(imageView);
+                        Glide.with(MainActivity.this).
+                                load(temp).
+                                crossFade().
+                              //  placeholder(R.drawable.placeorder).
+                                into(imageView);
                     }
                 });
             }
         }).start();
-
-
     }
 
     private  void initdata()

@@ -37,6 +37,11 @@ public class RoomExAdapter extends BaseExpandableListAdapter {
         this.context=context.getApplicationContext();
     }
 
+
+    public RoomExAdapter()
+    {
+
+    }
     /**
      * 读取父级数据条数
      * @return 返回父级数据大小，也就是学有多少建筑
@@ -100,6 +105,8 @@ public class RoomExAdapter extends BaseExpandableListAdapter {
 
         TextView textView = (TextView) view.findViewById(R.id.view_title);
         textView.setText(schoolBuilding.getBuildingName());
+
+
         return view;
     }
 

@@ -51,13 +51,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initdata();
-        ExpandableListView expandableListView=(ExpandableListView) findViewById(R.id.expand_list);
-        RoomExAdapter roomExAdapter = new RoomExAdapter(this,
+        final ExpandableListView expandableListView=(ExpandableListView) findViewById(R.id.expand_list);
+        final RoomExAdapter roomExAdapter = new RoomExAdapter(this,
                 R.layout.parent_item,
                 R.layout.child_item,
                 grouplist,
                 childlist);
         expandableListView.setAdapter(roomExAdapter);
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                int count=roomExAdapter.getGroupCount();
+                for(int i=0;i<count;i++)
+                {
+                    if(i!=groupPosition)
+                        expandableListView.collapseGroup(i);
+                }
+            }
+        });
 
     }
         /*

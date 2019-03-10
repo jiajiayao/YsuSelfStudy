@@ -23,6 +23,8 @@ public class DemoPopup extends BasePopupWindow {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String time=BeginTime.getHour()+":"+BeginTime.getMinute()+"-"+EndTime.getHour()+":"+EndTime.getMinute();
+                    MainActivity.SetTime(time);
                     onBackPressed();
                 }
             });
@@ -47,8 +49,11 @@ public class DemoPopup extends BasePopupWindow {
         EndTime.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                BeginTime.setHour(EndTime.getHour());
-                BeginTime.setMinute(EndTime.getMinute()-1);
+                if(EndTime.getHour()<BeginTime.getHour())
+                  BeginTime.setHour(EndTime.getHour());
+                else if(EndTime.getHour()==BeginTime.getHour())
+                    if(EndTime.getMinute()<=BeginTime.getMinute())
+                          BeginTime.setMinute(EndTime.getMinute()-1);
             }
         });
     }

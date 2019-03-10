@@ -24,7 +24,7 @@ import yuan.data.SchoolBuilding;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static ImageView image;
-    TextView textView;
+    private static TextView TimeView;
     TextView Today;
     String temp;
     ArrayList<SchoolBuilding> grouplist;
@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         Today.setText(AllString.Today);
 
         //时间的点击触发底部弹窗
-        textView=(TextView) findViewById(R.id.showTime);
-        textView.setOnClickListener(new View.OnClickListener() {
+        TimeView=(TextView) findViewById(R.id.showTime);
+        TimeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DemoPopup(MainActivity.this).showPopupWindow();
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
         /*
         * 加载必应每日一图，可以通过 Jsoup 来实现。
-        * 这里还没有准备好
+        * 占位图的设计?
         * */
     private void loadImage(final ImageView imageView) {
         new Thread(new Runnable() {
@@ -133,5 +133,10 @@ public class MainActivity extends AppCompatActivity {
         bg.add(new EmptyRoom("第7教学楼",16,"东"));
         childlist.add(bg);
 
+    }
+
+    public  static  void SetTime(String name)
+    {
+        TimeView.setText(name);
     }
 }

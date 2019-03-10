@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -12,12 +13,21 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import yuan.data.EmptyRoom;
+import yuan.data.RoomExAdapter;
+import yuan.data.SchoolBuilding;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static ImageView image;
     TextView textView;
     TextView Today;
     String temp;
+    ArrayList<SchoolBuilding> grouplist;
+    ArrayList<List> childlist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
                 new DemoPopup(MainActivity.this).showPopupWindow();
             }
         });
+
+        initdata();
+        ExpandableListView expandableListView=(ExpandableListView) findViewById(R.id.expand_list);
+        RoomExAdapter roomExAdapter = new RoomExAdapter(this,
+                R.layout.parent_item,
+                R.layout.child_item,
+                grouplist,
+                childlist);
+        expandableListView.setAdapter(roomExAdapter);
 
     }
         /*
@@ -62,6 +81,28 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
 
+
+    }
+
+    private  void initdata()
+    {
+        grouplist=new ArrayList<>();
+        childlist =new ArrayList<>();
+
+        grouplist.add(new SchoolBuilding("东区"));
+        grouplist.add(new SchoolBuilding("西区"));
+
+        ArrayList xs =new ArrayList<>();
+        xs.add(new EmptyRoom("第一教学楼",16,"东"));
+        xs.add(new EmptyRoom("第二教学楼",16,"东"));
+        xs.add(new EmptyRoom("第三教学楼",16,"东"));
+        childlist.add(xs);
+
+        ArrayList bg =new ArrayList<>();
+        bg.add(new EmptyRoom("第4教学楼",16,"东"));
+        bg.add(new EmptyRoom("第6教学楼",16,"东"));
+        bg.add(new EmptyRoom("第7教学楼",16,"东"));
+        childlist.add(bg);
 
     }
 }

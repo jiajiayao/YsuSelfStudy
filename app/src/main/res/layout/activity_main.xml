@@ -38,6 +38,9 @@
             android:text="时间" />
     </LinearLayout>
 
-
+    <ExpandableListView
+        android:id="@+id/expand_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ExpandableListView>
 
 </LinearLayout>

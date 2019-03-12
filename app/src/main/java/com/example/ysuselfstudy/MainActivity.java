@@ -1,5 +1,6 @@
 package com.example.ysuselfstudy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,11 +14,13 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+
+import org.litepal.LitePal;
+import org.litepal.crud.LitePalSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +29,15 @@ import yuan.data.EmptyRoom;
 import yuan.data.RoomExAdapter;
 import yuan.data.School;
 import yuan.data.SchoolBuilding;
+import yuan.data.Spider;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static ImageView image;
     private DrawerLayout mDrawerLayout;
     private static TextView TimeView;
+
+    private Button TempButton;
     TextView Today;
     String temp;
     ArrayList<School> grouplist;
@@ -41,6 +47,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Spider.Search(new ToastListener() {
+            @Override
+            public void showToast() {
+             //   Toast.makeText(MainActivity.this,"更新完毕",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void OnError() {
+              //  Toast.makeText(MainActivity.this,"网络异常",Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolbar);
@@ -106,6 +125,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        TempButton=findViewById(R.id.findall);
+        TempButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<EmptyRoom>  list= LitePal.findAll(EmptyRoom.class);
+                for (EmptyRoom room:list)
+                {
+                    Log.d(TAG, "onClick: "+room.getRoomName()+" "+room.getSizeOfRoom()+" "+room.getLocation());
+                }
+            }
+        });
     }
         /*
         * 加载必应每日一图，可以通过 Jsoup 来实现。
@@ -116,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //子线程获取地址
-               temp=Spider.SearchForBiYing();
+               temp= Spider.SearchForBiYing();
 
                 //切换到主线程进行更新
                 runOnUiThread(new Runnable() {
@@ -177,4 +207,6 @@ public class MainActivity extends AppCompatActivity {
     {
         TimeView.setText(name);
     }
+
+
 }

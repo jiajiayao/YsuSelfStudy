@@ -13,6 +13,7 @@ import java.util.List;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
    private List<EmptyRoom> mEmptyRoom;
+    private static final String TAG = "CardAdapter";
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView number;

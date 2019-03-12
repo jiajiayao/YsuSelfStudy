@@ -1,6 +1,8 @@
 package yuan.data;
 
-public class EmptyRoom{
+import org.litepal.crud.LitePalSupport;
+
+public class EmptyRoom extends LitePalSupport {
 
     private String RoomName;
     private int SizeOfRoom;
@@ -15,7 +17,14 @@ public class EmptyRoom{
     }
 
 
-    public EmptyRoom(String name,int number,String location) {
+    public EmptyRoom(String name,int number,String location,int time) {
+        this.RoomName=name;
+        this.SizeOfRoom=number;
+        this.Location=location;
+        this.time=time;
+    }
+    public  EmptyRoom(String name,int number,String location)
+    {
         this.RoomName=name;
         this.SizeOfRoom=number;
         this.Location=location;

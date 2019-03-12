@@ -33,11 +33,14 @@ public class CardShow extends AppCompatActivity {
         RoomList.add(new EmptyRoom("第7教学楼",16,"东"));
         RoomList.add(new EmptyRoom("第4教学楼",16,"东"));
         RoomList.add(new EmptyRoom("第6教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第7教学楼",16,"东"));  RoomList.add(new EmptyRoom("第4教学楼",16,"东"));
+        RoomList.add(new EmptyRoom("第7教学楼",16,"东"));
+        RoomList.add(new EmptyRoom("第4教学楼",16,"东"));
         RoomList.add(new EmptyRoom("第6教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第7教学楼",16,"东"));  RoomList.add(new EmptyRoom("第4教学楼",16,"东"));
+        RoomList.add(new EmptyRoom("第7教学楼",16,"东"));
+        RoomList.add(new EmptyRoom("第4教学楼",16,"东"));
         RoomList.add(new EmptyRoom("第6教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第7教学楼",16,"东"));  RoomList.add(new EmptyRoom("第4教学楼",16,"东"));
+        RoomList.add(new EmptyRoom("第7教学楼",16,"东"));
+        RoomList.add(new EmptyRoom("第4教学楼",16,"东"));
         RoomList.add(new EmptyRoom("第6教学楼",16,"东"));
         RoomList.add(new EmptyRoom("第7教学楼",16,"东"));
     }

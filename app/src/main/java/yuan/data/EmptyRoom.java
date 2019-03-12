@@ -5,6 +5,15 @@ public class EmptyRoom{
     private String RoomName;
     private int SizeOfRoom;
     private String Location;
+    private int time;
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
 
     public EmptyRoom(String name,int number,String location) {
         this.RoomName=name;

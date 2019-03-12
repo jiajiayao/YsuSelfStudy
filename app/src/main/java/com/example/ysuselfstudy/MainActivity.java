@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //导航栏显式左滑图标
         mDrawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBar actionBar=getSupportActionBar();
         if(actionBar != null)

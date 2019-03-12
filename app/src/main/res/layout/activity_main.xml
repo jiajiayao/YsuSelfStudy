@@ -75,15 +75,11 @@
             android:layout_height="wrap_content"></ExpandableListView>
 
     </LinearLayout>
-    <FrameLayout
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="#ffffff">
-
-        <ListView
-            android:id="@+id/left_listview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ListView>
-    </FrameLayout>
+   <android.support.design.widget.NavigationView
+       android:id="@+id/nav_view"
+       android:layout_gravity="start"
+       app:menu="@menu/nav_menu"
+       app:headerLayout="@layout/nav_header"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent" />
 </android.support.v4.widget.DrawerLayout>

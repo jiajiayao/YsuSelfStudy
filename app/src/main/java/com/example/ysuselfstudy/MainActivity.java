@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     String temp;
     ArrayList<SchoolBuilding> grouplist;
     ArrayList<List> childlist;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

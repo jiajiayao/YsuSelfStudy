@@ -9,20 +9,41 @@
     app:cardElevation="5dp"
     >
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:padding="10dp"
+                android:textSize="26sp"
+                android:id="@+id/classname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:id="@+id/number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/classname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
+            android:textColor="#8BC34A"
             android:id="@+id/location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="40sp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:padding="10dp"
+            />
     </LinearLayout>
+
+
 </android.support.v7.widget.CardView>

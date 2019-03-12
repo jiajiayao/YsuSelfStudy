@@ -41,8 +41,13 @@ public class DemoPopup extends BasePopupWindow {
         BeginTime.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                EndTime.setHour(BeginTime.getHour());
-                EndTime.setMinute(BeginTime.getMinute()+1);
+                if(EndTime.getHour()<BeginTime.getHour())
+                {
+                    EndTime.setHour(BeginTime.getHour());
+                }
+                else if(EndTime.getHour()==BeginTime.getHour())
+                    if(EndTime.getMinute()<=BeginTime.getMinute())
+                        EndTime.setMinute(BeginTime.getMinute()-1);
 
             }
         });
@@ -50,10 +55,10 @@ public class DemoPopup extends BasePopupWindow {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 if(EndTime.getHour()<BeginTime.getHour())
-                  BeginTime.setHour(EndTime.getHour());
+                  EndTime.setHour(BeginTime.getHour());
                 else if(EndTime.getHour()==BeginTime.getHour())
                     if(EndTime.getMinute()<=BeginTime.getMinute())
-                          BeginTime.setMinute(EndTime.getMinute()-1);
+                          EndTime.setMinute(BeginTime.getMinute()+1);
             }
         });
     }

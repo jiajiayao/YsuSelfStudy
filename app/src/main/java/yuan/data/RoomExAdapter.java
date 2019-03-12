@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class RoomExAdapter extends BaseExpandableListAdapter {
-    List<SchoolBuilding> groupList; //父级列表数据
+    List<School> groupList; //父级列表数据
     List<List> childList;//子级数据
     Context context;//应用上下文
     int groutlayout;//父级列表布局
@@ -29,7 +29,7 @@ public class RoomExAdapter extends BaseExpandableListAdapter {
      *
      * */
     public RoomExAdapter(Context context,int groutlayoutID,int childrenlayoutID,
-                         List<SchoolBuilding> groupList, List<List> childList)
+                         List<School> groupList, List<List> childList)
     {
         this.childList=childList;
         this.childrenlayout=childrenlayoutID;
@@ -55,7 +55,7 @@ public class RoomExAdapter extends BaseExpandableListAdapter {
      */
     @Override
     public int getChildrenCount(int groupPosition) {
-        List<EmptyRoom> itemList=childList.get(groupPosition);
+        List<SchoolBuilding> itemList=childList.get(groupPosition);
         return itemList.size();
     }
 
@@ -71,7 +71,7 @@ public class RoomExAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-       List<EmptyRoom> itemList=childList.get(groupPosition);
+       List<SchoolBuilding> itemList=childList.get(groupPosition);
         return itemList.get(childPosition);
     }
 
@@ -98,10 +98,10 @@ public class RoomExAdapter extends BaseExpandableListAdapter {
         else
             view=convertView;
 
-        SchoolBuilding schoolBuilding=(SchoolBuilding) getGroup(groupPosition);
+        School School=(School) getGroup(groupPosition);
 
         TextView textView = (TextView) view.findViewById(R.id.view_title);
-        textView.setText(schoolBuilding.getBuildingName());
+        textView.setText(School.getWhere());
 
 
         return view;
@@ -115,11 +115,11 @@ public class RoomExAdapter extends BaseExpandableListAdapter {
         else
             view=convertView;
 
-        EmptyRoom emptyRoom=(EmptyRoom) getChild(groupPosition,childPosition);
+        SchoolBuilding SchoolBuilding=(SchoolBuilding) getChild(groupPosition,childPosition);
 
 
         final TextView textView = (TextView) view.findViewById(R.id.view_content);
-        textView.setText(emptyRoom.getRoomName());
+        textView.setText(SchoolBuilding.getBuildingName());
         return view;
     }
 

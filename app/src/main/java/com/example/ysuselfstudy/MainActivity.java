@@ -24,6 +24,7 @@ import java.util.List;
 
 import yuan.data.EmptyRoom;
 import yuan.data.RoomExAdapter;
+import yuan.data.School;
 import yuan.data.SchoolBuilding;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private static TextView TimeView;
     TextView Today;
     String temp;
-    ArrayList<SchoolBuilding> grouplist;
+    ArrayList<School> grouplist;
     ArrayList<List> childlist;
 
     @Override
@@ -97,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
                                         int groupPosition,
                                         int childPosition,
                                         long id) {
-                EmptyRoom temp=(EmptyRoom) childlist.get(groupPosition).get(childPosition);
-                Toast.makeText(parent.getContext(),"你点击了"+temp.getRoomName(),Toast.LENGTH_SHORT).show();
+                SchoolBuilding temp=(SchoolBuilding) childlist.get(groupPosition).get(childPosition);
+                Toast.makeText(parent.getContext(),"你点击了"+temp.getBuildingName(),Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(MainActivity.this,CardShow.class);
                 startActivity(intent);
                 return false;
@@ -137,19 +138,25 @@ public class MainActivity extends AppCompatActivity {
         grouplist=new ArrayList<>();
         childlist =new ArrayList<>();
 
-        grouplist.add(new SchoolBuilding("东区"));
-        grouplist.add(new SchoolBuilding("西区"));
+        grouplist.add(new School("东校区"));
+        grouplist.add(new School("西校区"));
 
         ArrayList xs =new ArrayList<>();
-        xs.add(new EmptyRoom("第一教学楼",16,"东"));
-        xs.add(new EmptyRoom("第二教学楼",16,"东"));
-        xs.add(new EmptyRoom("第三教学楼",16,"东"));
+        xs.add(new SchoolBuilding("第一教学楼"));
+        xs.add(new SchoolBuilding("第二教学楼"));
+        xs.add(new SchoolBuilding("第三教学楼"));
+        xs.add(new SchoolBuilding("第四教学楼"));
+        xs.add(new SchoolBuilding("其他"));
         childlist.add(xs);
 
         ArrayList bg =new ArrayList<>();
-        bg.add(new EmptyRoom("第4教学楼",16,"东"));
-        bg.add(new EmptyRoom("第6教学楼",16,"东"));
-        bg.add(new EmptyRoom("第7教学楼",16,"东"));
+        bg.add(new SchoolBuilding("第一教学楼"));
+        bg.add(new SchoolBuilding("第二教学楼"));
+        bg.add(new SchoolBuilding("第三教学楼"));
+        bg.add(new SchoolBuilding("第四教学楼"));
+        bg.add(new SchoolBuilding("第五教学楼"));
+        bg.add(new SchoolBuilding("里仁教学楼"));
+        bg.add(new SchoolBuilding("其他"));
         childlist.add(bg);
 
     }

@@ -117,8 +117,10 @@ public class MainActivity extends AppCompatActivity {
                                         int childPosition,
                                         long id) {
                 SchoolBuilding temp=(SchoolBuilding) childlist.get(groupPosition).get(childPosition);
+                String where=temp.getBuildingName();
                 Toast.makeText(parent.getContext(),"你点击了"+temp.getBuildingName(),Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(MainActivity.this,CardShow.class);
+                intent.putExtra("where" ,where);
                 startActivity(intent);
                 return false;
             }

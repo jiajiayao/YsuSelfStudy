@@ -5,7 +5,10 @@ import org.litepal.crud.LitePalSupport;
 public class EmptyRoom extends LitePalSupport {
 
     private String room;
-
+    private String location;
+    private String xiaoqu;
+    private String nums;
+    private int time;
     public String getRoom() {
         return room;
     }
@@ -38,21 +41,18 @@ public class EmptyRoom extends LitePalSupport {
         this.nums = nums;
     }
 
-    public String getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
-    private String location;
-    private String xiaoqu;
-    private String nums;
-    private String time;
 
 
-    public EmptyRoom(String name,String number,String location,String time) {
+
+    public EmptyRoom(String name,String number,String location,int time) {
         this.room=name;
         this.nums=number;
         this.location=location;

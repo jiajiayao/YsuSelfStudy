@@ -44,8 +44,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull CardAdapter.ViewHolder viewHolder, int i) {
         EmptyRoom emptyRoom=mEmptyRoom.get(i);
         viewHolder.location.setText(emptyRoom.getLocation());
-        viewHolder.number.setText(emptyRoom.getSizeOfRoom()+"");
-        viewHolder.name.setText(emptyRoom.getRoomName());
+        viewHolder.number.setText(emptyRoom.getNums());
+        viewHolder.name.setText(emptyRoom.getRoom());
     }
 
     @Override

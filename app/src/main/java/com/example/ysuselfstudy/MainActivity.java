@@ -25,6 +25,7 @@ import org.litepal.crud.LitePalSupport;
 import java.util.ArrayList;
 import java.util.List;
 
+import yuan.data.DateBaseManager;
 import yuan.data.EmptyRoom;
 import yuan.data.RoomExAdapter;
 import yuan.data.School;
@@ -48,19 +49,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Spider.Search(new ToastListener() {
-            @Override
-            public void showToast() {
-             //   Toast.makeText(MainActivity.this,"更新完毕",Toast.LENGTH_SHORT).show();
-            }
+        LitePal.getDatabase();//创建数据库
 
-            @Override
-            public void OnError() {
-              //  Toast.makeText(MainActivity.this,"网络异常",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
+        //检查用不用更新数据库
+        DateBaseManager a=new DateBaseManager();
+       if(!a.ChecekDate())
+       {
+           Spider.Search();
+           /**
+            * 这里还应该加一个东西，否则，用户不知道什么时候更新完成。
+            */
+       }
 
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -124,18 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        TempButton=findViewById(R.id.findall);
-        TempButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<EmptyRoom>  list= LitePal.findAll(EmptyRoom.class);
-                for (EmptyRoom room:list)
-                {
-                    Log.d(TAG, "onClick: "+room.getRoomName()+" "+room.getSizeOfRoom()+" "+room.getLocation());
-                }
-            }
-        });
     }
         /*
         * 加载必应每日一图，可以通过 Jsoup 来实现。
@@ -165,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
     private  void initdata()
     {
+
         grouplist=new ArrayList<>();
         childlist =new ArrayList<>();
 
@@ -190,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
         childlist.add(bg);
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

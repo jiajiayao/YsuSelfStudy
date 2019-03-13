@@ -69,10 +69,6 @@
             android:layout_width="match_parent"
             android:layoutDirection="rtl"
             android:layout_height="wrap_content"></ExpandableListView>
-        <Button
-            android:id="@+id/findall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
    <android.support.design.widget.NavigationView
        android:id="@+id/nav_view"

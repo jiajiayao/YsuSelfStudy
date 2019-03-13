@@ -10,124 +10,67 @@ import android.widget.Toast;
 import com.example.ysuselfstudy.AllString;
 import com.example.ysuselfstudy.MainActivity;
 import com.example.ysuselfstudy.ToastListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.List;
 import java.util.jar.JarException;
 
 import javax.security.auth.login.LoginException;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class Spider {
   private static final String TAG = "Spider";
-  public static void  Search(final ToastListener toastListener)
+  private  static  DateBaseManager dateBaseManager=new DateBaseManager();
+  public static void  Search()
     {
+        //保证每次写入前都将数据库清空
+
+        dateBaseManager.delete_EmptyRoom();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    for (int i=1;i<13;i+=2)
-                    {
-                        Document response=
-                                Jsoup.connect(AllString.YSU)
-                                        .userAgent("Mozilla/5.0")
-                                        .timeout(10 * 1000)
-                                        .data("yxid","")
-                                        .data("sjd",i+"")//这是第几节课的意思
-                                        //   .data("dqxn","2018-2019")//当前学年
-                                        // .data("dqxq","2")//当前学期
-                                        //  .data("djz","2")//第几周
-                                        // .data("xqj","4")//这是星期
-                                        .data("show2","1")
-                                        .data("Submit","按条件显示")
-                                        .followRedirects(true)
-                                        .post();
-                        work(response,i);
-
-                        /**
-                         * 随后应该找到一共有多少页。
-                         */
-                        Elements NumberPage=response.select("font[color=#ff0000]");
-                        int page=Integer.parseInt(NumberPage.get(1).text());
-                        if(page%30>0)
-                            page=page/30+1;
-                        else
-                            page/=30;
-                        System.out.println(page);
-                        for(int k=2;k<=page;k++)
-                        {
-                            boolean temp =true;
-                            Document tiaozhuan;
-                            while (temp)
-                            {
-                                tiaozhuan=
-                                        Jsoup.connect(AllString.YSU)
-                                                .userAgent("Mozilla/5.0")
-                                                .timeout(10 * 1000)
-                                                .data("show2","1")
-                                                .data("yxid","")
-                                                .data("sjd",i+"")
-                                                .data("page",k+"")
-                                                .data("Submit","确定")
-                                                .followRedirects(true)
-                                                .post();
-                                if(tiaozhuan!=null)
-                                {
-                                    temp=false;
-                                    work(tiaozhuan,i);
-                                }
-                            }
-                        }
-                    }
-             if(toastListener!=null)
-             {
-                 toastListener.showToast();
-                 Log.d(TAG, "run: 更新完毕");
-             }
-
+                try
+                {
+                    OkHttpClient okHttpClient=new OkHttpClient();
+                    Request request=new Request.Builder()
+                            .url("http://10.2.55.32:8080/SelfStudy/TransRoom")
+                            .build();
+                    Response response=okHttpClient.newCall(request).execute();
+                    String res=response.body().string();
+                    work(res);
                 }catch (Exception e)
                 {
-                    /**
-                     * 这里填写超时逻辑
-                     */
-                    Log.e(TAG, "run: 超时错误"+e.toString());
-                    toastListener.OnError();
-                }
 
+                }
             }
         }).start();
-
     }
 
     /**
-     * 这是向数据库中添加的操作。
-     * @param document
-     * @param time
+     * 向教室数据库写数据
+     * @param res
      */
-
-    private static void work(Document document,int time) {
-        Elements classroom=document.select("td[bgcolor=#FFFFFF][width=89]");//检索出来全部是教室名字
-        Elements location=document.select("td[bgcolor=#FFFFFF][width=111]");//检索出来地点
-        Elements number=document.select("td[bgcolor=#FFFFFF][width=75]");
-
-        for (int j=0;j<classroom.size();j++)
+    private static void work(String res) {
+        Gson gson=new Gson();
+        List<EmptyRoom> list=gson.fromJson(res,new TypeToken<List<EmptyRoom>>(){}.getType());
+        int zongliang=0;
+        for (EmptyRoom room:list)
         {
-           EmptyRoom room;
-            if(!number.get(j).text().equals(""))
-            {
-              room=new EmptyRoom(classroom.get(j).text(),Integer.parseInt(number.get(j).text()),location.get(j).text(),time);
-               // Log.d(TAG, "work: "+classroom.get(j).text()+" "+99+" "+location.get(j).text());
-            }
-                //System.out.println(classroom.get(j).text()+" "+number.get(j).text()+" "+location.get(j).text());
-            else{
-               // Log.d(TAG, "work: "+classroom.get(j).text()+" "+number.get(j).text()+" "+location.get(j).text());
-
-                room=new EmptyRoom(classroom.get(j).text(),99,location.get(j).text(),time);
-            }
+            zongliang++;
             room.save();
         }
+        Log.d(TAG, "work:完成 "+zongliang);
+        dateBaseManager.setDate();
     }
 
     /**

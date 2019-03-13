@@ -28,20 +28,17 @@ public class CardShow extends AppCompatActivity {
     }
 
     private void initData() {
-        RoomList.add(new EmptyRoom("第4教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第6教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第7教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第4教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第6教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第7教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第4教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第6教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第7教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第4教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第6教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第7教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第4教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第6教学楼",16,"东"));
-        RoomList.add(new EmptyRoom("第7教学楼",16,"东"));
+        RoomList.add(new EmptyRoom("第4教学楼","16","东"));
+        RoomList.add(new EmptyRoom("第6教学楼","16","东"));
+        RoomList.add(new EmptyRoom("第4教学楼","16","东"));
+        RoomList.add(new EmptyRoom("第3教学楼","16","东"));
+        RoomList.add(new EmptyRoom("第7教学楼","16","东"));
+        RoomList.add(new EmptyRoom("第9教学楼","16","东"));
+        RoomList.add(new EmptyRoom("第y教学楼","16","东"));
+        RoomList.add(new EmptyRoom("第4教学楼","16","东"));
+        RoomList.add(new EmptyRoom("第1教学楼","16","东"));
+        RoomList.add(new EmptyRoom("第2教学楼","16","东"));
+        RoomList.add(new EmptyRoom("第34教学楼","16","东"));
+
     }
 }

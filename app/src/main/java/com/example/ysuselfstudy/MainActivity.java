@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView RoundImage;
     private View headerLayout;
     TextView Today;
-    String temp;
+    String address;
     ArrayList<School> grouplist;
     ArrayList<List> childlist;
 
@@ -154,14 +154,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //子线程获取地址
-               temp= Spider.SearchForBiYing();
+               address= Spider.SearchForBiYing();
 
                 //切换到主线程进行更新
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Glide.with(MainActivity.this).
-                                load(temp).
+                                load(address).
                               //  placeholder(R.drawable.placeorder).
                                 into(imageView);
                     }
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar=Calendar.getInstance();
         int hours=calendar.get(Calendar.HOUR);
         int minutes=calendar.get(Calendar.MINUTE);
-        String temp=hours+":"+minutes+"-"+hours+":"+minutes;
+        String temp=String.format("%02d:%02d-%02d:%02d",hours,minutes,hours,minutes);
         SetTime(temp);
     }
     /**

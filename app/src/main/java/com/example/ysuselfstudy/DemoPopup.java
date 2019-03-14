@@ -23,7 +23,7 @@ public class DemoPopup extends BasePopupWindow {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String time=BeginTime.getHour()+":"+BeginTime.getMinute()+"-"+EndTime.getHour()+":"+EndTime.getMinute();
+                    String time=String.format("%02d:%02d-%02d:%02d",BeginTime.getHour(),BeginTime.getMinute(),EndTime.getHour(),EndTime.getMinute());
                     MainActivity.SetTime(time);
                     onBackPressed();
                 }

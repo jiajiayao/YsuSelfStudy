@@ -47,9 +47,14 @@ public class CardShow extends AppCompatActivity {
             RoomList.add(ee);
         }*/
        String position=obj.getWhere();
-       String begin=obj.getBegin_time()+"";
-       String end=obj.getEnd_time()+"";
-       Cursor cc=LitePal.findBySQL("select room,nums,location from EmptyRoom where location = ? and time>=? and time <=? group by room",position,begin,end);
+       int  begin=obj.getBegin_time();
+       int  end=obj.getEnd_time();
+       String sql=" select room,nums,location from EmptyRoom where location = '"+position+"' and time="+begin+" ";
+       for (int i=begin+2;i<=end;i+=2)
+       {
+          sql+="intersect select room,nums,location from EmptyRoom where location = '"+position+"' and time="+i+" ";
+       }
+       Cursor cc=LitePal.findBySQL(sql);
         if(cc.moveToFirst())
         {
             do{

@@ -231,6 +231,12 @@ public class MainActivity extends AppCompatActivity {
         TimeView.setText(name);
     }
 
+    /**
+     * 这是 QQ 登录必须要实现的。
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
       super.onActivityResult(requestCode,resultCode,data);
@@ -301,6 +307,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onCancel() {
 
+        }
+    }
+
+    public  void  testLogin(View view)
+    {
+        mTencent=Tencent.createInstance("101560830",getApplicationContext());
+        if(!mTencent.isSessionValid())
+        {
+            mTencent.login(MainActivity.this, "all",new BaseUiListener());
         }
     }
 }

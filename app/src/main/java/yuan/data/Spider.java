@@ -1,27 +1,16 @@
 package yuan.data;
 
-import android.app.Notification;
-import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.ysuselfstudy.AllString;
-import com.example.ysuselfstudy.MainActivity;
-import com.example.ysuselfstudy.ToastListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.List;
-import java.util.jar.JarException;
-
-import javax.security.auth.login.LoginException;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -43,7 +32,7 @@ public class Spider {
                 {
                     OkHttpClient okHttpClient=new OkHttpClient();
                     Request request=new Request.Builder()
-                            .url("http://10.2.55.32:8080/SelfStudy/TransRoom")
+                            .url(AllString.YSU)
                             .build();
                     Response response=okHttpClient.newCall(request).execute();
                     String res=response.body().string();

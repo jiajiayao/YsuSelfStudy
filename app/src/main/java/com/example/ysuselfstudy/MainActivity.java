@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import heng.others.RecommendRoom;
+import heng.others.WhereWhen;
 import yuan.data.DateBaseManager;
 import yuan.data.EmptyRoom;
 import yuan.data.RoomExAdapter;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private UserInfo mUserInfo;
     private ImageView RoundImage;
     private View headerLayout;
+    private RecommendRoom recommendRoom=new RecommendRoom();
     TextView Today;
     String address;
     ArrayList<School> grouplist;
@@ -137,9 +140,11 @@ public class MainActivity extends AppCompatActivity {
                 SchoolBuilding temp=(SchoolBuilding) childlist.get(groupPosition).get(childPosition);
                 String where=temp.getBuildingName();
                 //这里调整为 WhereWhen 类型。
+                   WhereWhen whereWhen= recommendRoom.obj(GetTime());
+                    whereWhen.setWhere(temp.getBuildingName());
                 Toast.makeText(parent.getContext(),"你点击了"+temp.getBuildingName(),Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(MainActivity.this,CardShow.class);
-                intent.putExtra("where" ,where);
+                intent.putExtra("where" ,whereWhen);
                 startActivity(intent);
                 return false;
             }
@@ -240,6 +245,11 @@ public class MainActivity extends AppCompatActivity {
     public  static  void SetTime(String name)
     {
         TimeView.setText(name);
+    }
+
+    public static String GetTime()
+    {
+        return (String) TimeView.getText();
     }
 
     /**

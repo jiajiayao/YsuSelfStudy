@@ -13,6 +13,7 @@ import org.litepal.LitePal;
 import java.util.ArrayList;
 import java.util.List;
 
+import heng.others.WhereWhen;
 import yuan.data.CardAdapter;
 import yuan.data.EmptyRoom;
 
@@ -24,11 +25,12 @@ public class CardShow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_show);
         Intent intent=getIntent();
-        String data=intent.getStringExtra("where");
+        WhereWhen getWhere=( WhereWhen)getIntent().getSerializableExtra("where");
+        Log.d(TAG, "onCreate: 哪里"+getWhere.getWhere());
+        Log.d(TAG, "onCreate: 哪里启示"+getWhere.getBegin_time());
+        Log.d(TAG, "onCreate: 哪里结束"+getWhere.getEnd_time());
 
-        Log.d(TAG, "onCreate: "+data);
-
-        initData(data);
+        initData(getWhere);
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);//纵向滑动
         recyclerView.setLayoutManager(layoutManager);
@@ -38,14 +40,16 @@ public class CardShow extends AppCompatActivity {
 
     }
 
-    private void initData(String data) {
+    private void initData(WhereWhen obj) {
        /** List<EmptyRoom> cc=LitePal.where("location = ?",data).find(EmptyRoom.class);
         for(EmptyRoom ee :cc)
         {
             RoomList.add(ee);
         }*/
-       Cursor cc=LitePal.findBySQL("select room,nums,location from EmptyRoom where location = ? group by room",data);
-        Log.d(TAG, "initData: 行数"+cc.getCount());
+       String position=obj.getWhere();
+       String begin=obj.getBegin_time()+"";
+       String end=obj.getEnd_time()+"";
+       Cursor cc=LitePal.findBySQL("select room,nums,location from EmptyRoom where location = ? and time>=? and time <=? group by room",position,begin,end);
         if(cc.moveToFirst())
         {
             do{

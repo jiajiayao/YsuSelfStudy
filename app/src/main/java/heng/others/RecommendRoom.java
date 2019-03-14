@@ -1,5 +1,7 @@
 package heng.others;
 
+import android.widget.Toast;
+
 /**
  * 1.本类实现地理定位。
  * 2. 实现时间的错位。
@@ -8,6 +10,32 @@ package heng.others;
  */
 public class RecommendRoom {
     public WhereWhen whereWhen=new WhereWhen();
-    private static final double []TimeClock={8.00, 9.35 , 10.05, 11.40, 13.30, 15.05, 15.35, 17.10, 18.10, 19.45, 20.05 ,21.40 };
-
+    private static final double []TimeClock={0.0, 8.00, 9.35 , 10.05, 11.40, 13.30, 15.05, 15.35, 17.10, 18.10, 19.45, 20.05 ,21.40 };
+    public WhereWhen obj(String time)
+    {
+        int BZ=Integer.parseInt(time.substring(0,2));
+        int BX=Integer.parseInt(time.substring(3,5));
+        int EZ=Integer.parseInt(time.substring(6,8));
+        int EX=Integer.parseInt(time.substring(9,11));
+        double begin=BZ+0.01*BX;
+        double end  =EZ+0.01*EX;
+        int chu=0,zhong=12;
+        boolean a=true;
+        for (int i=0;i<TimeClock.length;i++)
+        {
+            if(begin<TimeClock[i]&&a)
+            {
+                a=false;
+                chu=i;
+            }
+            if(end<TimeClock[i])
+            {
+                zhong=i;
+                break;
+            }
+        }
+        whereWhen.setBegin_time(chu);
+        whereWhen.setEnd_time(zhong);
+        return whereWhen;
+    }
 }

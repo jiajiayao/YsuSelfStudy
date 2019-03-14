@@ -1,6 +1,8 @@
 package heng.others;
 
-public class WhereWhen {
+import java.io.Serializable;
+
+public class WhereWhen implements Serializable {
     private String Where;
 
     public String getWhere() {

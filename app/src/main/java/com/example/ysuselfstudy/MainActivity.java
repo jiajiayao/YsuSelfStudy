@@ -32,6 +32,7 @@ import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import yuan.data.DateBaseManager;
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private static ImageView image;
     private DrawerLayout mDrawerLayout;
     private static TextView TimeView;
-    private Button loginButton;
     private UserInfo mUserInfo;
     private ImageView RoundImage;
     private View headerLayout;
@@ -60,27 +60,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loginButton=findViewById(R.id.login);
 
         NavigationView navigationView=findViewById(R.id.nav_view) ;
         headerLayout =navigationView.inflateHeaderView(R.layout.nav_header);
         RoundImage=(ImageView) headerLayout.findViewById(R.id.icon_round_image);
         LitePal.getDatabase();//创建数据库
-
-        //实例化QQ
-
-      loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTencent=Tencent.createInstance("101560830",getApplicationContext());
-                if(!mTencent.isSessionValid())
-                {
-                    mTencent.login(MainActivity.this, "all",new BaseUiListener());
-                }
-            }
-        });
-
-
 
 
         //检查用不用更新数据库
@@ -121,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        InitTime();
+
         initdata();
         final ExpandableListView expandableListView=(ExpandableListView) findViewById(R.id.expand_list);
         final RoomExAdapter roomExAdapter = new RoomExAdapter(this,
@@ -150,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                                         long id) {
                 SchoolBuilding temp=(SchoolBuilding) childlist.get(groupPosition).get(childPosition);
                 String where=temp.getBuildingName();
+                //这里调整为 WhereWhen 类型。
                 Toast.makeText(parent.getContext(),"你点击了"+temp.getBuildingName(),Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(MainActivity.this,CardShow.class);
                 intent.putExtra("where" ,where);
@@ -181,9 +168,13 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }).start();
+        //加载 侧边栏的头像，默认为一条狗
         Glide.with(headerLayout.getContext()).load(R.mipmap.nav_icon).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
     }
 
+    /**
+     * 加载学校的各种建筑
+     */
     private  void initdata()
     {
 
@@ -214,6 +205,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * 打开侧边栏
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
@@ -226,6 +222,21 @@ public class MainActivity extends AppCompatActivity {
         return  true;
     }
 
+    /**
+     *一进去就设置时间
+     */
+    private  void InitTime()
+    {
+        Calendar calendar=Calendar.getInstance();
+        int hours=calendar.get(Calendar.HOUR);
+        int minutes=calendar.get(Calendar.MINUTE);
+        String temp=hours+":"+minutes+"-"+hours+":"+minutes;
+        SetTime(temp);
+    }
+    /**
+     * 供调用的设置时间的选项
+     * @param name
+     */
     public  static  void SetTime(String name)
     {
         TimeView.setText(name);
@@ -244,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 腾讯登录的类
+     * 腾讯登录实现的接口类
      */
     private class BaseUiListener implements IUiListener
     {
@@ -285,12 +296,12 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(UiError uiError) {
-
+                        Toast.makeText(MainActivity.this,"登录错误",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onCancel() {
-
+                      Toast.makeText(MainActivity.this,"登录取消",Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -301,15 +312,19 @@ public class MainActivity extends AppCompatActivity {
         }
         @Override
         public void onError(UiError uiError) {
-
+            Toast.makeText(MainActivity.this,"登录错误",Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onCancel() {
-
+            Toast.makeText(MainActivity.this,"登录取消",Toast.LENGTH_SHORT).show();
         }
     }
 
+    /**
+     * 头像点击实现 QQ 登录
+     * @param view
+     */
     public  void  testLogin(View view)
     {
         mTencent=Tencent.createInstance("101560830",getApplicationContext());

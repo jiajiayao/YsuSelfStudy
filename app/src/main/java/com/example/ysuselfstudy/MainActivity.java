@@ -2,6 +2,8 @@ package com.example.ysuselfstudy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -16,9 +18,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
-
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
+import com.tencent.connect.UserInfo;
+import com.tencent.connect.auth.QQToken;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 
+import org.json.JSONObject;
 import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
 
@@ -34,11 +43,14 @@ import yuan.data.Spider;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    private Tencent mTencent;
     private static ImageView image;
     private DrawerLayout mDrawerLayout;
     private static TextView TimeView;
-
-    private Button TempButton;
+    private Button loginButton;
+    private UserInfo mUserInfo;
+    private ImageView RoundImage;
+    private View headerLayout;
     TextView Today;
     String temp;
     ArrayList<School> grouplist;
@@ -48,8 +60,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loginButton=findViewById(R.id.login);
 
+        NavigationView navigationView=findViewById(R.id.nav_view) ;
+        headerLayout =navigationView.inflateHeaderView(R.layout.nav_header);
+        RoundImage=(ImageView) headerLayout.findViewById(R.id.icon_round_image);
         LitePal.getDatabase();//创建数据库
+
+        //实例化QQ
+
+      loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTencent=Tencent.createInstance("101560830",getApplicationContext());
+                if(!mTencent.isSessionValid())
+                {
+                    mTencent.login(MainActivity.this, "all",new BaseUiListener());
+                }
+            }
+        });
+
+
+
 
         //检查用不用更新数据库
         DateBaseManager a=new DateBaseManager();
@@ -143,13 +175,13 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         Glide.with(MainActivity.this).
                                 load(temp).
-                                crossFade().
                               //  placeholder(R.drawable.placeorder).
                                 into(imageView);
                     }
                 });
             }
         }).start();
+        Glide.with(headerLayout.getContext()).load(R.mipmap.nav_icon).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
     }
 
     private  void initdata()
@@ -199,5 +231,76 @@ public class MainActivity extends AppCompatActivity {
         TimeView.setText(name);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+      super.onActivityResult(requestCode,resultCode,data);
+        Tencent.onActivityResultData(requestCode,resultCode,data,new BaseUiListener());
+    }
 
+    /**
+     * 腾讯登录的类
+     */
+    private class BaseUiListener implements IUiListener
+    {
+        @Override
+        public void onComplete(Object response) {
+            Log.d(TAG, "onComplete: " + response.toString());
+            JSONObject obj = (JSONObject) response;
+            try {
+
+                String openID = obj.getString("openid");
+
+                String accessToken = obj.getString("access_token");
+
+                String expires = obj.getString("expires_in");
+
+                mTencent.setOpenId(openID);
+
+                mTencent.setAccessToken(accessToken, expires);
+
+                QQToken qqToken = mTencent.getQQToken();
+
+                mUserInfo = new UserInfo(getApplicationContext(), qqToken);
+                mUserInfo.getUserInfo(new IUiListener() {
+                    @Override
+                    public void onComplete(Object o) {
+                        Log.d(TAG,"登录成功"+o.toString());
+                        JSONObject Mess=(JSONObject) o;
+                        try {
+                            String nickname=Mess.getString("nickname");
+                            String touxiang=Mess.getString("figureurl_qq_2");
+                            Glide.with(headerLayout.getContext()).load(touxiang).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
+                        }catch (Exception e)
+                        {
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(UiError uiError) {
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+                });
+
+
+            } catch (Exception e) {
+
+            }
+        }
+        @Override
+        public void onError(UiError uiError) {
+
+        }
+
+        @Override
+        public void onCancel() {
+
+        }
+    }
 }

@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 //这里调整为 WhereWhen 类型。
                    WhereWhen whereWhen= recommendRoom.obj(GetTime());
                     whereWhen.setWhere(temp.getBuildingName());
-                Toast.makeText(parent.getContext(),"你点击了"+temp.getBuildingName(),Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(parent.getContext(),"你点击了"+temp.getBuildingName(),Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(MainActivity.this,CardShow.class);
                 intent.putExtra("where" ,whereWhen);
                 startActivity(intent);
@@ -198,11 +198,11 @@ public class MainActivity extends AppCompatActivity {
         childlist.add(xs);
 
         ArrayList bg =new ArrayList<>();
-        bg.add(new SchoolBuilding("第一教学楼"));
-        bg.add(new SchoolBuilding("第二教学楼"));
-        bg.add(new SchoolBuilding("第三教学楼"));
-        bg.add(new SchoolBuilding("第四教学楼"));
-        bg.add(new SchoolBuilding("第五教学楼"));
+        bg.add(new SchoolBuilding("西区第一教学楼"));
+        bg.add(new SchoolBuilding("西区第二教学楼"));
+        bg.add(new SchoolBuilding("西区第三教学楼"));
+        bg.add(new SchoolBuilding("西区第四教学楼"));
+        bg.add(new SchoolBuilding("西区第五教学楼"));
         bg.add(new SchoolBuilding("里仁教学楼"));
         bg.add(new SchoolBuilding("其他"));
         childlist.add(bg);

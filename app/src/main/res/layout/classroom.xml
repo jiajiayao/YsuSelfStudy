@@ -26,23 +26,21 @@
             <TextView
                 android:padding="10dp"
                 android:textSize="20sp"
-                android:id="@+id/number"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="wrap_content"
+                android:id="@+id/location" />
         </LinearLayout>
-
         <TextView
-            android:textColor="#8BC34A"
-            android:id="@+id/location"
-            android:textSize="40sp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:gravity="right"
-            android:padding="10dp"
-            />
+        android:textColor="#8BC34A"
+        android:id="@+id/number"
+        android:textSize="40sp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:gravity="right"
+        android:padding="10dp"
+           />
     </LinearLayout>
 
 

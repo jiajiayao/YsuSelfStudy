@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
     private  void InitTime()
     {
         Calendar calendar=Calendar.getInstance();
-        int hours=calendar.get(Calendar.HOUR);
+        int hours=calendar.get(Calendar.HOUR_OF_DAY);
         int minutes=calendar.get(Calendar.MINUTE);
         String temp=String.format("%02d:%02d-%02d:%02d",hours,minutes,hours,minutes);
         SetTime(temp);

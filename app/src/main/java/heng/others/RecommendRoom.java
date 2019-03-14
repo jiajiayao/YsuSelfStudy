@@ -19,7 +19,7 @@ public class RecommendRoom {
         int EX=Integer.parseInt(time.substring(9,11));
         double begin=BZ+0.01*BX;
         double end  =EZ+0.01*EX;
-        int chu=0,zhong=11;
+        int chu=1,zhong=11;
         boolean a=true;
         for (int i=1;i<TimeClock.length;i++)
         {

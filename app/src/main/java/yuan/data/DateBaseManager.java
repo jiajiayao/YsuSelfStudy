@@ -12,11 +12,9 @@ import heng.others.DateTime;
 public class DateBaseManager {
     private static final String TAG = "DateBaseManager";
     public boolean ChecekDate(){
-        int a=0;
         List<DateTime> dateTimes=LitePal.findAll(DateTime.class);
         if (LitePal.count(DateTime.class)==1)
         {
-            a++;
             DateTime time=new DateTime();
             DateTime check=LitePal.findFirst(DateTime.class);
             if(check.getDate()!=time.getDate()||check.getMonth()!=time.getMonth())

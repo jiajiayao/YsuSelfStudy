@@ -29,7 +29,6 @@ import com.tencent.tauth.UiError;
 
 import org.json.JSONObject;
 import org.litepal.LitePal;
-import org.litepal.crud.LitePalSupport;
 
 import java.util.ArrayList;
 import java.util.Calendar;

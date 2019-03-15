@@ -51,7 +51,7 @@ public class Spider {
      */
     private static void work(String res) {
         Gson gson=new Gson();
-        List<EmptyRoom> list=gson.fromJson(res,new TypeToken<List<EmptyRoom>>(){}.getType());
+        List<EmptyRoom> list=gson.fromJson(res, new TypeToken<List<EmptyRoom>>(){}.getType());
         int zongliang=0;
         for (EmptyRoom room:list)
         {

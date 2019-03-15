@@ -17,6 +17,7 @@ public class DateBaseManager {
         {
             DateTime time=new DateTime();
             DateTime check=LitePal.findFirst(DateTime.class);
+            Log.d(TAG, "ChecekDate: "+"是否相同？");
             if(check.getDate()!=time.getDate()||check.getMonth()!=time.getMonth())
                 return false;
             else
@@ -27,6 +28,7 @@ public class DateBaseManager {
 
         }
         Log.d(TAG, "ChecekDate: 准备新建");
+
             return false;
     }
 
@@ -43,6 +45,7 @@ public class DateBaseManager {
      */
     public void setDate()
     {
+        delete_Date();
         DateTime time=new DateTime();
         time.save();
     }

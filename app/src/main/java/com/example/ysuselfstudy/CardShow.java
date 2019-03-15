@@ -27,7 +27,7 @@ public class CardShow extends AppCompatActivity {
         Intent intent=getIntent();
         WhereWhen getWhere=( WhereWhen)getIntent().getSerializableExtra("where");
         Log.d(TAG, "onCreate: 哪里"+getWhere.getWhere());
-        Log.d(TAG, "onCreate: 哪里启示"+getWhere.getBegin_time());
+        Log.d(TAG, "onCreate: 哪里起始"+getWhere.getBegin_time());
         Log.d(TAG, "onCreate: 哪里结束"+getWhere.getEnd_time());
 
         initData(getWhere);

@@ -20,6 +20,7 @@ import yuan.data.EmptyRoom;
 public class CardShow extends AppCompatActivity {
     private static final String TAG = "CardShow";
     private List<EmptyRoom> RoomList=new ArrayList<>();
+    private CardAdapter cardAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,7 @@ public class CardShow extends AppCompatActivity {
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);//纵向滑动
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new SpacesItemDecoration(50));
-        CardAdapter cardAdapter=new CardAdapter(RoomList);//构造函数
+        cardAdapter=new CardAdapter(RoomList);//构造函数
         recyclerView.setAdapter(cardAdapter);
 
     }
@@ -71,6 +72,7 @@ public class CardShow extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         RoomList.clear();
+        cardAdapter.notifyDataSetChanged();
         super.onBackPressed();
     }
 }

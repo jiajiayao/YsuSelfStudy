@@ -63,6 +63,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //左面的侧栏头部
         NavigationView navigationView=findViewById(R.id.nav_view) ;
         headerLayout =navigationView.inflateHeaderView(R.layout.nav_header);
         RoundImage=(ImageView) headerLayout.findViewById(R.id.icon_round_image);

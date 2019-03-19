@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import org.litepal.LitePal;
@@ -21,10 +22,14 @@ public class CardShow extends BaseActivity {
     private static final String TAG = "CardShow";
     private List<EmptyRoom> RoomList=new ArrayList<>();
     private CardAdapter cardAdapter;
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_show);
+        toolbar=(Toolbar) findViewById(R.id.toolbar);
+
         Intent intent=getIntent();
         WhereWhen getWhere=( WhereWhen)getIntent().getSerializableExtra("where");
         Log.d(TAG, "onCreate: 哪里"+getWhere.getWhere());
@@ -32,6 +37,7 @@ public class CardShow extends BaseActivity {
         Log.d(TAG, "onCreate: 哪里结束"+getWhere.getEnd_time());
 
         initData(getWhere);
+        setSupportActionBar(toolbar);
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);//纵向滑动
         recyclerView.setLayoutManager(layoutManager);
@@ -56,9 +62,11 @@ public class CardShow extends BaseActivity {
           sql+="intersect select room,nums,location from EmptyRoom where location = '"+position+"' and time="+i+" ";
        }
        Cursor cc=LitePal.findBySQL(sql);
+       int NumsOfClassroom=0;
         if(cc.moveToFirst())
         {
             do{
+                NumsOfClassroom++;
                 String name=cc.getString(cc.getColumnIndex("room"));
                 String numbers=cc.getString(cc.getColumnIndex("nums"));
                 String location=cc.getString(cc.getColumnIndex("location"));
@@ -67,6 +75,8 @@ public class CardShow extends BaseActivity {
             }while (cc.moveToNext());
         }
         cc.close();
+        //更新了教室数量
+        toolbar.setTitle("有 "+NumsOfClassroom+" 间教室");
     }
 
     @Override

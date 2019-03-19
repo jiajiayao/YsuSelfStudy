@@ -228,7 +228,7 @@ public class MainActivity extends BaseActivity {
         xs.add(new SchoolBuilding("第二教学楼"));
         xs.add(new SchoolBuilding("第三教学楼"));
         xs.add(new SchoolBuilding("第四教学楼"));
-        xs.add(new SchoolBuilding("其他"));
+    //    xs.add(new SchoolBuilding("其他"));
         childlist.add(xs);
 
         ArrayList bg =new ArrayList<>();
@@ -238,7 +238,7 @@ public class MainActivity extends BaseActivity {
         bg.add(new SchoolBuilding("西区第四教学楼"));
         bg.add(new SchoolBuilding("西区第五教学楼"));
         bg.add(new SchoolBuilding("里仁教学楼"));
-        bg.add(new SchoolBuilding("其他"));
+       // bg.add(new SchoolBuilding("其他"));
         childlist.add(bg);
 
     }

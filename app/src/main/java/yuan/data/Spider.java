@@ -24,7 +24,7 @@ public class Spider {
         //保证每次写入前都将数据库清空
 
         dateBaseManager.delete_EmptyRoom();
-
+        Log.d(TAG, "Search: 爬虫开始工作");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -50,6 +50,7 @@ public class Spider {
      * @param res
      */
     private static void work(String res) {
+        Log.d(TAG, "work: 进来了");
         Gson gson=new Gson();
         List<EmptyRoom> list=gson.fromJson(res, new TypeToken<List<EmptyRoom>>(){}.getType());
         int zongliang=0;

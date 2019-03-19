@@ -17,7 +17,7 @@ import heng.others.WhereWhen;
 import yuan.data.CardAdapter;
 import yuan.data.EmptyRoom;
 
-public class CardShow extends AppCompatActivity {
+public class CardShow extends BaseActivity {
     private static final String TAG = "CardShow";
     private List<EmptyRoom> RoomList=new ArrayList<>();
     private CardAdapter cardAdapter;

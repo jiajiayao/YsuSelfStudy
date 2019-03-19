@@ -43,7 +43,7 @@ import yuan.data.School;
 import yuan.data.SchoolBuilding;
 import yuan.data.Spider;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private Tencent mTencent;
     private static ImageView image;

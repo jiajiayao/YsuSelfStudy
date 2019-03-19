@@ -32,12 +32,10 @@ public class CardShow extends BaseActivity {
 
         Intent intent=getIntent();
         WhereWhen getWhere=( WhereWhen)getIntent().getSerializableExtra("where");
-        Log.d(TAG, "onCreate: 哪里"+getWhere.getWhere());
-        Log.d(TAG, "onCreate: 哪里起始"+getWhere.getBegin_time());
-        Log.d(TAG, "onCreate: 哪里结束"+getWhere.getEnd_time());
 
         initData(getWhere);
         setSupportActionBar(toolbar);
+
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);//纵向滑动
         recyclerView.setLayoutManager(layoutManager);

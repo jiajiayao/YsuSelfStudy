@@ -2,10 +2,12 @@ package com.example.ysuselfstudy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +23,9 @@ import android.support.v7.widget.Toolbar;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;
 import com.tencent.tauth.IUiListener;
@@ -52,6 +57,7 @@ public class MainActivity extends BaseActivity {
     private UserInfo mUserInfo;
     private ImageView RoundImage;
     private View headerLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecommendRoom recommendRoom=new RecommendRoom();
     TextView Today;
     String address;
@@ -70,15 +76,43 @@ public class MainActivity extends BaseActivity {
         LitePal.getDatabase();//创建数据库
 
 
-        //检查用不用更新数据库
-        DateBaseManager a=new DateBaseManager();
-       if(!a.ChecekDate())
-       {
-           Spider.Search();
-           /**
-            * 这里还应该加一个东西，否则，用户不知道什么时候更新完成。
-            */
-       }
+        RefreshLayout refreshLayout=(RefreshLayout) findViewById(R.id.refreshLayout);
+        refreshLayout.setRefreshHeader(new BezierRadarHeader(this).setEnableHorizontalDrag(true));
+        refreshLayout.setDisableContentWhenRefresh(true);
+        refreshLayout.autoRefresh();
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
+                refreshLayout.setEnableRefresh(true);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            //检查用不用更新数据库
+                            DateBaseManager a=new DateBaseManager();
+                            if(!a.ChecekDate())
+                            {
+                                Spider.Search();
+                                /**
+                                 * 这里还应该加一个东西，否则，用户不知道什么时候更新完成。
+                                 */
+                            }
+
+                        }catch (Exception e)
+                        {
+
+                        }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                               refreshLayout.finishRefresh();
+                               Toast.makeText(MainActivity.this,"同步完成",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).start();
+            }
+        });
 
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

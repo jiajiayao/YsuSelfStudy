@@ -25,24 +25,19 @@ public class Spider {
 
         dateBaseManager.delete_EmptyRoom();
         Log.d(TAG, "Search: 爬虫开始工作");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try
-                {
-                    OkHttpClient okHttpClient=new OkHttpClient();
-                    Request request=new Request.Builder()
-                            .url(AllString.YSU)
-                            .build();
-                    Response response=okHttpClient.newCall(request).execute();
-                    String res=response.body().string();
-                    work(res);
-                }catch (Exception e)
-                {
+        try
+        {
+            OkHttpClient okHttpClient=new OkHttpClient();
+            Request request=new Request.Builder()
+                    .url(AllString.YSU)
+                    .build();
+            Response response=okHttpClient.newCall(request).execute();
+            String res=response.body().string();
+            work(res);
+        }catch (Exception e)
+        {
 
-                }
-            }
-        }).start();
+        }
     }
 
     /**

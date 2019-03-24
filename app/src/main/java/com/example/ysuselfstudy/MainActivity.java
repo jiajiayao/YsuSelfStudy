@@ -148,13 +148,8 @@ public class MainActivity extends BaseActivity {
                 {
                     case R.id.grade:
                         Toast.makeText(getApplicationContext(),"你点击了成绩",Toast.LENGTH_SHORT).show();
-
                         Intent intent=new Intent(MainActivity.this,LoginOffice.class);
                         startActivity(intent);
-                        break;
-                    case R.id.navcall:
-                        Toast.makeText(getApplicationContext(),"你点击了其他",Toast.LENGTH_SHORT)
-                        .show();
                         break;
                         default:
                             break;
@@ -225,7 +220,7 @@ public class MainActivity extends BaseActivity {
             }
         }).start();
         //加载 侧边栏的头像，默认为一条狗
-        Glide.with(headerLayout.getContext()).load(R.mipmap.nav_icon).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
+        Glide.with(headerLayout.getContext()).load(R.mipmap.qq).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
     }
 
     /**

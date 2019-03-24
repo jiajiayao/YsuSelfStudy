@@ -2,11 +2,11 @@
 <!--侧边栏的各种选项-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
  <group android:checkableBehavior="single">
-    <item android:id="@+id/navcall"
-        android:icon="@mipmap/nav_call"
-        android:title="Call"/>
      <item android:id="@+id/grade"
-         android:icon="@mipmap/nav_call"
+         android:icon="@mipmap/ic_exam"
          android:title="成绩"/>
+     <item android:id="@+id/update"
+         android:icon="@mipmap/ic_update"
+         android:title="检查更新"/>
 </group>
 </menu>

@@ -144,6 +144,26 @@ public class MainActivity extends BaseActivity {
         InitTime();
 
         initdata();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId())
+                {
+                    case R.id.grade:
+                        Toast.makeText(getApplicationContext(),"你点击了成绩",Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(MainActivity.this,LoginOffice.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.navcall:
+                        Toast.makeText(getApplicationContext(),"你点击了其他",Toast.LENGTH_SHORT)
+                        .show();
+                        break;
+                        default:
+                            break;
+                }
+                return true;
+            }
+        });
         final ExpandableListView expandableListView=(ExpandableListView) findViewById(R.id.expand_list);
         final RoomExAdapter roomExAdapter = new RoomExAdapter(this,
                 R.layout.parent_item,

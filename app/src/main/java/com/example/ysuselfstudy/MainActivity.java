@@ -147,7 +147,6 @@ public class MainActivity extends BaseActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.grade:
-                        Toast.makeText(getApplicationContext(),"你点击了成绩",Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(MainActivity.this,LoginOffice.class);
                         startActivity(intent);
                         break;

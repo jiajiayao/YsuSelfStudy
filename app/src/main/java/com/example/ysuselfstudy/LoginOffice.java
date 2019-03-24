@@ -39,7 +39,7 @@ public class LoginOffice extends BaseActivity {
      private   EditText yanzhengma;
      private   Button login;
      private static final String TAG = "LoginOffice";
-     private  String LoginCookie;
+     public static String LoginCookie;
     /**
      * 这是自动保存 Okhttp 的 Cookie
      */

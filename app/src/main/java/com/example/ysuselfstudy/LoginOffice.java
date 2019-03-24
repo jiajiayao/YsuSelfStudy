@@ -3,9 +3,12 @@ package com.example.ysuselfstudy;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +32,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class LoginOffice extends AppCompatActivity {
+public class LoginOffice extends BaseActivity {
      private   ImageView imageView;
      private   EditText xuehao;
      private   EditText mima;
@@ -60,10 +63,31 @@ public class LoginOffice extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_office);
+        Toolbar toolbar=(android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+
+        //状态栏添加返回按钮
+        setSupportActionBar(toolbar);
+        ActionBar actionBar=getSupportActionBar();
+        if(actionBar!=null)
+        {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("登录教务系统");
+        }
         InitView();
         ConnectToOffice();
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     /**
      * 更换验证码
      * @param view
@@ -89,7 +113,7 @@ public class LoginOffice extends AppCompatActivity {
                     call.enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            Toast.makeText(getApplicationContext(),"连接不顺",Toast.LENGTH_SHORT).show();
+
                         }
 
                         @Override

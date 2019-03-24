@@ -151,6 +151,7 @@ public class MainActivity extends BaseActivity {
                 {
                     case R.id.grade:
                         Toast.makeText(getApplicationContext(),"你点击了成绩",Toast.LENGTH_SHORT).show();
+
                         Intent intent=new Intent(MainActivity.this,LoginOffice.class);
                         startActivity(intent);
                         break;
@@ -161,6 +162,7 @@ public class MainActivity extends BaseActivity {
                         default:
                             break;
                 }
+                mDrawerLayout.closeDrawers();
                 return true;
             }
         });
@@ -219,7 +221,7 @@ public class MainActivity extends BaseActivity {
                     public void run() {
                         Glide.with(MainActivity.this).
                                 load(address).
-                              //  placeholder(R.drawable.placeorder).
+                                //placeholder(R.drawable.placeorder).
                                 into(imageView);
                     }
                 });

@@ -2,12 +2,14 @@ package com.example.ysuselfstudy;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 
 import org.litepal.LitePal;
 
@@ -35,7 +37,11 @@ public class CardShow extends BaseActivity {
 
         initData(getWhere);
         setSupportActionBar(toolbar);
-
+        ActionBar actionBar=getSupportActionBar();
+        if(actionBar!=null)
+        {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);//纵向滑动
         recyclerView.setLayoutManager(layoutManager);
@@ -46,11 +52,6 @@ public class CardShow extends BaseActivity {
     }
 
     private void initData(WhereWhen obj) {
-       /** List<EmptyRoom> cc=LitePal.where("location = ?",data).find(EmptyRoom.class);
-        for(EmptyRoom ee :cc)
-        {
-            RoomList.add(ee);
-        }*/
        String position=obj.getWhere();
        int  begin=obj.getBegin_time();
        int  end=obj.getEnd_time();
@@ -73,14 +74,28 @@ public class CardShow extends BaseActivity {
             }while (cc.moveToNext());
         }
         cc.close();
-        //更新了教室数量
+        //更新教室数量
         toolbar.setTitle("有 "+NumsOfClassroom+" 间教室");
     }
 
     @Override
     public void onBackPressed() {
         RoomList.clear();
+        //返回时务必要更新一下适配器
         cardAdapter.notifyDataSetChanged();
         super.onBackPressed();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+                default:
+                    break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

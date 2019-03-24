@@ -75,7 +75,6 @@ public class MainActivity extends BaseActivity {
         RoundImage=(ImageView) headerLayout.findViewById(R.id.icon_round_image);
         LitePal.getDatabase();//创建数据库
 
-
         RefreshLayout refreshLayout=(RefreshLayout) findViewById(R.id.refreshLayout);
         refreshLayout.setRefreshHeader(new BezierRadarHeader(this).setEnableHorizontalDrag(true));
         refreshLayout.setDisableContentWhenRefresh(true);
@@ -174,9 +173,8 @@ public class MainActivity extends BaseActivity {
                 SchoolBuilding temp=(SchoolBuilding) childlist.get(groupPosition).get(childPosition);
                 String where=temp.getBuildingName();
                 //这里调整为 WhereWhen 类型。
-                   WhereWhen whereWhen= recommendRoom.obj(GetTime());
-                    whereWhen.setWhere(temp.getBuildingName());
-              //  Toast.makeText(parent.getContext(),"你点击了"+temp.getBuildingName(),Toast.LENGTH_SHORT).show();
+                WhereWhen whereWhen= recommendRoom.obj(GetTime());
+                whereWhen.setWhere(temp.getBuildingName());
                 Intent intent=new Intent(MainActivity.this,CardShow.class);
                 intent.putExtra("where" ,whereWhen);
                 startActivity(intent);

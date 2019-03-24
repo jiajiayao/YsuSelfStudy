@@ -1,4 +1,4 @@
-package yuan.data;
+package com.ysuselfstudy.database;
 
 public class School {
     public School(String name) {

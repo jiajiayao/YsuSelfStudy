@@ -1,4 +1,4 @@
-package heng.others;
+package com.ysuselfstudy.time;
 
 import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;

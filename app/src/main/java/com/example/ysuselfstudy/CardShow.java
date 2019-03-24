@@ -3,12 +3,10 @@ package com.example.ysuselfstudy;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 
 import org.litepal.LitePal;
@@ -16,9 +14,10 @@ import org.litepal.LitePal;
 import java.util.ArrayList;
 import java.util.List;
 
-import heng.others.WhereWhen;
-import yuan.data.CardAdapter;
-import yuan.data.EmptyRoom;
+import com.ysuselfstudy.adapter.SpacesItemDecoration;
+import com.ysuselfstudy.time.WhereWhen;
+import com.ysuselfstudy.adapter.CardAdapter;
+import com.ysuselfstudy.database.EmptyRoom;
 
 public class CardShow extends BaseActivity {
     private static final String TAG = "CardShow";

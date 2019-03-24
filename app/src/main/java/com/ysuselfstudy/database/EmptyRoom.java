@@ -1,4 +1,4 @@
-package yuan.data;
+package com.ysuselfstudy.database;
 
 import org.litepal.crud.LitePalSupport;
 

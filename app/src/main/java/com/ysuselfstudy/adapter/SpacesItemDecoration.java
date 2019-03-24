@@ -1,7 +1,7 @@
 /**
  * 这个类是为了控制 RecyclerView 的 Item 间隔
  */
-package com.example.ysuselfstudy;
+package com.ysuselfstudy.adapter;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

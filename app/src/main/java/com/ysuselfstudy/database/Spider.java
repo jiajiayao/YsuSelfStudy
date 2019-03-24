@@ -1,10 +1,12 @@
-package yuan.data;
+package com.ysuselfstudy.database;
 
 import android.util.Log;
 
 import com.example.ysuselfstudy.AllString;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ysuselfstudy.database.DateBaseManager;
+import com.ysuselfstudy.database.EmptyRoom;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,7 +20,7 @@ import okhttp3.Response;
 
 public class Spider {
   private static final String TAG = "Spider";
-  private  static  DateBaseManager dateBaseManager=new DateBaseManager();
+  private  static DateBaseManager dateBaseManager=new DateBaseManager();
   public static void  Search()
     {
         //保证每次写入前都将数据库清空

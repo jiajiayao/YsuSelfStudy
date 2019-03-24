@@ -1,4 +1,4 @@
-package yuan.data;
+package com.ysuselfstudy.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.ysuselfstudy.R;
+import com.ysuselfstudy.database.EmptyRoom;
 
 import java.util.List;
 

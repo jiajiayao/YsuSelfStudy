@@ -1,6 +1,4 @@
-package heng.others;
-
-import android.widget.Toast;
+package com.ysuselfstudy.time;
 
 /**
  * 1.本类实现地理定位。

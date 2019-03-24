@@ -32,8 +32,8 @@
     	</list>
     -->
     <list>
-        <mapping class = "yuan.data.EmptyRoom"/>
-        <mapping class = "heng.others.DateTime"/>
+        <mapping class = "com.ysuselfstudy.database.EmptyRoom"/>
+        <mapping class = "com.ysuselfstudy.time.DateTime"/>
     </list>
 
     <!--

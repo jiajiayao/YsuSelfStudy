@@ -1,20 +1,17 @@
-package yuan.data;
+package com.ysuselfstudy.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.ysuselfstudy.CardShow;
-import com.example.ysuselfstudy.MainActivity;
 import com.example.ysuselfstudy.R;
+import com.ysuselfstudy.database.School;
+import com.ysuselfstudy.database.SchoolBuilding;
 
 import java.util.List;
-import java.util.ListIterator;
 
 public class RoomExAdapter extends BaseExpandableListAdapter {
     List<School> groupList; //父级列表数据

@@ -1,6 +1,5 @@
 package com.example.ysuselfstudy;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,12 +8,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,14 +36,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import heng.others.RecommendRoom;
-import heng.others.WhereWhen;
-import yuan.data.DateBaseManager;
-import yuan.data.EmptyRoom;
-import yuan.data.RoomExAdapter;
-import yuan.data.School;
-import yuan.data.SchoolBuilding;
-import yuan.data.Spider;
+import com.ysuselfstudy.adapter.DemoPopup;
+import com.ysuselfstudy.time.RecommendRoom;
+import com.ysuselfstudy.time.WhereWhen;
+import com.ysuselfstudy.database.DateBaseManager;
+import com.ysuselfstudy.adapter.RoomExAdapter;
+import com.ysuselfstudy.database.School;
+import com.ysuselfstudy.database.SchoolBuilding;
+import com.ysuselfstudy.database.Spider;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";

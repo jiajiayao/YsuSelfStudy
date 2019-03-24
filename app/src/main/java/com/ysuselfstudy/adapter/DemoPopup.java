@@ -1,10 +1,13 @@
-package com.example.ysuselfstudy;
+package com.ysuselfstudy.adapter;
 
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TimePicker;
+
+import com.example.ysuselfstudy.MainActivity;
+import com.example.ysuselfstudy.R;
 
 import razerdp.basepopup.BasePopupWindow;
 

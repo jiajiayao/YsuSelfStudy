@@ -210,7 +210,7 @@ public class LoginOffice extends BaseActivity {
                                 else
                                 {
                                     Log.d(TAG, "onResponse: 登录成功");
-                                    dateBaseManager.UpdateStu(new StudentInfo(username,password));
+                                    dateBaseManager.UpdateStu(new StudentInfo(username,password));//更新数据库中学生的信息。
                                     refreshLayout.finishRefresh();
                                     Intent intent=new Intent(LoginOffice.this,ExamActivity.class);
                                     startActivity(intent);

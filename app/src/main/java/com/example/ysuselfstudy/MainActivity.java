@@ -139,8 +139,16 @@ public class MainActivity extends BaseActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.grade:
-                        Intent intent=new Intent(MainActivity.this,LoginOffice.class);
-                        startActivity(intent);
+                        if(AllString.Cookie.equals(""))
+                        {
+                            Intent intent=new Intent(MainActivity.this,LoginOffice.class);
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            Intent intent=new Intent(MainActivity.this,ExamActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                         default:
                             break;

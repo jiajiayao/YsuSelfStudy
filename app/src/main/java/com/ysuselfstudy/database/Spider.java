@@ -26,7 +26,6 @@ public class Spider {
   public static void  Search()
     {
         //保证每次写入前都将数据库清空
-
         dateBaseManager.delete_EmptyRoom();
         Log.d(TAG, "Search: 爬虫开始工作");
         try

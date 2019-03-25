@@ -140,7 +140,7 @@ public class MainActivity extends BaseActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.grade:
-                        if(AllString.Cookie.equals(""))
+                        if(!AllString.Login)//如果没有登录
                         {
                             Intent intent=new Intent(MainActivity.this,LoginOffice.class);
                             startActivity(intent);

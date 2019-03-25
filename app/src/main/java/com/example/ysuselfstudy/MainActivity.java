@@ -56,7 +56,6 @@ public class MainActivity extends BaseActivity {
     private View headerLayout;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecommendRoom recommendRoom=new RecommendRoom();
-    TextView Today;
     String address;
     ArrayList<School> grouplist;
     ArrayList<List> childlist;
@@ -93,7 +92,7 @@ public class MainActivity extends BaseActivity {
 
                         }catch (Exception e)
                         {
-
+                            Log.d(TAG, "run: "+e.toString());
                         }
                         runOnUiThread(new Runnable() {
                             @Override
@@ -121,10 +120,6 @@ public class MainActivity extends BaseActivity {
         //每日必应图片
         image=(ImageView) findViewById(R.id.image);
         loadImage(image);
-
-        //图片上显式的字
-        Today=findViewById(R.id.text);
-        Today.setText(AllString.Today);
 
         //时间的点击触发底部弹窗
         TimeView=(TextView) findViewById(R.id.showTime);

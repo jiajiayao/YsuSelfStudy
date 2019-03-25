@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFFFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,6 +10,10 @@
     <include android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/toolbar_layout"/>
+    <ImageView
+        android:src="@mipmap/ic_login_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 <LinearLayout
     android:padding="20dp"
     android:layout_width="match_parent"

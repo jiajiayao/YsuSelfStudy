@@ -20,6 +20,9 @@ public class ExamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam);
 
+        //
+        ExamInfor examInfor=new ExamInfor("政治考试","下午三四节","西区教学楼","10");
+        list.add(examInfor);
         recyclerView = findViewById(R.id.exam_recycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);

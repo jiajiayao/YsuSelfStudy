@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--侧边栏的各种选项-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
- <group android:checkableBehavior="single">
+ <group android:checkableBehavior="none">
      <item android:id="@+id/grade"
          android:icon="@mipmap/ic_exam"
          android:title="成绩"/>

@@ -89,9 +89,6 @@ public class MainActivity extends BaseActivity {
                             if(!a.ChecekDate())
                             {
                                 Spider.Search();
-                                /**
-                                 * 这里还应该加一个东西，否则，用户不知道什么时候更新完成。
-                                 */
                             }
 
                         }catch (Exception e)

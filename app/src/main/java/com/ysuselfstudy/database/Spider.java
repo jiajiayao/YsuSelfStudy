@@ -47,7 +47,7 @@ public class Spider {
      * @param res
      */
     private static void work(String res) {
-        Log.d(TAG, "work: 进来了");
+        Log.d(TAG, "work: 爬取完成");
         Gson gson=new Gson();
         List<EmptyRoom> list=gson.fromJson(res, new TypeToken<List<EmptyRoom>>(){}.getType());
         int zongliang=0;

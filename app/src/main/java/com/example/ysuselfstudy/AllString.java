@@ -11,6 +11,8 @@ public class AllString {
     public  static  final String APPID = "101560830";
     public  static  final String YsuOffice="http://202.206.243.5/default2.aspx";
     public  static  final String YsuYanZhengMa="http://202.206.243.5/CheckCode.aspx";
+    public  static  final String LoginTitle="登录教务系统";
+    public  static  String Cookie="";
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.ysuselfstudy;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Message;
@@ -39,7 +40,7 @@ public class LoginOffice extends BaseActivity {
      private   EditText yanzhengma;
      private   Button login;
      private static final String TAG = "LoginOffice";
-     public static String LoginCookie;
+     public String LoginCookie;
     /**
      * 这是自动保存 Okhttp 的 Cookie
      */
@@ -50,6 +51,7 @@ public class LoginOffice extends BaseActivity {
             cookieStore.put(url.host(), cookies);
             LoginCookie=cookies.get(cookies.size()-1).toString();
             LoginCookie=LoginCookie.substring(0,LoginCookie.indexOf(";"));//提取出来 Cookie
+            AllString.Cookie=LoginCookie;//赋值给全局变量
         }
 
         @Override
@@ -71,7 +73,7 @@ public class LoginOffice extends BaseActivity {
         if(actionBar!=null)
         {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("登录教务系统");
+            actionBar.setTitle(AllString.LoginTitle);
         }
         InitView();
         ConnectToOffice();
@@ -193,6 +195,9 @@ public class LoginOffice extends BaseActivity {
                         else
                         {
                             Log.d(TAG, "onResponse: 登录成功");
+                            Intent intent=new Intent(LoginOffice.this,ExamActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
 
                     }

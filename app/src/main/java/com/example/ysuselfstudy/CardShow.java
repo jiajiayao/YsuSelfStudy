@@ -77,6 +77,9 @@ public class CardShow extends BaseActivity {
         toolbar.setTitle("有 "+NumsOfClassroom+" 间教室");
     }
 
+    /**
+     * 返回时要做的工作
+     */
     @Override
     public void onBackPressed() {
         RoomList.clear();

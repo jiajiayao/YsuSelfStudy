@@ -14,6 +14,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.ysuselfstudy.adapter.SpacesItemDecoration;
 import com.ysuselfstudy.database.StudentInfo;
 import com.ysuselfstudy.examadapter.ExamAdapter;
 import com.ysuselfstudy.examadapter.ExamInfor;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExamActivity extends BaseActivity {
-    private List<ExamInfor> list = new ArrayList<>();
+    private List<ExamInfor> ExamList = new ArrayList<>();
     private RecyclerView recyclerView;
     private SmartRefreshLayout smartRefreshLayout;
     private ExamAdapter examAdapter;
@@ -57,13 +58,14 @@ public class ExamActivity extends BaseActivity {
         recyclerView = findViewById(R.id.exam_recycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        examAdapter=new ExamAdapter(list);
+        recyclerView.addItemDecoration(new SpacesItemDecoration(50));
+        examAdapter=new ExamAdapter(ExamList);
         recyclerView.setAdapter(examAdapter);
     }
 
     @Override
     public void onBackPressed() {
-        list.clear();
+        ExamList.clear();
         examAdapter.notifyDataSetChanged();
         super.onBackPressed();
     }
@@ -103,7 +105,7 @@ public class ExamActivity extends BaseActivity {
                                     String location=elements.get(i+1).text();
                                     String number=elements.get(i+3).text();
                                     ExamInfor examInfor=new ExamInfor(target,temp,location,number);
-                                    list.add(examInfor);
+                                    ExamList.add(examInfor);
                                 }
                                 else
                                 {
@@ -114,7 +116,7 @@ public class ExamActivity extends BaseActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    actionBar.setTitle("近期有 "+list.size()+" 门考试");
+                                    actionBar.setTitle("近期有 "+ExamList.size()+" 门考试");
                                 }
                             });
                         }

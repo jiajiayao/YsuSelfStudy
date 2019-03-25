@@ -37,6 +37,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.ysuselfstudy.adapter.DemoPopup;
+import com.ysuselfstudy.software.APKVersionCodeUtils;
 import com.ysuselfstudy.time.RecommendRoom;
 import com.ysuselfstudy.time.WhereWhen;
 import com.ysuselfstudy.database.DateBaseManager;
@@ -150,6 +151,23 @@ public class MainActivity extends BaseActivity {
                             startActivity(intent);
                         }
                         break;
+                    case R.id.update:
+                      int versioncode= APKVersionCodeUtils.getVersionCode(MainActivity.this);
+                        Log.d(TAG, "onNavigationItemSelected: 服务器版本"+Spider.GetVersion());
+                        Log.d(TAG, "onNavigationItemSelected: 本地版本"+versioncode);
+                      if(versioncode<Spider.GetVersion())
+                      {
+                          new Thread(new Runnable() {
+                              @Override
+                              public void run() {
+                                  Log.d(TAG, "run: 准备下载");
+                              }
+                          }).start();
+                      }
+                      else  
+                      {
+                          Toast.makeText(MainActivity.this,"已经是最新版本",Toast.LENGTH_SHORT).show();
+                      }
                         default:
                             break;
                 }

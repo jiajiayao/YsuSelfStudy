@@ -13,6 +13,5 @@ public class AllString {
     public  static  final String YsuYanZhengMa="http://202.206.243.5/CheckCode.aspx";
     public  static  final String LoginTitle="登录教务系统";
     public  static  String Cookie="";
-
-
+    public  static  String UpdateUrl="http://39.96.163.218:8080/SelfStudy/Version";
 }

@@ -4,10 +4,12 @@ import android.util.Log;
 
 import com.example.ysuselfstudy.AllString;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.ysuselfstudy.database.DateBaseManager;
-import com.ysuselfstudy.database.EmptyRoom;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -80,6 +82,25 @@ public class Spider {
         return element.text();
     }
 
-
+    public static int GetVersion()
+    {
+        int version=1;
+        try
+        {
+            OkHttpClient okHttpClient=new OkHttpClient();
+            Request request=new Request.Builder()
+                    .url(AllString.UpdateUrl)
+                    .build();
+            Response response=okHttpClient.newCall(request).execute();
+            String te=response.body().string();
+            JSONObject jsonObject=new JSONObject();
+            version =  jsonObject.getInt("version");
+            Log.d(TAG, "GetVersion: "+version);
+        }catch (Exception e)
+        {
+            Log.d(TAG, "GetVersion: "+e.toString());
+        }
+        return version;
+    }
 
 }

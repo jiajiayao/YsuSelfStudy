@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.ysuselfstudy.database.DateBaseManager;
+import com.ysuselfstudy.database.StudentInfo;
+
+import org.litepal.LitePal;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,9 +48,10 @@ public class LoginOffice extends BaseActivity {
      private   EditText xuehao;
      private   EditText mima;
      private   EditText yanzhengma;
-     private   Button login;
      private static final String TAG = "LoginOffice";
      public String LoginCookie;
+     private SmartRefreshLayout smartRefreshLayout;
+     private DateBaseManager dateBaseManager;
     /**
      * 这是自动保存 Okhttp 的 Cookie
      */
@@ -142,68 +153,76 @@ public class LoginOffice extends BaseActivity {
 
     /**
      * 登录的点击事件
-     * @param view
      */
-    public void Login(View view) {
-        new Thread(new Runnable() {
+    public void Login() {
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void run() {
-                String username=xuehao.getText().toString();
-                String password=mima.getText().toString();
-                String lingpai=yanzhengma.getText().toString();
-                RequestBody requestBody=new FormBody.Builder()
-                        .add("__VIEWSTATE","dDwxNTMxMDk5Mzc0Ozs+cgOhsy/GUNsWPAGh+Vu0SCcW5Hw=")
-                        .add("txtUserName",username)
-                        .add("Textbox1","")
-                        .add("TextBox2",password)
-                        .add("RadioButtonList1","学生")
-                        .add("Button1","")
-                        .add("txtSecretCode",lingpai)
-                        .add("lbLanguage","")
-                        .add("hidPdrs","")
-                        .add("hidsc","").build();
-                Request request=new Request.Builder()
-                        .url(AllString.YsuOffice)
-                        .post(requestBody)
-                        .build();
-                Call call=client.newCall(request);
-                call.enqueue(new Callback() {
+            public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
+                refreshLayout.setEnableRefresh(true);
+                new Thread(new Runnable() {
                     @Override
-                    public void onFailure(Call call, IOException e) {
+                    public void run() {
+                        final String username=xuehao.getText().toString();
+                        final String password=mima.getText().toString();
+                        String lingpai=yanzhengma.getText().toString();
+                        RequestBody requestBody=new FormBody.Builder()
+                                .add("__VIEWSTATE","dDwxNTMxMDk5Mzc0Ozs+cgOhsy/GUNsWPAGh+Vu0SCcW5Hw=")
+                                .add("txtUserName",username)
+                                .add("Textbox1","")
+                                .add("TextBox2",password)
+                                .add("RadioButtonList1","学生")
+                                .add("Button1","")
+                                .add("txtSecretCode",lingpai)
+                                .add("lbLanguage","")
+                                .add("hidPdrs","")
+                                .add("hidsc","").build();
+                        Request request=new Request.Builder()
+                                .url(AllString.YsuOffice)
+                                .post(requestBody)
+                                .build();
+                        Call call=client.newCall(request);
+                        call.enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
 
-                    }
+                            }
 
-                    /**
-                     * 这里是登录是否成功的处理逻辑
-                     * @param call
-                     * @param response
-                     * @throws IOException
-                     */
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        
-                        if (response.request().url().toString().equals(AllString.YsuOffice))
-                        {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    ConnectToOffice();
-                                    Toast.makeText(LoginOffice.this,"登录失败",Toast.LENGTH_SHORT).show();
+                            /**
+                             * 这里是登录是否成功的处理逻辑
+                             * @param call
+                             * @param response
+                             * @throws IOException
+                             */
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+
+                                if (response.request().url().toString().equals(AllString.YsuOffice))
+                                {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            ConnectToOffice();
+                                            refreshLayout.finishRefresh();
+                                            Toast.makeText(LoginOffice.this,"登录失败",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
-                            });
-                        }
-                        else
-                        {
-                            Log.d(TAG, "onResponse: 登录成功");
-                            Intent intent=new Intent(LoginOffice.this,ExamActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-
+                                else
+                                {
+                                    Log.d(TAG, "onResponse: 登录成功");
+                                    dateBaseManager.UpdateStu(new StudentInfo(username,password));
+                                    refreshLayout.finishRefresh();
+                                    Intent intent=new Intent(LoginOffice.this,ExamActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                        });
                     }
-                });
+                }).start();
             }
-        }).start();
+        });
+
 
 
     }
@@ -213,6 +232,16 @@ public class LoginOffice extends BaseActivity {
         xuehao =findViewById(R.id.xuehao);
         mima   =findViewById(R.id.password);
         yanzhengma  =findViewById(R.id.yanzhengma);
-        login    =findViewById(R.id.LoginOffice);
+        smartRefreshLayout=findViewById(R.id.LoginRefresh);
+        smartRefreshLayout.setRefreshHeader(new BezierRadarHeader(this).setEnableHorizontalDrag(true));
+        smartRefreshLayout.setDisableContentWhenRefresh(true);
+        Login();
+        dateBaseManager=new DateBaseManager();
+        if (dateBaseManager.CheckPassword())
+        {
+            StudentInfo stu= LitePal.findFirst(StudentInfo.class);
+            xuehao.setText(stu.getXuehao());
+            mima.setText(stu.getPassword());
+        }
     }
 }

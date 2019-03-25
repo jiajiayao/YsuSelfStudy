@@ -56,4 +56,23 @@ public class DateBaseManager {
     {
         LitePal.deleteAll(EmptyRoom.class);
     }
+
+    /**
+     *更新数据库中学生的信心
+     */
+    public void UpdateStu(StudentInfo studentInfo)
+    {
+        LitePal.deleteAll(StudentInfo.class);
+        studentInfo.save();
+    }
+    /**
+     * 检查是否用填充密码
+     */
+    public boolean CheckPassword()
+    {
+        if(LitePal.count(StudentInfo.class)>0)
+            return true;
+        return false;
+    }
+
 }

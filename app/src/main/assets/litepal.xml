@@ -34,6 +34,7 @@
     <list>
         <mapping class = "com.ysuselfstudy.database.EmptyRoom"/>
         <mapping class = "com.ysuselfstudy.time.DateTime"/>
+        <mapping class = "com.ysuselfstudy.database.StudentInfo"/>
     </list>
 
     <!--

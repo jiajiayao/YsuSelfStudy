@@ -154,6 +154,13 @@ public class MainActivity extends BaseActivity {
                 return true;
             }
         });
+
+        InitExpandableListView();
+
+    }
+
+    public void InitExpandableListView()
+    {
         final ExpandableListView expandableListView=(ExpandableListView) findViewById(R.id.expand_list);
         final RoomExAdapter roomExAdapter = new RoomExAdapter(this,
                 R.layout.parent_item,

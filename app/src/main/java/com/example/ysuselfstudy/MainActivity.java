@@ -152,22 +152,29 @@ public class MainActivity extends BaseActivity {
                         }
                         break;
                     case R.id.update:
-                      int versioncode= APKVersionCodeUtils.getVersionCode(MainActivity.this);
-                        Log.d(TAG, "onNavigationItemSelected: 服务器版本"+Spider.GetVersion());
-                        Log.d(TAG, "onNavigationItemSelected: 本地版本"+versioncode);
-                      if(versioncode<Spider.GetVersion())
-                      {
-                          new Thread(new Runnable() {
-                              @Override
-                              public void run() {
-                                  Log.d(TAG, "run: 准备下载");
-                              }
-                          }).start();
-                      }
-                      else  
-                      {
-                          Toast.makeText(MainActivity.this,"已经是最新版本",Toast.LENGTH_SHORT).show();
-                      }
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                int versioncode= APKVersionCodeUtils.getVersionCode(MainActivity.this);
+                                Log.d(TAG, "onNavigationItemSelected: 服务器版本"+Spider.GetVersion());
+                                Log.d(TAG, "onNavigationItemSelected: 本地版本"+versioncode);
+                                if(versioncode<Spider.GetVersion())
+                                {
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Log.d(TAG, "run: 准备下载");
+                                        }
+                                    }).start();
+                                }
+                                else
+                                {
+                                    Log.d(TAG, "run: 已经是最新版本");
+                                    //Toast.makeText(MainActivity.this,"已经是最新版本",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }).start();
+
                         default:
                             break;
                 }

@@ -1,21 +1,15 @@
 package com.ysuselfstudy.database;
 
 import android.util.Log;
-
 import com.example.ysuselfstudy.AllString;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
 import java.util.List;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -91,9 +85,9 @@ public class Spider {
                     .url(AllString.UpdateUrl)
                     .build();
             Response response=okHttpClient.newCall(request).execute();
-            String te=response.body().string();
-            JSONObject jsonObject=new JSONObject();
-            version =  jsonObject.getInt("version");
+            String temp=response.body().string();
+            JSONObject jsonObject=new JSONObject(temp);
+            version= jsonObject.getInt("version");
             Log.d(TAG, "GetVersion: "+version);
         }catch (Exception e)
         {

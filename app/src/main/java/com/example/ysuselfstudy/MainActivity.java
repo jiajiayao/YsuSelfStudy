@@ -1,6 +1,7 @@
 package com.example.ysuselfstudy;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -164,13 +165,15 @@ public class MainActivity extends BaseActivity {
                                         @Override
                                         public void run() {
                                             Log.d(TAG, "run: 准备下载");
+                                            Intent intent=new Intent(Intent.ACTION_VIEW);
+                                            intent.setData(Uri.parse(AllString.DownloadUrl));
+                                            startActivity(intent);
                                         }
                                     }).start();
                                 }
                                 else
                                 {
                                     Log.d(TAG, "run: 已经是最新版本");
-                                    //Toast.makeText(MainActivity.this,"已经是最新版本",Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }).start();

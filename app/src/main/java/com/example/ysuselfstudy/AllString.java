@@ -13,5 +13,6 @@ public class AllString {
     public  static  final String LoginTitle="登录教务系统";
     public  static  String Cookie="";
     public  static  String UpdateUrl="http://39.96.163.218:8080/SelfStudy/Version";
-    public static boolean Login=false;
+    public  static boolean Login=false;
+    public  static String DownloadUrl="http://39.96.163.218:8080/download/1.zip";
 }

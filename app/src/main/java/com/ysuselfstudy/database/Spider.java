@@ -17,6 +17,10 @@ import okhttp3.Response;
 public class Spider {
   private static final String TAG = "Spider";
   private  static DateBaseManager dateBaseManager=new DateBaseManager();
+
+    /**
+     * 页面爬取空教室
+     */
   public static void  Search()
     {
         //保证每次写入前都将数据库清空
@@ -75,6 +79,10 @@ public class Spider {
         return element.text();
     }
 
+    /**
+     * 获取服务器上最新版的信息
+     * @return 服务器最新编号
+     */
     public static int GetVersion()
     {
         int version=1;
@@ -88,7 +96,6 @@ public class Spider {
             String temp=response.body().string();
             JSONObject jsonObject=new JSONObject(temp);
             version= jsonObject.getInt("version");
-            Log.d(TAG, "GetVersion: "+version);
         }catch (Exception e)
         {
             Log.d(TAG, "GetVersion: "+e.toString());

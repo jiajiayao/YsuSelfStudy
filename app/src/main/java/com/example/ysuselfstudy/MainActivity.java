@@ -73,6 +73,9 @@ public class MainActivity extends BaseActivity {
         RoundImage=(ImageView) headerLayout.findViewById(R.id.icon_round_image);
         LitePal.getDatabase();//创建数据库
 
+        /**
+         * 下拉刷新
+         */
         RefreshLayout refreshLayout=(RefreshLayout) findViewById(R.id.refreshLayout);
         refreshLayout.setRefreshHeader(new BezierRadarHeader(this).setEnableHorizontalDrag(true));
         refreshLayout.setDisableContentWhenRefresh(true);
@@ -133,7 +136,6 @@ public class MainActivity extends BaseActivity {
         });
 
         InitTime();
-
         initdata();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -157,23 +159,22 @@ public class MainActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 int versioncode= APKVersionCodeUtils.getVersionCode(MainActivity.this);
-                                Log.d(TAG, "onNavigationItemSelected: 服务器版本"+Spider.GetVersion());
-                                Log.d(TAG, "onNavigationItemSelected: 本地版本"+versioncode);
                                 if(versioncode<Spider.GetVersion())
                                 {
-                                    new Thread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Log.d(TAG, "run: 准备下载");
-                                            Intent intent=new Intent(Intent.ACTION_VIEW);
-                                            intent.setData(Uri.parse(AllString.DownloadUrl));
-                                            startActivity(intent);
-                                        }
-                                    }).start();
+                                    //开始下载，调用浏览器
+                                    Intent intent=new Intent(Intent.ACTION_VIEW);
+                                    intent.setData(Uri.parse(AllString.DownloadUrl));
+                                    startActivity(intent);
                                 }
                                 else
                                 {
-                                    Log.d(TAG, "run: 已经是最新版本");
+                                    //Toast 弹出说明已经是最新的了
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(MainActivity.this,"已经是最新版本",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
                             }
                         }).start();
@@ -190,6 +191,9 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    /**
+     * 加载扩展栏
+     */
     public void InitExpandableListView()
     {
         final ExpandableListView expandableListView=(ExpandableListView) findViewById(R.id.expand_list);
@@ -253,7 +257,7 @@ public class MainActivity extends BaseActivity {
                 });
             }
         }).start();
-        //加载 侧边栏的头像，默认为一条狗
+        //加载 侧边栏的头像，初始为 QQ 头像
         Glide.with(headerLayout.getContext()).load(R.mipmap.qq).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
     }
 

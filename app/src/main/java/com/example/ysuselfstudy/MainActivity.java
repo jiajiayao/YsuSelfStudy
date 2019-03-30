@@ -178,7 +178,11 @@ public class MainActivity extends BaseActivity {
                                 }
                             }
                         }).start();
-
+                        break;
+                    case R.id.library:
+                        Intent intent=new Intent(MainActivity.this,LibraryActivity.class);
+                        startActivity(intent);
+                        break;
                         default:
                             break;
                 }

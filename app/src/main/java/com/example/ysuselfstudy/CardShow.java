@@ -40,6 +40,7 @@ public class CardShow extends BaseActivity {
         if(actionBar!=null)
         {
             actionBar.setDisplayHomeAsUpEnabled(true);
+
         }
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);//纵向滑动

@@ -1,12 +1,12 @@
 package com.example.ysuselfstudy;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -40,7 +40,7 @@ public class ExamActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam);
 
-        Toolbar toolbar=(android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar=(androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
 
         //状态栏添加返回按钮
         setSupportActionBar(toolbar);

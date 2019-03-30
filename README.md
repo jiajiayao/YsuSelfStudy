@@ -20,6 +20,8 @@
 ---
 Android Studio 3.3.2
 
+项目最低适配 Android 6.0 （SDK 23）
+
 Jdk 11
 ## 更新日志
 ---

@@ -15,4 +15,6 @@ public class AllString {
     public  static boolean Login=false;//能否直接登录
     public  static String DownloadUrl="http://39.96.163.218:8080/download/1.zip";//下载更新的地址
     public  static final String LibraryUrl="http://202.206.242.87/ClientWeb/m/ic2/Default.aspx";
+    public static final String MI_APP_ID="2882303761517971963";
+    public static final String MI_APP_KEY="5161797164963";
 }

@@ -20,6 +20,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.xiaomi.mipush.sdk.MiPushClient;
 import com.ysuselfstudy.database.DateBaseManager;
 import com.ysuselfstudy.database.StudentInfo;
 
@@ -149,6 +150,12 @@ public class LoginOffice extends BaseActivity {
         }
     }
 
+    public void YsuSetAlias(String Alias)
+    {
+        MiPushClient.setAlias(LoginOffice.this,Alias,null);
+        Log.d(TAG, "YsuSetAlias: 别名设置好了");
+    }
+
     /**
      * 登录的点击事件
      */
@@ -209,6 +216,7 @@ public class LoginOffice extends BaseActivity {
                                 {
                                     Log.d(TAG, "onResponse: 登录成功");
                                     AllString.Login=true;
+                                    YsuSetAlias(username);
                                     dateBaseManager.UpdateStu(new StudentInfo(username,password));//更新数据库中学生的信息。
                                     refreshLayout.finishRefresh();
                                     Intent intent=new Intent(LoginOffice.this,ExamActivity.class);

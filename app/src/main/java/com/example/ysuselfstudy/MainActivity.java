@@ -1,5 +1,7 @@
 package com.example.ysuselfstudy;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import androidx.annotation.NonNull;
@@ -10,6 +12,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.ActionBar;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Process;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import com.xiaomi.mipush.sdk.MiPushClient;
 import com.ysuselfstudy.adapter.DemoPopup;
 import com.ysuselfstudy.software.APKVersionCodeUtils;
 import com.ysuselfstudy.time.RecommendRoom;
@@ -56,6 +62,7 @@ public class MainActivity extends BaseActivity {
     private UserInfo mUserInfo;
     private ImageView RoundImage;
     private View headerLayout;
+    public static YsuHandler sHandler;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecommendRoom recommendRoom=new RecommendRoom();
     String address;
@@ -66,12 +73,18 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //左面的侧栏头部
         NavigationView navigationView=findViewById(R.id.nav_view) ;
         headerLayout =navigationView.inflateHeaderView(R.layout.nav_header);
         RoundImage=(ImageView) headerLayout.findViewById(R.id.icon_round_image);
         LitePal.getDatabase();//创建数据库
+
+        if(shouldInit())
+        {
+            Log.d(TAG, "onCreate: 开始注册");
+            MiPushClient.registerPush(MainActivity.this,AllString.MI_APP_ID,AllString.MI_APP_KEY);
+        }
+
 
         /**
          * 下拉刷新
@@ -125,6 +138,7 @@ public class MainActivity extends BaseActivity {
         //每日必应图片
         image=(ImageView) findViewById(R.id.image);
         loadImage(image);
+
 
         //时间的点击触发底部弹窗
         TimeView=(TextView) findViewById(R.id.showTime);
@@ -431,4 +445,37 @@ public class MainActivity extends BaseActivity {
             mTencent.login(MainActivity.this, "all",new BaseUiListener());
         }
     }
+
+    private boolean shouldInit() {
+        ActivityManager am = ((ActivityManager) getSystemService(Context.ACTIVITY_SERVICE));
+        List<ActivityManager.RunningAppProcessInfo> processInfos = am.getRunningAppProcesses();
+        String mainProcessName = getPackageName();
+        int myPid = Process.myPid();
+        for (ActivityManager.RunningAppProcessInfo info : processInfos) {
+            if (info.pid == myPid && mainProcessName.equals(info.processName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public static class YsuHandler extends Handler{
+        public Context context;
+        public YsuHandler(Context context) {
+            this.context=context;
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what)
+            {
+                case 1:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
 }

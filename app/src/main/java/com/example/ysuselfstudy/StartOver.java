@@ -34,7 +34,6 @@ public class StartOver extends BaseActivity {
                 }
             }
         });
-
     }
 
     private void setSvg(SVG svg) {

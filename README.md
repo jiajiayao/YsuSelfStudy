@@ -74,3 +74,13 @@ Jdk 11
 * 开启第一屏的欢迎
 * 代码优化
 * 加速空教室的获取速度
+
+## 鸣谢
+---
+https://github.com/square/okhttp
+
+https://github.com/scwang90/SmartRefreshLayout
+
+https://github.com/jhy/jsoup
+
+

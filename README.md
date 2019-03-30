@@ -28,6 +28,7 @@ Jdk 11
 
 **2019.3.30**
 - 调整了 我的考试 界面
+- 新增了开启第一屏
 
 **2019.3.29**
 - 更新了服务器端代码，大幅度删减冗余数据，现在加载只需要 2 秒！
@@ -72,17 +73,21 @@ Jdk 11
 - 新增了基本的布局。
 ## 未来更新
 ---
-* 图书馆的登陆接口
-* 开启第一屏的欢迎
-* 代码优化
+* ~~图书馆的登陆接口~~
+* ~~开启第一屏的欢迎~~
 * ~~加速空教室的获取速度~~
+* 状态栏的调整
 
 ## 鸣谢
 ---
-https://github.com/square/okhttp
+[Okhttp](https://github.com/square/okhttp)
 
-https://github.com/scwang90/SmartRefreshLayout
+[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)
 
-https://github.com/jhy/jsoup
+[jsoup](https://github.com/jhy/jsoup)
+
+[BasePop](https://github.com/razerdp/BasePopup)
+
+[AnimatedSvgView](https://github.com/jaredrummler/AnimatedSvgView)
 
 

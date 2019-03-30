@@ -24,6 +24,8 @@ Jdk 11
 ## 更新日志
 ---
 
+**2019.3.30**
+- 调整了 我的考试 界面
 
 **2019.3.29**
 - 更新了服务器端代码，大幅度删减冗余数据，现在加载只需要 2 秒！
@@ -71,4 +73,14 @@ Jdk 11
 * 图书馆的登陆接口
 * 开启第一屏的欢迎
 * 代码优化
-* 加速空教室的获取速度
+* ~~加速空教室的获取速度~~
+
+## 鸣谢
+---
+https://github.com/square/okhttp
+
+https://github.com/scwang90/SmartRefreshLayout
+
+https://github.com/jhy/jsoup
+
+

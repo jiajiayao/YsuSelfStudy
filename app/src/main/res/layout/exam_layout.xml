@@ -8,27 +8,37 @@
     app:cardElevation="5dp"
     >
     <LinearLayout
+
         android:orientation="vertical"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <!--考试名称-->
         <TextView
+            android:textSize="19sp"
+            android:textColor="@color/colorAccent"
+
             android:id="@+id/exam_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <!--考试时间-->
         <TextView
+            android:textSize="19sp"
+            android:textColor="#8BC34A"
             android:id="@+id/exam_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <!--考试地点-->
         <TextView
+            android:textSize="19sp"
+            android:textColor="#00BCD4"
             android:id="@+id/exam_positon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <!--座位号-->
         <TextView
+            android:textSize="19sp"
+            android:textColor="#9C27B0"
             android:id="@+id/exam_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

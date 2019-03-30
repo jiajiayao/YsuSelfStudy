@@ -44,10 +44,10 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         ExamInfor examInfor=mList.get(i);
-        viewHolder.time.setText(examInfor.getTime());
-        viewHolder.number.setText(examInfor.getNumber());
-        viewHolder.location.setText(examInfor.getLocation());
-        viewHolder.name.setText(examInfor.getName());
+        viewHolder.time.setText("时间： "+examInfor.getTime());
+        viewHolder.number.setText("座位号： "+examInfor.getNumber());
+        viewHolder.location.setText("地点： "+examInfor.getLocation());
+        viewHolder.name.setText("科目： "+examInfor.getName());
     }
 
     @Override

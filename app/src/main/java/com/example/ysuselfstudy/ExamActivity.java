@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -77,6 +78,7 @@ public class ExamActivity extends BaseActivity {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 refreshLayout.setEnableRefresh(true);
+                ExamList.clear();
                 StudentInfo studentInfo = LitePal.findFirst(StudentInfo.class);
                 final String xuehao=studentInfo.getXuehao();
                 new Thread(new Runnable() {
@@ -85,16 +87,27 @@ public class ExamActivity extends BaseActivity {
                         try {
                             String exam="http://202.206.243.5/xskscx.aspx?xh=" + xuehao + "&xm=%B8%DF%BA%E3%D4%B4&gnmkdm=N121604";
                             String referer="http://202.206.243.5/xs_main.aspx?xh="+xuehao;
-                            Log.d(TAG, "onClick: 检查");
                             Document connection = Jsoup.connect(exam)
                                     .header("Cookie", AllString.Cookie)
                                     .referrer(referer)
-                                    .data("xh","160120010208")
+                                    .data("xh",xuehao)
                                     .data("xm","%B8%DF%BA%E3%D4%B4")
                                     .data("gnmkdm","N121604")
                                     .post();
+                            //如果还未评价。这是一个优化点
+                            String aab=connection.body().text();
+                            if(aab.length()==0)
+                            {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(ExamActivity.this,"请登录教务系统进行教学评价",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
                             //获取了所有爬取的信息。
                             Elements elements=connection.select("td");
+
                             int size=elements.size();
                             for (int i= 11 ; i<size ; i+=8)
                             {
@@ -102,21 +115,28 @@ public class ExamActivity extends BaseActivity {
                                 if (!temp.equals(""))
                                 {
                                     String target=elements.get(i-2).text();
+                                    Log.d(TAG, "run: "+target);
                                     String location=elements.get(i+1).text();
+                                    Log.d(TAG, "run: "+location);
                                     String number=elements.get(i+3).text();
+                                    Log.d(TAG, "run: "+number);
                                     ExamInfor examInfor=new ExamInfor(target,temp,location,number);
                                     ExamList.add(examInfor);
+
                                 }
                                 else
                                 {
+                                    Log.d(TAG, "run: 停止了");
                                     break;
                                 }
                             }
                             smartRefreshLayout.finishRefresh();
+
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    actionBar.setTitle("近期有 "+ExamList.size()+" 门考试");
+                                    actionBar.setTitle("本学期有 "+ExamList.size()+" 门考试");
+                                    examAdapter.notifyDataSetChanged();
                                 }
                             });
                         }

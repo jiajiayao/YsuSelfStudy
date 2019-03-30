@@ -25,14 +25,17 @@ public class Spider {
     {
         //保证每次写入前都将数据库清空
         dateBaseManager.delete_EmptyRoom();
-        Log.d(TAG, "Search: 爬虫开始工作");
+
         try
         {
+            Log.d(TAG, "Search: 爬虫开始工作");
             OkHttpClient okHttpClient=new OkHttpClient();
             Request request=new Request.Builder()
                     .url(AllString.YSU)
                     .build();
+            Log.d(TAG, "Search: 准备执行");
             Response response=okHttpClient.newCall(request).execute();
+            Log.d(TAG, "Search: 准备开始转化" );
             String res=response.body().string();
             work(res);
         }catch (Exception e)

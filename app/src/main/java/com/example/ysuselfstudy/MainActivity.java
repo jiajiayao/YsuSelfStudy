@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBar;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
 import android.util.Log;
@@ -50,17 +51,18 @@ import com.ysuselfstudy.database.Spider;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
+    public static Context MainContext;
     private static ImageView image;
     private DrawerLayout mDrawerLayout;
     private static TextView TimeView;
     private static ImageView RoundImage;
     private static View headerLayout;
-    public static YsuHandler sHandler;
     private RecommendRoom recommendRoom=new RecommendRoom();
     String address;
     ArrayList<School> grouplist;
     ArrayList<List> childlist;
     public BaseUiListener baseUiListener;
+    public Spider spider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +73,11 @@ public class MainActivity extends BaseActivity {
         RoundImage=(ImageView) headerLayout.findViewById(R.id.icon_round_image);
         LitePal.getDatabase();//创建数据库
 
+        spider=new Spider();
         baseUiListener=new BaseUiListener();
         baseUiListener.getActivity(MainActivity.this);
         baseUiListener.getContex(getApplicationContext());
-
+        MainContext=getApplicationContext();
 
         if(shouldInit())
         {
@@ -102,7 +105,7 @@ public class MainActivity extends BaseActivity {
                             DateBaseManager a=new DateBaseManager();
                             if(!a.ChecekDate())
                             {
-                                Spider.Search();
+                                spider.Search(getApplicationContext());
                             }
 
                         }catch (Exception e)
@@ -113,7 +116,7 @@ public class MainActivity extends BaseActivity {
                             @Override
                             public void run() {
                                refreshLayout.finishRefresh();
-                               Toast.makeText(MainActivity.this,"同步完成",Toast.LENGTH_SHORT).show();
+                               Toast.makeText(MainActivity.this,"完成!",Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -399,8 +402,13 @@ public class MainActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what)
             {
-                case 1:
+                case AllString.BEGIN_ACCESS:
+                    Log.d(TAG, "handleMessage: 收到");
+                    Toast.makeText(MainContext,"开始同步",Toast.LENGTH_SHORT).show();
                     break;
+                case AllString.BEGIN_STORE:
+                    Toast.makeText(MainContext,"开始储存，时间依性能而定",Toast.LENGTH_SHORT).show();
+                     break;
                 case AllString.TENCENT_IMAGE:
                     String url=(String) msg.obj;
                     Glide.with(headerLayout.getContext()).load(url).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);

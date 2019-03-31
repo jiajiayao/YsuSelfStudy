@@ -31,7 +31,7 @@ public class BaseUiListener implements IUiListener
     public View headerLayout;
     public Context context;
     public Activity activity;
-
+    public MainActivity mainActivity;
     @Override
     public void onComplete(Object response) {
         Log.d(TAG, "onComplete: " + response.toString());
@@ -59,7 +59,8 @@ public class BaseUiListener implements IUiListener
                     try {
                         String nickname=Mess.getString("nickname");
                         String touxiang=Mess.getString("figureurl_qq_2");
-                        MainActivity.YsuHandler ui=new MainActivity.YsuHandler();
+
+                       MainActivity.YsuHandler ui=new MainActivity.YsuHandler();
                         Message a=new Message();
                         a.what=AllString.TENCENT_IMAGE;
                         a.obj=touxiang;

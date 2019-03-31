@@ -5,9 +5,20 @@
      <item android:id="@+id/grade"
          android:icon="@mipmap/ic_exam"
          android:title="我的考试"/>
+     <item android:id="@+id/mygraded"
+         android:icon="@mipmap/ic_grade"
+         android:title="我的成绩"
+         />
      <item android:id="@+id/library"
-         android:title="图书馆"
+         android:title="图书馆座位预约"
          android:icon="@mipmap/ic_library"/>
+     <item android:id="@+id/misscard"
+         android:icon="@mipmap/ic_card"
+         android:title="丢失的一卡通" />
+     <item android:id="@+id/xiaoli"
+         android:icon="@mipmap/ic_xiaoli"
+        android:title="校历"
+         />
      <item  android:id="@+id/setting"
          android:title="设置"
          android:icon="@mipmap/ic_setting"/>

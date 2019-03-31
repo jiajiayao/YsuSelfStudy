@@ -1,7 +1,12 @@
 package com.ysuselfstudy.database;
 
+import android.content.Context;
+import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.example.ysuselfstudy.AllString;
+import com.example.ysuselfstudy.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -16,31 +21,35 @@ import okhttp3.Response;
 
 public class Spider {
   private static final String TAG = "Spider";
-  private  static DateBaseManager dateBaseManager=new DateBaseManager();
+  public MainActivity.YsuHandler tt=new MainActivity.YsuHandler();
+  private static DateBaseManager dateBaseManager=new DateBaseManager();
 
     /**
      * 页面爬取空教室
      */
-  public static void  Search()
+  public void  Search(Context context)
     {
         //保证每次写入前都将数据库清空
         dateBaseManager.delete_EmptyRoom();
-
+        Message msg1=new Message();
+        msg1.what=AllString.BEGIN_ACCESS;
+        tt.sendMessage(msg1);
         try
         {
-            Log.d(TAG, "Search: 爬虫开始工作");
             OkHttpClient okHttpClient=new OkHttpClient();
             Request request=new Request.Builder()
                     .url(AllString.YSU)
                     .build();
             Log.d(TAG, "Search: 准备执行");
             Response response=okHttpClient.newCall(request).execute();
-            Log.d(TAG, "Search: 准备开始转化" );
             String res=response.body().string();
+            Message msg2=new Message();
+            msg2.what=AllString.BEGIN_STORE;
+            tt.sendMessage(msg2);
             work(res);
         }catch (Exception e)
         {
-
+            Log.d(TAG, "Search: "+e.toString());
         }
     }
 
@@ -48,17 +57,15 @@ public class Spider {
      * 向教室数据库写数据
      * @param res
      */
-    private static void work(String res) {
-        Log.d(TAG, "work: 爬取完成");
+    private void work(String res) {
         Gson gson=new Gson();
         List<EmptyRoom> list=gson.fromJson(res, new TypeToken<List<EmptyRoom>>(){}.getType());
-        int zongliang=0;
+        Log.d(TAG, "work: 开始存储");
         for (EmptyRoom room:list)
         {
-            zongliang++;
             room.save();
         }
-        Log.d(TAG, "work:完成 "+zongliang);
+        Log.d(TAG, "work:完成 "+list.size());
         dateBaseManager.setDate();
     }
 
@@ -72,7 +79,6 @@ public class Spider {
         try {
             Document document=Jsoup.connect(AllString.BiYing).get();
             element=document.select("body");
-            Log.d(TAG, "SearchForBiYing: "+element.text());
 
         }catch (Exception e)
         {

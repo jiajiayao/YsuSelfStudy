@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.ActionBar;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,13 +28,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.tencent.connect.UserInfo;
-import com.tencent.connect.auth.QQToken;
-import com.tencent.tauth.IUiListener;
-import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
 
-import org.json.JSONObject;
+import com.tencent.tauth.Tencent;
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
@@ -45,6 +39,7 @@ import java.util.List;
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.ysuselfstudy.adapter.DemoPopup;
 import com.ysuselfstudy.software.APKVersionCodeUtils;
+import com.ysuselfstudy.tencent.BaseUiListener;
 import com.ysuselfstudy.time.RecommendRoom;
 import com.ysuselfstudy.time.WhereWhen;
 import com.ysuselfstudy.database.DateBaseManager;
@@ -55,20 +50,17 @@ import com.ysuselfstudy.database.Spider;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
-    private Tencent mTencent;
     private static ImageView image;
     private DrawerLayout mDrawerLayout;
     private static TextView TimeView;
-    private UserInfo mUserInfo;
-    private ImageView RoundImage;
-    private View headerLayout;
+    private static ImageView RoundImage;
+    private static View headerLayout;
     public static YsuHandler sHandler;
-    private SwipeRefreshLayout swipeRefreshLayout;
     private RecommendRoom recommendRoom=new RecommendRoom();
     String address;
     ArrayList<School> grouplist;
     ArrayList<List> childlist;
-
+    public BaseUiListener baseUiListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +70,11 @@ public class MainActivity extends BaseActivity {
         headerLayout =navigationView.inflateHeaderView(R.layout.nav_header);
         RoundImage=(ImageView) headerLayout.findViewById(R.id.icon_round_image);
         LitePal.getDatabase();//创建数据库
+
+        baseUiListener=new BaseUiListener();
+        baseUiListener.getActivity(MainActivity.this);
+        baseUiListener.getContex(getApplicationContext());
+
 
         if(shouldInit())
         {
@@ -275,7 +272,7 @@ public class MainActivity extends BaseActivity {
                 });
             }
         }).start();
-        //加载 侧边栏的头像，初始为 QQ 头像
+        //加载 侧边栏的头像，初始为 QQ 企鹅
         Glide.with(headerLayout.getContext()).load(R.mipmap.qq).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
     }
 
@@ -363,89 +360,26 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
       super.onActivityResult(requestCode,resultCode,data);
-        Tencent.onActivityResultData(requestCode,resultCode,data,new BaseUiListener());
+        Tencent.onActivityResultData(requestCode,resultCode,data,baseUiListener);
+        Log.d(TAG, "onActivityResult: "+data+"  "+requestCode+" "+resultCode);
     }
-
-    /**
-     * 腾讯登录实现的接口类
-     */
-    private class BaseUiListener implements IUiListener
-    {
-        @Override
-        public void onComplete(Object response) {
-            Log.d(TAG, "onComplete: " + response.toString());
-            JSONObject obj = (JSONObject) response;
-            try {
-
-                String openID = obj.getString("openid");
-
-                String accessToken = obj.getString("access_token");
-
-                String expires = obj.getString("expires_in");
-
-                mTencent.setOpenId(openID);
-
-                mTencent.setAccessToken(accessToken, expires);
-
-                QQToken qqToken = mTencent.getQQToken();
-
-                mUserInfo = new UserInfo(getApplicationContext(), qqToken);
-                mUserInfo.getUserInfo(new IUiListener() {
-                    @Override
-                    public void onComplete(Object o) {
-                        Log.d(TAG,"登录成功"+o.toString());
-                        JSONObject Mess=(JSONObject) o;
-                        try {
-                            String nickname=Mess.getString("nickname");
-                            String touxiang=Mess.getString("figureurl_qq_2");
-                            Glide.with(headerLayout.getContext()).load(touxiang).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
-                        }catch (Exception e)
-                        {
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onError(UiError uiError) {
-                        Toast.makeText(MainActivity.this,"登录错误",Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancel() {
-                      Toast.makeText(MainActivity.this,"登录取消",Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-            } catch (Exception e) {
-
-            }
-        }
-        @Override
-        public void onError(UiError uiError) {
-            Toast.makeText(MainActivity.this,"登录错误",Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onCancel() {
-            Toast.makeText(MainActivity.this,"登录取消",Toast.LENGTH_SHORT).show();
-        }
-    }
-
     /**
      * 头像点击实现 QQ 登录
      * @param view
      */
     public  void  testLogin(View view)
     {
-        mTencent=Tencent.createInstance("101560830",getApplicationContext());
+        Tencent  mTencent=baseUiListener.getTencent();
         if(!mTencent.isSessionValid())
         {
-            mTencent.login(MainActivity.this, "all",new BaseUiListener());
+            mTencent.login(MainActivity.this, "all",baseUiListener);
         }
     }
 
+    /**
+     * 小米登录必备
+     * @return
+     */
     private boolean shouldInit() {
         ActivityManager am = ((ActivityManager) getSystemService(Context.ACTIVITY_SERVICE));
         List<ActivityManager.RunningAppProcessInfo> processInfos = am.getRunningAppProcesses();
@@ -461,16 +395,15 @@ public class MainActivity extends BaseActivity {
 
 
     public static class YsuHandler extends Handler{
-        public Context context;
-        public YsuHandler(Context context) {
-            this.context=context;
-        }
-
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what)
             {
                 case 1:
+                    break;
+                case AllString.TENCENT_IMAGE:
+                    String url=(String) msg.obj;
+                    Glide.with(headerLayout.getContext()).load(url).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
                     break;
                 default:
                     break;

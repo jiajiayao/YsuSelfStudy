@@ -23,7 +23,7 @@
         android:src="@mipmap/ic_login_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-        <LinearLayout
+        <RelativeLayout
             android:paddingTop="40dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
@@ -32,18 +32,28 @@
             android:layout_below="@+id/ysuimage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-           <ImageView
-               android:src="@mipmap/studentname"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content" />
-            <EditText
-                android:paddingLeft="10dp"
-                android:id="@+id/xuehao"
-                android:hint="学号"
-                android:inputType="number"
+
+            <ImageView
+                android:id="@+id/fsd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/yui"
+                android:src="@mipmap/studentname" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_toRightOf="@+id/fsd"
+                android:id="@+id/yui"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+                android:layout_height="wrap_content">
+                <EditText
+                    android:paddingLeft="10dp"
+                    android:id="@+id/xuehao"
+                    android:hint="学号"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </RelativeLayout>
         <LinearLayout
             android:padding="20dp"
             android:id="@+id/mimalinear"
@@ -54,13 +64,19 @@
               android:src="@mipmap/password"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content" />
-            <EditText
-                android:paddingLeft="10dp"
-                android:id="@+id/password"
-                android:hint="密码"
-                android:inputType="textPassword"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                app:passwordToggleEnabled="true"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:paddingLeft="10dp"
+                    android:id="@+id/password"
+                    android:hint="密码"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
         <LinearLayout
             android:padding="20dp"
@@ -71,13 +87,19 @@
                 android:src="@mipmap/yanzhengma"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/yanzhengma"
-                android:paddingLeft="10dp"
-                android:hint="验证码"
+            <com.google.android.material.textfield.TextInputLayout
+
                 android:layout_weight="3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+                <EditText
+                    android:paddingLeft="10dp"
+                    android:id="@+id/yanzhengma"
+                    android:hint="验证码"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <ImageView
                 android:id="@+id/change"
                 android:scaleType="fitCenter"

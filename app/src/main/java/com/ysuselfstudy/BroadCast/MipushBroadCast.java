@@ -3,6 +3,7 @@ package com.ysuselfstudy.BroadCast;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.ysuselfstudy.AllString;
 import com.example.ysuselfstudy.MainActivity;
 import com.xiaomi.mipush.sdk.ErrorCode;
 import com.xiaomi.mipush.sdk.MiPushClient;
@@ -32,6 +33,12 @@ public class MipushBroadCast extends PushMessageReceiver {
     @Override
     public void onNotificationMessageClicked(Context context, MiPushMessage miPushMessage) {
         Log.d(TAG, "onNotificationMessageClicked: 点击事件");
+        switch (miPushMessage.getContent())
+        {
+            case AllString.SHIWU :
+                //打开我的信息主页。
+                break;
+        }
     }
 
     /***
@@ -42,6 +49,12 @@ public class MipushBroadCast extends PushMessageReceiver {
     @Override
     public void onNotificationMessageArrived(Context context, MiPushMessage miPushMessage) {
         Log.d(TAG, "onNotificationMessageArrived: 消息到了"+miPushMessage.toString());
+        switch (miPushMessage.getContent())
+        {
+            case AllString.SHIWU :
+                //获取对方的qq号，手机号等操作。同时更新数据库。
+                break;
+        }
     }
 
     /**

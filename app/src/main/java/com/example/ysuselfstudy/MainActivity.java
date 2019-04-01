@@ -168,6 +168,10 @@ public class MainActivity extends BaseActivity {
                             startActivity(intent);
                         }
                         break;
+                    case R.id.misscard:
+                        Intent intent=new Intent(MainActivity.this,PostMissingCard.class);
+                        startActivity(intent);
+                        break;
                     case R.id.update:
                         new Thread(new Runnable() {
                             @Override

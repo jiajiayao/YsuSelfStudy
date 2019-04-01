@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">YsuSelfStudy</string>
+    <string name="title_activity_post_missing_card">Sign in</string>
+    <string name="Complete">完成</string>
+    <string name="Error">错误</string>
+    <string name="Upload">提交</string>
 </resources>

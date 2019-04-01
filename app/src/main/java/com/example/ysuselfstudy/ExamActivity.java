@@ -15,6 +15,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.xiaomi.mipush.sdk.MiPushClient;
 import com.ysuselfstudy.adapter.SpacesItemDecoration;
 import com.ysuselfstudy.database.StudentInfo;
 import com.ysuselfstudy.examadapter.ExamAdapter;

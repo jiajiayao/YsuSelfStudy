@@ -12,6 +12,8 @@ import com.xiaomi.mipush.sdk.MiPushClient;
 import com.xiaomi.mipush.sdk.MiPushCommandMessage;
 import com.xiaomi.mipush.sdk.MiPushMessage;
 import com.xiaomi.mipush.sdk.PushMessageReceiver;
+import com.ysuselfstudy.database.MipushInfor;
+import com.ysuselfstudy.time.DateTime;
 
 public class MipushBroadCast extends PushMessageReceiver {
 
@@ -54,12 +56,11 @@ public class MipushBroadCast extends PushMessageReceiver {
     @Override
     public void onNotificationMessageArrived(Context context, MiPushMessage miPushMessage) {
         Log.d(TAG, "onNotificationMessageArrived: 消息到了"+miPushMessage.toString());
-        switch (miPushMessage.getContent())
-        {
-            case AllString.SHIWU :
-                //获取对方的qq号，手机号等操作。同时更新数据库。
-                break;
-        }
+        DateTime dateTime=new DateTime();
+        String time=dateTime.getMonth()+"月"+dateTime.getDate()+"日";
+        String information=miPushMessage.getDescription();
+        MipushInfor mipushInfor = new MipushInfor(time, information);
+        mipushInfor.save();
     }
 
     /**

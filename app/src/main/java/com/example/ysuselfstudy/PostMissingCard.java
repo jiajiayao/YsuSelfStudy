@@ -59,7 +59,7 @@ public class PostMissingCard extends AppCompatActivity {
                         RequestBody formbody=RequestBody.create(JSON,data);
                         Request request=new Request.Builder()
                                 .post(formbody)
-                                .url("http://10.2.55.32:8080/SelfStudy_war_exploded/GetMissingInfo")
+                                .url("http://192.168.137.1:8080/SelfStudy_war_exploded/GetMissingInfo")
                                 .build();
                         okHttpClient.newCall(request).enqueue(new Callback() {
                             @Override

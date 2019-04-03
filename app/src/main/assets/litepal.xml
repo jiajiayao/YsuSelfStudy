@@ -35,6 +35,8 @@
         <mapping class = "com.ysuselfstudy.database.EmptyRoom"/>
         <mapping class = "com.ysuselfstudy.time.DateTime"/>
         <mapping class = "com.ysuselfstudy.database.StudentInfo"/>
+        <mapping class="com.ysuselfstudy.database.SingleInfo"/>
+        <mapping class="com.ysuselfstudy.tencent.Personel"/>
     </list>
 
     <!--

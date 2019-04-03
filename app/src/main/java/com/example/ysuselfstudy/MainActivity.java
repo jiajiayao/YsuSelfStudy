@@ -201,6 +201,10 @@ public class MainActivity extends BaseActivity {
                         Intent intentLibrary=new Intent(MainActivity.this,LibraryActivity.class);
                         startActivity(intentLibrary);
                         break;
+                    case R.id.my_information://跳转到我的信息页。
+                        Intent intentinfo = new Intent(MainActivity.this, InfoActivity.class);
+                        startActivity(intentinfo);
+                        break;
                         default:
                             break;
                 }
@@ -377,10 +381,15 @@ public class MainActivity extends BaseActivity {
     public  void  testLogin(View view)
     {
         Tencent  mTencent=baseUiListener.getTencent();
+
         if(!mTencent.isSessionValid())
         {
             mTencent.login(MainActivity.this, "all",baseUiListener);
+        }else {
+            Intent intent = new Intent(MainActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
+
     }
 
     /**

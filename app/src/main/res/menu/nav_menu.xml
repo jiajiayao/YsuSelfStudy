@@ -2,13 +2,15 @@
 <!--侧边栏的各种选项-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
  <group android:checkableBehavior="none">
+     <item  android:id="@+id/my_information"
+         android:title="我的信息"
+         android:icon="@mipmap/ic_information"/>
      <item android:id="@+id/grade"
          android:icon="@mipmap/ic_exam"
          android:title="我的考试"/>
      <item android:id="@+id/mygraded"
          android:icon="@mipmap/ic_grade"
-         android:title="我的成绩"
-         />
+         android:title="我的成绩" />
      <item android:id="@+id/library"
          android:title="图书馆座位预约"
          android:icon="@mipmap/ic_library"/>
@@ -17,8 +19,7 @@
          android:title="丢失的一卡通" />
      <item android:id="@+id/xiaoli"
          android:icon="@mipmap/ic_xiaoli"
-        android:title="校历"
-         />
+        android:title="校历" />
      <item  android:id="@+id/setting"
          android:title="设置"
          android:icon="@mipmap/ic_setting"/>

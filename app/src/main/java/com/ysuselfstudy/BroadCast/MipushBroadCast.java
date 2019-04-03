@@ -1,9 +1,11 @@
 package com.ysuselfstudy.BroadCast;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.example.ysuselfstudy.AllString;
+import com.example.ysuselfstudy.InfoActivity;
 import com.example.ysuselfstudy.MainActivity;
 import com.xiaomi.mipush.sdk.ErrorCode;
 import com.xiaomi.mipush.sdk.MiPushClient;
@@ -37,6 +39,9 @@ public class MipushBroadCast extends PushMessageReceiver {
         {
             case AllString.SHIWU :
                 //打开我的信息主页。
+                Intent i = new Intent(context, InfoActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
                 break;
         }
     }

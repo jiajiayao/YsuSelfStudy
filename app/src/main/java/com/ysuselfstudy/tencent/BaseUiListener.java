@@ -20,8 +20,10 @@ import com.tencent.connect.auth.QQToken;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
+import com.ysuselfstudy.database.DateBaseManager;
 
 import org.json.JSONObject;
+import org.litepal.LitePal;
 
 public class BaseUiListener implements IUiListener
 {
@@ -32,21 +34,26 @@ public class BaseUiListener implements IUiListener
     public Context context;
     public Activity activity;
     public MainActivity mainActivity;
+    MainActivity.YsuHandler ui=new MainActivity.YsuHandler();
+    private DateBaseManager dateBaseManager=new DateBaseManager();
     @Override
     public void onComplete(Object response) {
         Log.d(TAG, "onComplete: " + response.toString());
+
         JSONObject obj = (JSONObject) response;
         try {
+            dateBaseManager.delete_QQ();
+            final String openID= obj.getString("openid");
 
-            String openID = obj.getString("openid");
+            final String accessToken = obj.getString("access_token");
 
-            String accessToken = obj.getString("access_token");
-
-            String expires = obj.getString("expires_in");
+            final String expires = obj.getString("expires_in");
 
             mTencent.setOpenId(openID);
 
             mTencent.setAccessToken(accessToken, expires);//这里应该持久化保存
+
+
             Log.d(TAG, "onComplete: 设置完毕");
             QQToken qqToken = mTencent.getQQToken();
 
@@ -60,7 +67,9 @@ public class BaseUiListener implements IUiListener
                         String nickname=Mess.getString("nickname");
                         String touxiang=Mess.getString("figureurl_qq_2");
 
-                       MainActivity.YsuHandler ui=new MainActivity.YsuHandler();
+                        dateBaseManager.setTencent(openID, accessToken, nickname, touxiang,expires);
+
+
                         Message a=new Message();
                         a.what=AllString.TENCENT_IMAGE;
                         a.obj=touxiang;
@@ -107,10 +116,21 @@ public class BaseUiListener implements IUiListener
     {
         this.context=context;
         mTencent=Tencent.createInstance(AllString.TENCENT_APPID,this.context);
+        if (LitePal.count(Personel.class)>0)
+        {
+            Personel temp = LitePal.findLast(Personel.class);
+            mTencent.setAccessToken(temp.getAccessToken(), temp.getExpires());
+            mTencent.setOpenId(temp.getOpenId());
+            Message b=new Message();
+            b.what=AllString.TENCENT_IMAGE;
+            b.obj=temp.getQQtouxiang();
+            ui.sendMessage(b);
+        }
     }
 
     public Tencent getTencent()
     {
         return mTencent;
     }
+
 }

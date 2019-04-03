@@ -6,6 +6,7 @@ import org.litepal.LitePal;
 
 import java.util.List;
 
+import com.ysuselfstudy.tencent.Personel;
 import com.ysuselfstudy.time.DateTime;
 
 public class DateBaseManager {
@@ -74,5 +75,34 @@ public class DateBaseManager {
             return true;
         return false;
     }
+    /**
+     * 保存QQ登录的信息。
+     */
+    public void setTencent(String openid,String taken,String name,String urltouxiang,String ex)
+    {
+        Personel personel=new Personel();
+        personel.setAccessToken(taken);
+        personel.setOpenId(openid);
+        personel.setQQname(name);
+        personel.setExpires(ex);
+        personel.setQQtouxiang(urltouxiang);
+        personel.save();
+    }
+    /**
+     * 检查QQ登录态时都有效
+     */
+    public boolean CheckQQ()
+    {
+        if (LitePal.count(Personel.class)>0)
+            return true;
+        return false;
+    }
 
+    /**
+     * 删除QQ数据库
+     */
+    public void delete_QQ()
+    {
+        LitePal.deleteAll(Personel.class);
+    }
 }

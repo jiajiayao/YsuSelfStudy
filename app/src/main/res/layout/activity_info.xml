@@ -24,17 +24,16 @@
                android:layout_width="match_parent"
                android:layout_height="match_parent">
                 <ImageView
-                    android:background="@drawable/tes"
+                    android:background="@drawable/back"
                     android:fitsSystemWindows="true"
                     android:id="@+id/background_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
                <ImageView
                    android:id="@+id/touxiang"
-                   android:background="@drawable/timg"
                    android:layout_gravity="center"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content" />
+                   android:layout_width="70dp"
+                   android:layout_height="70dp" />
            </FrameLayout>
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/info_toolbar"
@@ -49,13 +48,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="你好啊" />
+        android:layout_height="match_parent"    >
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/personal_info"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

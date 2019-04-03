@@ -68,7 +68,8 @@ public class BaseUiListener implements IUiListener
                         String touxiang=Mess.getString("figureurl_qq_2");
 
                         dateBaseManager.setTencent(openID, accessToken, nickname, touxiang,expires);
-
+                        AllString.qq_touxiang = touxiang;
+                        AllString.nickname=nickname;
 
                         Message a=new Message();
                         a.what=AllString.TENCENT_IMAGE;
@@ -125,6 +126,8 @@ public class BaseUiListener implements IUiListener
             b.what=AllString.TENCENT_IMAGE;
             b.obj=temp.getQQtouxiang();
             ui.sendMessage(b);
+            AllString.nickname=temp.getQQname();
+            AllString.qq_touxiang=temp.getQQtouxiang();
         }
     }
 

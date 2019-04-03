@@ -19,9 +19,12 @@ public class AllString {
     public  static  final String LibraryUrl="http://202.206.242.87/ClientWeb/m/ic2/Default.aspx";
     public  static  final String MI_APP_ID="2882303761517971963";
     public  static  final String MI_APP_KEY="5161797164963";
+    public static String nickname = "";
+    public static String qq_touxiang = "";
     public static   final String SHIWU="shiwuxinxi";
 
     public static final int TENCENT_IMAGE = 2;
     public static final int BEGIN_ACCESS = 1;
     public static final int BEGIN_STORE = 3;
+
 }

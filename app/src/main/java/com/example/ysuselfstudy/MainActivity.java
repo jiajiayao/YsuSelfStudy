@@ -157,20 +157,18 @@ public class MainActivity extends BaseActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.grade:
-                        if(!AllString.Login)//如果没有登录
-                        {
-                            Intent intent=new Intent(MainActivity.this,LoginOffice.class);
-                            startActivity(intent);
-                        }
-                        else
-                        {
-                            Intent intent=new Intent(MainActivity.this,ExamActivity.class);
-                            startActivity(intent);
-                        }
+                        Intent intent_grade = new Intent(MainActivity.this, !AllString.Login ? LoginOffice.class : GradeActivity.class);
+                        intent_grade.putExtra("version",1);;
+                        startActivity(intent_grade);
+                        break;
+                    case R.id.exam:
+                        Intent intent_exam= new Intent(MainActivity.this, !AllString.Login ? LoginOffice.class : ExamActivity.class);
+                        intent_exam.putExtra("version", 2);
+                        startActivity(intent_exam);
                         break;
                     case R.id.misscard:
-                        Intent intent=new Intent(MainActivity.this,PostMissingCard.class);
-                        startActivity(intent);
+                        Intent intent_misscard=new Intent(MainActivity.this,PostMissingCard.class);
+                        startActivity(intent_misscard);
                         break;
                     case R.id.update:
                         new Thread(new Runnable() {

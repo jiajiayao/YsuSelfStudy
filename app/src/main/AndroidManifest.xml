@@ -20,7 +20,6 @@
     <uses-permission android:name="com.example.ysuselfstudy.permission.MIPUSH_RECEIVE" />
 
     <application
-
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/home_tiny"
@@ -29,8 +28,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InfoActivity" android:theme="@style/InfoActivity">
-        </activity>
+        <activity android:name=".GradeActivity"></activity>
+        <activity
+            android:name=".InfoActivity"
+            android:theme="@style/InfoActivity"></activity>
         <activity android:name=".PostMissingCard" />
         <activity android:name=".StartOver">
             <intent-filter>
@@ -124,8 +125,8 @@
                 <action android:name="com.xiaomi.mipush.ERROR" />
             </intent-filter>
         </receiver>
-        <provider
 
+        <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.ysuselfstudy.selfupdate.fileprovider"
             android:exported="false"

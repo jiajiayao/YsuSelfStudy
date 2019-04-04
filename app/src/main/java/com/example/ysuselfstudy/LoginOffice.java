@@ -51,6 +51,8 @@ public class LoginOffice extends BaseActivity {
      public String LoginCookie;
      private SmartRefreshLayout smartRefreshLayout;
      private DateBaseManager dateBaseManager;
+     private Intent received_intent;
+     private int version;
     /**
      * 这是自动保存 Okhttp 的 Cookie
      */
@@ -62,6 +64,7 @@ public class LoginOffice extends BaseActivity {
             LoginCookie=cookies.get(cookies.size()-1).toString();
             LoginCookie=LoginCookie.substring(0,LoginCookie.indexOf(";"));//提取出来 Cookie
             AllString.Cookie=LoginCookie;//赋值给全局变量
+
         }
 
         @Override
@@ -86,6 +89,8 @@ public class LoginOffice extends BaseActivity {
             actionBar.setTitle(AllString.LoginTitle);
         }
         InitView();
+        received_intent=getIntent();
+        version = received_intent.getIntExtra("version", 1);
         ConnectToOffice();
     }
     @Override
@@ -219,7 +224,8 @@ public class LoginOffice extends BaseActivity {
                                     YsuSetAlias(username);
                                     dateBaseManager.UpdateStu(new StudentInfo(username,password));//更新数据库中学生的信息。
                                     refreshLayout.finishRefresh();
-                                    Intent intent=new Intent(LoginOffice.this,ExamActivity.class);
+                                    Log.d(TAG, "onResponse: " + version);
+                                    Intent intent = new Intent(LoginOffice.this, version == 1 ? GradeActivity.class : ExamActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }

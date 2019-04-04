@@ -5,10 +5,10 @@
      <item  android:id="@+id/my_information"
          android:title="我的信息"
          android:icon="@mipmap/ic_information"/>
-     <item android:id="@+id/grade"
+     <item android:id="@+id/exam"
          android:icon="@mipmap/ic_exam"
          android:title="我的考试"/>
-     <item android:id="@+id/mygraded"
+     <item android:id="@+id/grade"
          android:icon="@mipmap/ic_grade"
          android:title="我的成绩" />
      <item android:id="@+id/library"

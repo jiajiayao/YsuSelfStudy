@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
+import com.xiaomi.market.sdk.XiaomiUpdateAgent;
 
 import org.json.JSONObject;
 
@@ -38,6 +39,9 @@ public class PostMissingCard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_missing_card);
         initView();
+        //XiaomiUpdateAgent.update(PostMissingCard.this);
+       // XiaomiUpdateAgent.arrange();
+        //暂时注销掉更新
         postbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

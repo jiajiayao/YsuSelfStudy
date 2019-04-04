@@ -25,7 +25,7 @@ public class Spider {
   private static DateBaseManager dateBaseManager=new DateBaseManager();
 
     /**
-     * 页面爬取空教室
+     * 从服务器爬取空教室
      */
   public void  Search(Context context)
     {

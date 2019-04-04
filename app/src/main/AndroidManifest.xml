@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.xiaomi.market.sdk.UPDATE" />
 
     <permission
         android:name="com.example.ysuselfstudy.permission.MIPUSH_RECEIVE"
@@ -19,6 +20,7 @@
     <uses-permission android:name="com.example.ysuselfstudy.permission.MIPUSH_RECEIVE" />
 
     <application
+
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/home_tiny"
@@ -122,6 +124,16 @@
                 <action android:name="com.xiaomi.mipush.ERROR" />
             </intent-filter>
         </receiver>
+        <provider
+
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.ysuselfstudy.selfupdate.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/xiaomi_update_sdk_file_paths" />
+        </provider>
     </application>
 
 </manifest>

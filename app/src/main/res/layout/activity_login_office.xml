@@ -10,127 +10,148 @@
     <include android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/toolbar_layout"/>
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/LoginRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/ysuimage"
-        android:src="@mipmap/ic_login_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
         <RelativeLayout
-            android:paddingTop="40dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="20dp"
-            android:id="@+id/xuehaolinear"
-            android:layout_below="@+id/ysuimage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <!--燕山大学的图标-->
             <ImageView
-                android:id="@+id/fsd"
-                android:layout_width="wrap_content"
+                android:id="@+id/ysuimage"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/yui"
-                android:src="@mipmap/studentname" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_toRightOf="@+id/fsd"
-                android:id="@+id/yui"
+                android:src="@mipmap/ic_login_title" />
+
+            <RelativeLayout
+                android:id="@+id/xuehaolinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ysuimage"
+                android:paddingLeft="20dp"
+                android:paddingTop="40dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="20dp">
+
+
+                <ImageView
+                    android:id="@+id/fsd"
+                    android:layout_alignBottom="@id/yui"
+                    android:layout_alignTop="@id/yui"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/studentname" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/yui"
+                    android:layout_toRightOf="@id/fsd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/xuehao"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="学号"
+                        android:inputType="number"
+                        android:paddingLeft="10dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/mimalinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/xuehaolinear"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/pass_src"
+                    android:layout_alignBottom="@id/pass_text"
+                    android:layout_alignTop="@id/pass_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/password" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_toRightOf="@id/pass_src"
+                    android:id="@+id/pass_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="密码"
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:padding="20dp"
+                android:layout_below="@id/mimalinear"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <EditText
-                    android:paddingLeft="10dp"
-                    android:id="@+id/xuehao"
-                    android:hint="学号"
-                    android:inputType="number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
 
-        </RelativeLayout>
-        <LinearLayout
-            android:padding="20dp"
-            android:id="@+id/mimalinear"
-            android:layout_below="@+id/xuehaolinear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-          <ImageView
-              android:src="@mipmap/password"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                app:passwordToggleEnabled="true"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:paddingLeft="10dp"
-                    android:id="@+id/password"
-                    android:hint="密码"
-                    android:inputType="textPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:padding="20dp"
-            android:layout_below="@+id/mimalinear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:src="@mipmap/yanzhengma"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <com.google.android.material.textfield.TextInputLayout
-
+            <RelativeLayout
+                android:id="@+id/yanzheng_layout"
                 android:layout_weight="3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:paddingLeft="10dp"
-                    android:id="@+id/yanzhengma"
-                    android:hint="验证码"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+               >
 
-            <ImageView
-                android:id="@+id/change"
-                android:scaleType="fitCenter"
-                android:minHeight="37dp"
-                android:minWidth="100dp"
-                android:onClick="ChangeImage"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <!--
-        <LinearLayout
-            android:padding="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/LoginOffice"
-                android:text="登录"
-                android:onClick="Login"
+                <ImageView
+                    android:id="@+id/yanzheng_src"
+                    android:layout_alignTop="@id/hhh"
+                    android:layout_alignBottom="@id/hhh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/yanzhengma" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/hhh"
+                    android:layout_toRightOf="@id/yanzheng_src"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/yanzhengma"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="验证码"
+                        android:paddingLeft="10dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minWidth="100dp"
+                    android:minHeight="37dp"
+                    android:onClick="ChangeImage"
+                    android:scaleType="fitCenter" />
+            </LinearLayout>
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        -->
-        <TextView
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:padding="20dp"
-            android:text="下拉登录"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="下拉登录" />
+        </RelativeLayout>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

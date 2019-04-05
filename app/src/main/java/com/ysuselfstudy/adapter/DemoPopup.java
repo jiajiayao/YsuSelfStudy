@@ -68,7 +68,7 @@ public class DemoPopup extends BasePopupWindow {
 
     @Override
     public View onCreateContentView() {
-        return createPopupById(R.layout.layout);
+        return createPopupById(R.layout.bottom_layout);
     }
 
 }

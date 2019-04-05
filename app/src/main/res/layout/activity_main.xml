@@ -71,9 +71,9 @@
 
                     <ExpandableListView
                         android:id="@+id/expand_list"
+                        android:layoutDirection="rtl"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layoutDirection="rtl"></ExpandableListView>
+                        android:layout_height="wrap_content"></ExpandableListView>
 
                 </LinearLayout>
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>

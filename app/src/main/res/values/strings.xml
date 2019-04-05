@@ -4,4 +4,5 @@
     <string name="Complete">完成</string>
     <string name="Error">错误</string>
     <string name="Upload">提交</string>
+    <string name="my_message">我的消息</string>
 </resources>

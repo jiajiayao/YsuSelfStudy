@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--选择栏父项布局-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:gravity="left"
     android:layoutDirection="ltr"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <TextView
+        android:gravity="left"
+        android:layoutDirection="ltr"
+        android:layout_weight="3"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:paddingLeft="20dp"
@@ -15,4 +18,5 @@
         android:id="@+id/view_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-</LinearLayout>
+
+</RelativeLayout>

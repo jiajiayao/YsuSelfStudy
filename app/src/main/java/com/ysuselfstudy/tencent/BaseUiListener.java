@@ -38,8 +38,6 @@ public class BaseUiListener implements IUiListener
     private DateBaseManager dateBaseManager=new DateBaseManager();
     @Override
     public void onComplete(Object response) {
-        Log.d(TAG, "onComplete: " + response.toString());
-
         JSONObject obj = (JSONObject) response;
         try {
             dateBaseManager.delete_QQ();
@@ -61,7 +59,6 @@ public class BaseUiListener implements IUiListener
             mUserInfo.getUserInfo(new IUiListener() {
                 @Override
                 public void onComplete(Object o) {
-                    Log.d(TAG,"登录成功"+o.toString());
                     JSONObject Mess=(JSONObject) o;
                     try {
                         String nickname=Mess.getString("nickname");

@@ -57,6 +57,7 @@ public class MainActivity extends BaseActivity {
     private static TextView TimeView;
     private static ImageView RoundImage;
     private static View headerLayout;
+    private Tencent  mTencent;
     private RecommendRoom recommendRoom=new RecommendRoom();
     String address;
     ArrayList<School> grouplist;
@@ -200,8 +201,14 @@ public class MainActivity extends BaseActivity {
                         startActivity(intentLibrary);
                         break;
                     case R.id.my_information://跳转到我的信息页。
-                        Intent intentinfo = new Intent(MainActivity.this, InfoActivity.class);
-                        startActivity(intentinfo);
+                        if (mTencent!=null&& mTencent.isSessionValid()) {
+                            Intent intentinfo = new Intent(MainActivity.this, InfoActivity.class);
+                            startActivity(intentinfo);
+                        }else {
+                            View test=getWindow().getDecorView();
+                            testLogin(test);
+                        }
+
                         break;
                         default:
                             break;
@@ -317,7 +324,6 @@ public class MainActivity extends BaseActivity {
         bg.add(new SchoolBuilding("里仁教学楼"));
        // bg.add(new SchoolBuilding("其他"));
         childlist.add(bg);
-
     }
 
 
@@ -373,7 +379,6 @@ public class MainActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
       super.onActivityResult(requestCode,resultCode,data);
         Tencent.onActivityResultData(requestCode,resultCode,data,baseUiListener);
-        Log.d(TAG, "onActivityResult: "+data+"  "+requestCode+" "+resultCode);
     }
     /**
      * 头像点击实现 QQ 登录
@@ -381,7 +386,7 @@ public class MainActivity extends BaseActivity {
      */
     public  void  testLogin(View view)
     {
-        Tencent  mTencent=baseUiListener.getTencent();
+        mTencent=baseUiListener.getTencent();
 
         if(!mTencent.isSessionValid())
         {

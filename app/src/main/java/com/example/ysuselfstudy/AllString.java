@@ -15,7 +15,7 @@ public class AllString {
     public  static  final String LoginTitle="登录教务系统";//登录界面的标题
 
     public  static  final String UpdateUrl="http://39.96.163.218:8080/SelfStudy/Version";//检查更新的网址
-    public  static  final String DownloadUrl="http://39.96.163.218:8080/download/1.zip";//下载更新的地址
+    public  static  final String DownloadUrl="http://39.96.163.218:8080/download/yanxi.apk";//下载更新的地址
     public  static  final String LibraryUrl="http://202.206.242.87/ClientWeb/m/ic2/Default.aspx";
     public  static  final String MI_APP_ID="2882303761517971963";
     public  static  final String MI_APP_KEY="5161797164963";

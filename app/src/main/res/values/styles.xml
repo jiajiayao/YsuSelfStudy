@@ -11,4 +11,10 @@
     <style name="LibraryActivity" parent="AppTheme"></style>
     <style name="XiaoliActivity" parent="AppTheme"></style>
     <style name="MissingCard" parent="AppTheme"></style>
+    <style name="hintAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/google_blue</item>
+    </style>
+    <style name="editAppearance" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated" >@color/google_blue</item>
+    </style>
 </resources>

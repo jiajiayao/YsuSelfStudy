@@ -23,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
+import jp.wasabeef.glide.transformations.BlurTransformation;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
@@ -49,6 +51,9 @@ import com.ysuselfstudy.database.School;
 import com.ysuselfstudy.database.SchoolBuilding;
 import com.ysuselfstudy.database.Spider;
 
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     public static Context MainContext;
@@ -58,6 +63,7 @@ public class MainActivity extends BaseActivity {
     private static ImageView RoundImage;
     private static View headerLayout;
     private Tencent  mTencent;
+    private static ImageView BackgroundImageView;
     private RecommendRoom recommendRoom=new RecommendRoom();
     String address;
     ArrayList<School> grouplist;
@@ -72,6 +78,7 @@ public class MainActivity extends BaseActivity {
         NavigationView navigationView=findViewById(R.id.nav_view) ;
         headerLayout =navigationView.inflateHeaderView(R.layout.nav_header);
         RoundImage=(ImageView) headerLayout.findViewById(R.id.icon_round_image);
+        BackgroundImageView = (ImageView) headerLayout.findViewById(R.id.blur_image);
         LitePal.getDatabase();//创建数据库
 
         spider=new Spider();
@@ -201,8 +208,11 @@ public class MainActivity extends BaseActivity {
                         startActivity(intentxiaoli);
                         break;
                     case R.id.setting:
-                            baseUiListener.Loginout();
-                            Glide.with(headerLayout.getContext()).load(R.mipmap.qq).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
+                        Intent insten_setting = new Intent(MainActivity.this, SettingsActivity.class);
+                        startActivity(insten_setting);
+
+                           // baseUiListener.Loginout();
+                           // Glide.with(headerLayout.getContext()).load(R.mipmap.qq).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
                         break;
                     case R.id.library :
                         Intent intentLibrary=new Intent(MainActivity.this,LibraryActivity.class);
@@ -300,7 +310,12 @@ public class MainActivity extends BaseActivity {
             }
         }).start();
         //加载 侧边栏的头像，初始为 QQ 企鹅
-        Glide.with(headerLayout.getContext()).load(R.mipmap.qq).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
+        Glide.with(headerLayout.getContext()).load(R.mipmap.qq).apply(bitmapTransform(new CircleCrop())).into(RoundImage);
+        Glide.with(this).load(R.drawable.back)
+                .apply(bitmapTransform(new BlurTransformation(25, 3)))
+                .into(BackgroundImageView);
+
+
     }
 
     /**
@@ -438,7 +453,10 @@ public class MainActivity extends BaseActivity {
                      break;
                 case AllString.TENCENT_IMAGE:
                     String url=(String) msg.obj;
-                    Glide.with(headerLayout.getContext()).load(url).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
+                    Glide.with(headerLayout.getContext()).load(url).apply(bitmapTransform(new CircleCrop())).into(RoundImage);
+                    Glide.with(headerLayout.getContext()).load(url)
+                            .apply(bitmapTransform(new BlurTransformation(25, 3)))
+                            .into(BackgroundImageView);
                     break;
                 default:
                     break;

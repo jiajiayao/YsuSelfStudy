@@ -21,7 +21,7 @@
          android:icon="@mipmap/ic_xiaoli"
         android:title="校历" />
      <item  android:id="@+id/setting"
-         android:title="注销登录"
+         android:title="设置"
          android:icon="@mipmap/ic_setting"/>
      <item android:id="@+id/update"
          android:icon="@mipmap/ic_update"

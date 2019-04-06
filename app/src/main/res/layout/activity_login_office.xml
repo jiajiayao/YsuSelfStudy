@@ -48,11 +48,15 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/yui"
+                    app:hintTextAppearance="@style/hintAppearance"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="12"
                     android:layout_toRightOf="@id/fsd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:theme="@style/editAppearance"
                         android:id="@+id/xuehao"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -80,12 +84,14 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_toRightOf="@id/pass_src"
+                    app:hintTextAppearance="@style/hintAppearance"
                     android:id="@+id/pass_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:passwordToggleEnabled="true">
 
                     <EditText
+                        android:theme="@style/editAppearance"
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -120,11 +126,13 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/hhh"
+                    app:hintTextAppearance="@style/hintAppearance"
                     android:layout_toRightOf="@id/yanzheng_src"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:theme="@style/editAppearance"
                         android:id="@+id/yanzhengma"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

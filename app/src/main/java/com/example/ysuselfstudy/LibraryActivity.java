@@ -1,6 +1,7 @@
 package com.example.ysuselfstudy;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class LibraryActivity extends BaseActivity {
         }
         mWebview = (WebView) findViewById(R.id.webView1);
         mWebSettings = mWebview.getSettings();
+
 
         mWebview.loadUrl(AllString.LibraryUrl);
         mWebview.getSettings().setJavaScriptEnabled(true);

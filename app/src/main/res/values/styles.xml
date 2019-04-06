@@ -7,15 +7,31 @@
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="InfoActivity" parent="AppTheme"></style>
+
     <style name="LibraryActivity" parent="AppTheme"></style>
+
     <style name="XiaoliActivity" parent="AppTheme"></style>
+
     <style name="MissingCard" parent="AppTheme"></style>
+
     <style name="hintAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/google_blue</item>
     </style>
+
     <style name="editAppearance" parent="Theme.AppCompat.Light">
-        <item name="colorControlActivated" >@color/google_blue</item>
+        <item name="colorControlActivated">@color/google_blue</item>
     </style>
+
     <style name="MainActivity" parent="AppTheme"></style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

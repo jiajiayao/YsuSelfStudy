@@ -216,11 +216,14 @@ public class MainActivity extends BaseActivity {
                         startActivity(intentxiaoli);
                         break;
                     case R.id.setting:
-                        Intent insten_setting = new Intent(MainActivity.this, SettingsActivity.class);
-                        startActivity(insten_setting);
+                       // Intent insten_setting = new Intent(MainActivity.this, SettingsActivity.class);
+                        //startActivity(insten_setting);
 
-                           // baseUiListener.Loginout();
-                           // Glide.with(headerLayout.getContext()).load(R.mipmap.qq).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
+                           baseUiListener.Loginout();
+                        Glide.with(headerLayout.getContext()).load(R.drawable.back)
+                                .apply(bitmapTransform(new BlurTransformation(25, 3)))
+                                .into(BackgroundImageView);
+                           Glide.with(headerLayout.getContext()).load(R.mipmap.qq).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
                         break;
                     case R.id.library :
                         Intent intentLibrary=new Intent(MainActivity.this,LibraryActivity.class);
@@ -234,7 +237,10 @@ public class MainActivity extends BaseActivity {
                             View test=getWindow().getDecorView();
                             testLogin(test);
                         }
-
+                        break;
+                    case R.id.about:
+                        Intent intent_about = new Intent(MainActivity.this, ScrollingActivity.class);
+                        startActivity(intent_about);
                         break;
                         default:
                             break;
@@ -317,7 +323,7 @@ public class MainActivity extends BaseActivity {
                 });
             }
         }).start();
-        //加载 侧边栏的头像，初始为 QQ 企鹅
+        //加载 侧边栏的头像，初始为 qq 企鹅
         Glide.with(headerLayout.getContext()).load(R.mipmap.qq).apply(bitmapTransform(new CircleCrop())).into(RoundImage);
         Glide.with(this).load(R.drawable.back)
                 .apply(bitmapTransform(new BlurTransformation(25, 3)))
@@ -401,7 +407,7 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * 这是 QQ 登录必须要实现的。
+     * 这是 qq 登录必须要实现的。
      * @param requestCode
      * @param resultCode
      * @param data
@@ -412,7 +418,7 @@ public class MainActivity extends BaseActivity {
         Tencent.onActivityResultData(requestCode,resultCode,data,baseUiListener);
     }
     /**
-     * 头像点击实现 QQ 登录
+     * 头像点击实现 qq 登录
      * @param view
      */
     public  void  testLogin(View view)

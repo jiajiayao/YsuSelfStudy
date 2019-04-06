@@ -29,8 +29,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".XiaoLiActivity"
             android:theme="@style/XiaoliActivity" />
@@ -62,8 +66,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/MainActivity"
-            android:label="燕习" />
+            android:label="燕习"
+            android:theme="@style/MainActivity" />
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"

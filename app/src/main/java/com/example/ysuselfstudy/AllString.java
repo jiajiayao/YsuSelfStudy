@@ -9,7 +9,7 @@ public class AllString {
 
     public  static  final String BiYing="http://guolin.tech/api/bing_pic";
     public  static  final String YSU="http://39.96.163.218:8080/SelfStudy/TransRoom";
-    public  static  final String TENCENT_APPID = "101560830";//QQ 登录相关的关键码
+    public  static  final String TENCENT_APPID = "101560830";//qq 登录相关的关键码
     public  static  final String YsuOffice="http://202.206.243.5/default2.aspx";//教务系统的登录界面
     public  static  final String YsuYanZhengMa="http://202.206.243.5/CheckCode.aspx";//教务系统的验证码
     public  static  final String LoginTitle="登录教务系统";//登录界面的标题

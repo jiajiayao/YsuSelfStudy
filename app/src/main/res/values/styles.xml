@@ -17,4 +17,5 @@
     <style name="editAppearance" parent="Theme.AppCompat.Light">
         <item name="colorControlActivated" >@color/google_blue</item>
     </style>
+    <style name="MainActivity" parent="AppTheme"></style>
 </resources>

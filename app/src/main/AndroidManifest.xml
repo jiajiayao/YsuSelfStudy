@@ -62,6 +62,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:theme="@style/MainActivity"
             android:label="燕习" />
         <activity
             android:name="com.tencent.tauth.AuthActivity"

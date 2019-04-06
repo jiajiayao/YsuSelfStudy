@@ -3,6 +3,7 @@ package com.example.ysuselfstudy;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -80,6 +81,13 @@ public class MainActivity extends BaseActivity {
         RoundImage=(ImageView) headerLayout.findViewById(R.id.icon_round_image);
         BackgroundImageView = (ImageView) headerLayout.findViewById(R.id.blur_image);
         LitePal.getDatabase();//创建数据库
+
+        findViewById(R.id.drawer_layout).setFitsSystemWindows(false);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        findViewById(R.id.toolbar).setPadding(0, 96, 0, 0);
+
+
+
 
         spider=new Spider();
         baseUiListener=new BaseUiListener();

@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".XiaoLiActivity">
-    <com.com.polites.android.GestureImageView
+    <com.polites.android.GestureImageView
         android:id="@+id/gesture"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"

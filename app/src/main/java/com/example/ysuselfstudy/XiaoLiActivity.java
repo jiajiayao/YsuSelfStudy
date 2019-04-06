@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout.LayoutParams;
 import android.os.Bundle;
 
-import com.com.polites.android.GestureImageView;
+import com.polites.android.GestureImageView;
 
 public class XiaoLiActivity extends AppCompatActivity {
 

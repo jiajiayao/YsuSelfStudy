@@ -114,7 +114,7 @@ public class BaseUiListener implements IUiListener
     {
         this.context=context;
         mTencent=Tencent.createInstance(AllString.TENCENT_APPID,this.context);
-        if (LitePal.count(Personel.class)>0)
+        if (dateBaseManager.CheckQQ())
         {
             Personel temp = LitePal.findLast(Personel.class);
             mTencent.setAccessToken(temp.getAccessToken(), temp.getExpires());
@@ -131,6 +131,12 @@ public class BaseUiListener implements IUiListener
     public Tencent getTencent()
     {
         return mTencent;
+    }
+
+    public void Loginout()
+    {
+        if(mTencent.isSessionValid())
+          mTencent.logout(context);
     }
 
 }

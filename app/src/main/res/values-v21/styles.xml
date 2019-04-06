@@ -9,4 +9,7 @@
     <style name="XiaoliActivity" parent="AppTheme">
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+    <style name="MissingCard" parent="AppTheme">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
 </resources>

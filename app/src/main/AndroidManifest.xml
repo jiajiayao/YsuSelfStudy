@@ -28,12 +28,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".XiaoLiActivity" android:theme="@style/XiaoliActivity"></activity>
+        <activity
+            android:name=".XiaoLiActivity"
+            android:theme="@style/XiaoliActivity" />
         <activity android:name=".GradeActivity" />
         <activity
             android:name=".InfoActivity"
             android:theme="@style/InfoActivity" />
-        <activity android:name=".PostMissingCard" />
+        <activity
+            android:name=".PostMissingCard"
+            android:theme="@style/MissingCard" />
         <activity android:name=".StartOver">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,10 +56,6 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@xml/network_security_config" />
 
         <activity
             android:name=".MainActivity"

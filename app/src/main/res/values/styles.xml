@@ -10,4 +10,5 @@
     <style name="InfoActivity" parent="AppTheme"></style>
     <style name="LibraryActivity" parent="AppTheme"></style>
     <style name="XiaoliActivity" parent="AppTheme"></style>
+    <style name="MissingCard" parent="AppTheme"></style>
 </resources>

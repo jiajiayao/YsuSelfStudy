@@ -1,46 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".PostMissingCard">
-    <com.google.android.material.textfield.TextInputLayout
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <androidx.cardview.widget.CardView
+        android:padding="10dp"
+        android:layout_gravity="center_vertical"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <EditText
-            android:hint="请输入对方学号"
-            android:inputType="number"
-            android:id="@+id/other_xuehao"
+        <LinearLayout
+            android:id="@+id/line1"
+            android:padding="@dimen/text_exam_size"
+
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:hint="你的QQ号"
-            android:inputType="number"
-            android:id="@+id/my_qq"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        app:counterMaxLength="11"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/myphone"
-            android:hint="你的电话（填一个即可）"
-            android:inputType="number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-  <Button
-      android:id="@+id/post"
-      android:layout_gravity="center"
-      android:text="确认"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" />
-</LinearLayout>
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:drawableLeft="@mipmap/ic_stu"
+                    android:drawablePadding="@dimen/text_padding"
+                    android:hint="请输入对方学号"
+                    android:inputType="number"
+                    android:id="@+id/other_xuehao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:hint="你的QQ号"
+                    android:drawableStart="@mipmap/ic_qq"
+                    android:drawablePadding="@dimen/text_padding"
+                    android:inputType="number"
+                    android:id="@+id/my_qq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                app:counterMaxLength="11"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/myphone"
+                    android:drawableStart="@mipmap/ic_phone"
+                    android:drawablePadding="@dimen/text_padding"
+                    android:hint="你的电话（填一个即可）"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:layout_marginTop="@dimen/text_exam_size"
+                android:id="@+id/post"
+                android:background="@drawable/circle_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:stateListAnimator="@null"
+                android:text="@string/tijiao" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</FrameLayout>

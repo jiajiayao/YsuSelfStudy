@@ -44,7 +44,7 @@
                     android:layout_alignTop="@id/yui"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/studentname" />
+                    android:src="@mipmap/ic_stu" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/yui"

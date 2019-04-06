@@ -9,6 +9,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +43,10 @@ public class PostMissingCard extends AppCompatActivity {
         //XiaomiUpdateAgent.update(PostMissingCard.this);
        // XiaomiUpdateAgent.arrange();
         //暂时注销掉更新
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PostMissingCard.this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         postbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +68,8 @@ public class PostMissingCard extends AppCompatActivity {
                         RequestBody formbody=RequestBody.create(JSON,data);
                         Request request=new Request.Builder()
                                 .post(formbody)
-                                .url("http://192.168.137.1:8080/SelfStudy_war_exploded/GetMissingInfo")
+                             //   .url("http://192.168.137.1:8080/SelfStudy_war_exploded/GetMissingInfo")
+                                .url("http://39.96.163.218:8080/SelfStudy/GetMissingInfo")
                                 .build();
                         okHttpClient.newCall(request).enqueue(new Callback() {
                             @Override

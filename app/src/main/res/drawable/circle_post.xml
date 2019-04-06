@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- 布局颜色 -->
+    <solid android:color="@color/google_yellow"
+        />
+
+    <!-- 直接写成android:radius="5dp" 也可以 -->
+    <corners
+        android:radius="30dp"
+        />
+</shape>

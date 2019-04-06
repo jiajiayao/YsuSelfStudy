@@ -200,6 +200,10 @@ public class MainActivity extends BaseActivity {
                         Intent intentxiaoli = new Intent(MainActivity.this, XiaoLiActivity.class);
                         startActivity(intentxiaoli);
                         break;
+                    case R.id.setting:
+                            baseUiListener.Loginout();
+                            Glide.with(headerLayout.getContext()).load(R.mipmap.qq).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(RoundImage);
+                        break;
                     case R.id.library :
                         Intent intentLibrary=new Intent(MainActivity.this,LibraryActivity.class);
                         startActivity(intentLibrary);

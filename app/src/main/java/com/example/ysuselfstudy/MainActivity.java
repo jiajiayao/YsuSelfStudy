@@ -196,6 +196,10 @@ public class MainActivity extends BaseActivity {
                             }
                         }).start();
                         break;
+                    case R.id.xiaoli:
+                        Intent intentxiaoli = new Intent(MainActivity.this, XiaoLiActivity.class);
+                        startActivity(intentxiaoli);
+                        break;
                     case R.id.library :
                         Intent intentLibrary=new Intent(MainActivity.this,LibraryActivity.class);
                         startActivity(intentLibrary);

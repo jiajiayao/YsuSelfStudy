@@ -213,6 +213,7 @@ public class LoginOffice extends BaseActivity {
                                         public void run() {
                                             ConnectToOffice();
                                             refreshLayout.finishRefresh();
+                                            yanzhengma.setText("");
                                             Toast.makeText(LoginOffice.this,"登录失败",Toast.LENGTH_SHORT).show();
                                         }
                                     });

@@ -28,18 +28,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GradeActivity"></activity>
+        <activity android:name=".XiaoLiActivity" android:theme="@style/XiaoliActivity"></activity>
+        <activity android:name=".GradeActivity" />
         <activity
             android:name=".InfoActivity"
-            android:theme="@style/InfoActivity"></activity>
+            android:theme="@style/InfoActivity" />
         <activity android:name=".PostMissingCard" />
         <activity android:name=".StartOver">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LibraryActivity" android:theme="@style/LibraryActivity" />
+        <activity
+            android:name=".LibraryActivity"
+            android:theme="@style/LibraryActivity" />
         <activity android:name=".ExamActivity" />
         <activity android:name=".LoginOffice" />
         <activity

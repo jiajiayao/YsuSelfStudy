@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YsuSelfStudy</string>
+    <string name="app_name">燕习</string>
     <string name="title_activity_post_missing_card">Sign in</string>
     <string name="Complete">完成</string>
     <string name="Error">错误</string>

@@ -139,4 +139,9 @@ public class BaseUiListener implements IUiListener
           mTencent.logout(context);
     }
 
+    public void talk(Context context1)
+    {
+        return;
+    }
+
 }

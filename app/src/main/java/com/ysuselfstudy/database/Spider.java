@@ -14,6 +14,8 @@ import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.litepal.LitePal;
+
 import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -61,10 +63,7 @@ public class Spider {
         Gson gson=new Gson();
         List<EmptyRoom> list=gson.fromJson(res, new TypeToken<List<EmptyRoom>>(){}.getType());
         Log.d(TAG, "work: 开始存储");
-        for (EmptyRoom room:list)
-        {
-            room.save();
-        }
+        LitePal.saveAll(list);
         Log.d(TAG, "work:完成 "+list.size());
         dateBaseManager.setDate();
     }

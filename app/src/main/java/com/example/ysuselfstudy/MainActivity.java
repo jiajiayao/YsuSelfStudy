@@ -33,6 +33,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import com.tencent.bugly.Bugly;
 import com.tencent.tauth.Tencent;
 import org.litepal.LitePal;
 
@@ -186,7 +187,7 @@ public class MainActivity extends BaseActivity {
                         Intent intent_misscard=new Intent(MainActivity.this,PostMissingCard.class);
                         startActivity(intent_misscard);
                         break;
-                    case R.id.update:
+                    case R.id.update:/*
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -209,7 +210,7 @@ public class MainActivity extends BaseActivity {
                                     });
                                 }
                             }
-                        }).start();
+                        }).start();*/
                         break;
                     case R.id.xiaoli:
                         Intent intentxiaoli = new Intent(MainActivity.this, XiaoLiActivity.class);
@@ -251,6 +252,7 @@ public class MainActivity extends BaseActivity {
         });
 
         InitExpandableListView();
+        Bugly.init(getApplicationContext(), AllString.Bugly_APPID, true);
 
     }
 

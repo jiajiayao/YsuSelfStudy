@@ -17,9 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
-import com.xiaomi.market.sdk.XiaomiUpdateAgent;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -40,10 +37,6 @@ public class PostMissingCard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_missing_card);
         initView();
-        //XiaomiUpdateAgent.update(PostMissingCard.this);
-       // XiaomiUpdateAgent.arrange();
-        //暂时注销掉更新
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             PostMissingCard.this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
@@ -68,7 +61,6 @@ public class PostMissingCard extends AppCompatActivity {
                         RequestBody formbody=RequestBody.create(JSON,data);
                         Request request=new Request.Builder()
                                 .post(formbody)
-                             //   .url("http://192.168.137.1:8080/SelfStudy_war_exploded/GetMissingInfo")
                                 .url("http://39.96.163.218:8080/SelfStudy/GetMissingInfo")
                                 .build();
                         okHttpClient.newCall(request).enqueue(new Callback() {

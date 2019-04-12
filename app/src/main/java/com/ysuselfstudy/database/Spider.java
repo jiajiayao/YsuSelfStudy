@@ -45,9 +45,6 @@ public class Spider {
             Log.d(TAG, "Search: 准备执行");
             Response response=okHttpClient.newCall(request).execute();
             String res=response.body().string();
-            Message msg2=new Message();
-            msg2.what=AllString.BEGIN_STORE;
-            tt.sendMessage(msg2);
             work(res);
         }catch (Exception e)
         {

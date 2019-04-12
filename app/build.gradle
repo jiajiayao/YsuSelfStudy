@@ -1,6 +1,17 @@
 apply plugin: 'com.android.application'
+def keystoreProperFile=rootProject.file('keystore.properties')
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystoreProperFile))
 
 android {
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['KEY_ALIAS']
+            keyPassword keystoreProperties['KEY_PASSWORD']
+            storeFile file(keystoreProperties['STORE_FILE'])
+            storePassword keystoreProperties['STORE_PASSWORD']
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         renderscriptTargetApi 25
@@ -21,6 +32,9 @@ android {
             aaptOptions.cruncherEnabled = false
             aaptOptions.useNewCruncher = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -50,7 +64,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
     implementation files('libs/open_sdk_r6008_lite.jar')
     implementation files('libs/MiPush_SDK_Client_3_6_17.jar')
-
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
 }

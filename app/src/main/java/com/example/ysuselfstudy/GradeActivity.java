@@ -70,7 +70,8 @@ public class GradeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         list.clear();
-        markAdapter.notifyDataSetChanged();
+        if(markAdapter!=null)
+             markAdapter.notifyDataSetChanged();
         super.onBackPressed();
     }
 

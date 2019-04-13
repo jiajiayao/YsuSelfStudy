@@ -27,5 +27,5 @@ public class AllString {
     public static final int TENCENT_IMAGE = 2;
     public static final int BEGIN_ACCESS = 1;
     public static final int BEGIN_STORE = 3;
-
+    public static String LAB_URL = "";
 }

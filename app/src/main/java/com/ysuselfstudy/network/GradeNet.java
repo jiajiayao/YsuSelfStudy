@@ -3,6 +3,8 @@ package com.ysuselfstudy.network;
 import android.util.Log;
 
 import com.example.ysuselfstudy.AllString;
+import com.example.ysuselfstudy.LoginOffice;
+import com.ysuselfstudy.LabRoom.LabBean;
 import com.ysuselfstudy.database.StudentInfo;
 import com.ysuselfstudy.gradeadapter.GradeBean;
 
@@ -11,11 +13,27 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.litepal.LitePal;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.FormBody;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class GradeNet {
     private static final String TAG = "GradeNet";
+    int count=9;
+    public  List<LabBean> list_lab = new ArrayList<>();
     public List<GradeBean> Connect_Mark()
     {
         StudentInfo studentInfo = LitePal.findFirst(StudentInfo.class);
@@ -248,5 +266,85 @@ public class GradeNet {
             //直接打印
             Log.i("msg", out);
         }
+    }
+
+    public List<LabBean>  lab()
+    {
+        count=9;
+        list_lab.clear();
+        final OkHttpClient okHttpClient=new OkHttpClient.Builder().cookieJar(new CookieJar() {
+            private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
+            @Override
+            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+                cookieStore.put(url.host(), cookies);
+
+            }
+
+            @Override
+            public List<Cookie> loadForRequest(HttpUrl url) {
+                List<Cookie> cookies = cookieStore.get(url.host());
+                return cookies != null ? cookies : new ArrayList<Cookie>();
+            }
+        }).build();
+
+        final Request request=new Request.Builder()
+                .url(AllString.LAB_URL)
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                return;
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                for (int i = 1; i <10; i++) {
+                    FormBody.Builder builder=new FormBody.Builder();
+                    builder.add("currYearterm","2018-2019-2");//当前学期
+                    builder.add("currTeachCourseCode", "%");
+                    builder.add("page", i+"");
+                    FormBody formBody=builder.build();
+
+                    Request da=new Request.Builder()
+                            .post(formBody)
+                            .url("http://202.206.243.7/StuExpbook/book/bookResult.jsp")
+                            .build();
+                    Call haha=okHttpClient.newCall(da);
+                    haha.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                                count--;
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String html=response.body().string();
+                            Document document = Jsoup.parse(html);
+                            Elements elements = document.select("table[class=table1] td");
+                            //线程一闪而过
+                            for (int i = 0; i < elements.size(); i+=12) {
+                                Log.d(TAG, "onResponse: "+i+" "+elements.get(i).text());
+                                LabBean labBean = new LabBean();
+                                labBean.setProject(elements.get(i).text());
+                                labBean.setContent(elements.get(i+1).text());
+                                labBean.setTime(elements.get(i + 2).text());
+                                labBean.setRoom(elements.get(i + 3).text());
+                                list_lab.add(labBean);
+                            }
+                            count--;
+                        }
+                    });
+                }
+            }
+        });
+
+        while (count!=0)
+        {
+
+        }
+        Log.d(TAG, "最后"+list_lab.size());
+        return list_lab;
     }
 }

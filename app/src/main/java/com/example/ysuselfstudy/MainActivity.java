@@ -43,6 +43,7 @@ import java.util.List;
 
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.ysuselfstudy.adapter.DemoPopup;
+import com.ysuselfstudy.network.GradeNet;
 import com.ysuselfstudy.software.APKVersionCodeUtils;
 import com.ysuselfstudy.tencent.BaseUiListener;
 import com.ysuselfstudy.time.RecommendRoom;
@@ -187,34 +188,19 @@ public class MainActivity extends BaseActivity {
                         Intent intent_misscard=new Intent(MainActivity.this,PostMissingCard.class);
                         startActivity(intent_misscard);
                         break;
-                    case R.id.update:/*
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                int versioncode= APKVersionCodeUtils.getVersionCode(MainActivity.this);
-                                if(versioncode<Spider.GetVersion())
-                                {
-                                    //开始下载，调用浏览器
-                                    Intent intent=new Intent(Intent.ACTION_VIEW);
-                                    intent.setData(Uri.parse(AllString.DownloadUrl));
-                                    startActivity(intent);
-                                }
-                                else
-                                {
-                                    //Toast 弹出说明已经是最新的了
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Toast.makeText(MainActivity.this,"已经是最新版本",Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
-                            }
-                        }).start();*/
+                    case R.id.update:
+                        Toast.makeText(MainActivity.this,"是最新版本",Toast.LENGTH_SHORT).show();
+
                         break;
                     case R.id.xiaoli:
                         Intent intentxiaoli = new Intent(MainActivity.this, XiaoLiActivity.class);
                         startActivity(intentxiaoli);
+                        break;
+                    case R.id.lab:
+                        Intent intentlab = new Intent(MainActivity.this, !AllString.Login ? LoginOffice.class :LabRoom.class);
+                        intentlab.putExtra("version",3);;
+                        startActivity(intentlab);
+
                         break;
                     case R.id.setting:
                        // Intent insten_setting = new Intent(MainActivity.this, SettingsActivity.class);
@@ -358,7 +344,7 @@ public class MainActivity extends BaseActivity {
         bg.add(new SchoolBuilding("西区第一教学楼"));
         bg.add(new SchoolBuilding("西区第二教学楼"));
         bg.add(new SchoolBuilding("西区第三教学楼"));
-        bg.add(new SchoolBuilding("西区第四教学楼"));
+       // bg.add(new SchoolBuilding("西区第四教学楼"));
         bg.add(new SchoolBuilding("西区第五教学楼"));
         bg.add(new SchoolBuilding("里仁教学楼"));
        // bg.add(new SchoolBuilding("其他"));

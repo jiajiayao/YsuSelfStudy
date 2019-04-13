@@ -230,11 +230,20 @@ public class LoginOffice extends BaseActivity {
                                     /**
                                      * 这里应该写完评价。
                                      */
-                                  /*  Document document=Jsoup.connect(response.request().url().toString())
+                                   Document document=Jsoup.connect(response.request().url().toString())
                                             .header("Cookie", AllString.Cookie)
                                             .get();//成功获取首页信息。
                                     Elements elements=document.select("a[href]");
-                                    List<String> UrlJudge = new ArrayList<>();
+                                    for (int i = 0; i < elements.size(); i++) {
+                                        String temp = elements.get(i).attr("href");
+                                        if(temp.contains("StuE"))
+                                        {
+                                            AllString.LAB_URL = temp;
+                                            Log.d(TAG, "onResponse: " + AllString.LAB_URL);
+                                            break;
+                                        }
+                                    }
+                                  /*  List<String> UrlJudge = new ArrayList<>();
                                     String temp = "",hah="";
                                     boolean you=true;
                                     for (int i = 0; i < elements.size(); i++) {
@@ -268,8 +277,25 @@ public class LoginOffice extends BaseActivity {
                                     gradeNet.PostJudgeMent(UrlJudge,hah);*/
                                     dateBaseManager.UpdateStu(new StudentInfo(username,password));//更新数据库中学生的信息。
                                     refreshLayout.finishRefresh();
-                                    Intent intent = new Intent(LoginOffice.this, version == 1 ? GradeActivity.class : ExamActivity.class);
-                                    startActivity(intent);
+                                    Intent intent = null;
+                                    switch (version)
+                                    {
+                                        case 1:
+                                            intent=new Intent(LoginOffice.this,GradeActivity.class);
+                                            break;
+                                        case 2:
+                                            intent=new Intent(LoginOffice.this,ExamActivity.class);
+                                            break;
+                                        case 3:
+                                            intent=new Intent(LoginOffice.this,LabRoom.class);
+                                            break;
+
+                                            default:
+                                                break;
+
+                                    }
+                                    if(intent!=null)
+                                     startActivity(intent);
                                     finish();
                                 }
                             }
@@ -299,5 +325,9 @@ public class LoginOffice extends BaseActivity {
             xuehao.setText(stu.getXuehao());
             mima.setText(stu.getPassword());
         }
+    }
+    public OkHttpClient back()
+    {
+        return client;
     }
 }

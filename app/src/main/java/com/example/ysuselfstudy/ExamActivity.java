@@ -68,7 +68,8 @@ public class ExamActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         ExamList.clear();
-        examAdapter.notifyDataSetChanged();
+        if(examAdapter!=null)
+            examAdapter.notifyDataSetChanged();
         super.onBackPressed();
     }
 

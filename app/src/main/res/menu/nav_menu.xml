@@ -26,6 +26,10 @@
      <item android:id="@+id/update"
          android:icon="@mipmap/ic_update"
          android:title="检查更新"/>
+     <item android:id="@+id/lab"
+            android:icon="@mipmap/ic_lab"
+         android:title="实验室"
+         ></item>
      <item android:id="@+id/about"
          android:icon="@mipmap/ic_about"
          android:title="@string/guanyu"/>

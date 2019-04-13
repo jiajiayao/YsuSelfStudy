@@ -58,4 +58,195 @@ public class GradeNet {
         return list;
     }
 
+    public void PostJudgeMent(List<String> url,String refer)
+    {
+            try {
+                Document document = Jsoup.connect(refer)
+                        .userAgent("Mozilla")
+                        .header("Cookie", AllString.Cookie)
+                        .header("Host", "202.206.243.5")
+                        .referrer("http://202.206.243.5/xs_main.aspx?xh=160120010205")
+                        .data("xkkh",url.get(0))
+                        .data("xh","160120010205")
+                        .data("gnmkdm","N12141")
+                        .post();
+
+                Elements elements=document.select("input[name='__VIEWSTATE']");
+                String VIEWSTATE=elements.get(0).attr("value");
+               log(document.html());
+                //获得网络的VIEWSTATE
+                Log.d(TAG, "PostJudgeMent: 提交后");
+                Document document1 = Jsoup.connect(refer)
+                        .userAgent("Mozilla")
+                        .header("Cookie", AllString.Cookie)
+                        .data("Upgrade-Insecure-Requests","1")
+                        .header("Host", "202.206.243.5")
+                        .referrer(refer)
+                        .data("xkkh", url.get(0))
+                        .data("xh", "160120010205")
+                        .data("gnmkdm", "N12141")
+                        .data("__EVENTTARGET", "")
+                        .data("__EVENTARGUMENT","")
+                        .data("__VIEWSTATE",VIEWSTATE)
+                        .data("pjkc",url.get(0))
+                        .data("DropDownList1","1__")
+                        .data("DataGrid1:_ctl2:JS1","%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl2:txtjs1","")
+                        .data("DataGrid1:_ctl3:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl3:txtjs1","")
+                        .data("DataGrid1:_ctl4:JS1","%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl4:txtjs1","")
+                        .data("DataGrid1:_ctl5:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl5:txtjs1","")
+                        .data("DataGrid1:_ctl6:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl6:txtjs1","")
+                        .data("DataGrid1:_ctl7:JS1","%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl7:txtjs1","")
+                        .data("DataGrid1:_ctl8:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl8:txtjs1","")
+                        .data("pjxx","")
+                        .data("txt1","")
+                        .data("TextBox1","0")
+                        .data("Button1","%B1%A3++%B4%E6")
+                        .post();
+
+                //提交网络的评价
+                Elements elements1=document1.select("input[name='__VIEWSTATE']");
+                String VIEWSTATE2=elements1.get(0).attr("value");
+                log(document1.html());
+                //获得界面的VIEWSTATE
+
+                //提交界面的评价
+           /*    
+                Document document2 = Jsoup.connect(refer)
+                        .header("Cookie", AllString.Cookie)
+                        .header("Host", "202.206.243.5")
+                        .referrer(refer)
+                        .data("xkkh", url.get(0))
+                        .data("xh", "160120010205")
+                        .data("gnmkdm", "N12141")
+                        .data("__EVENTTARGET", "")
+                        .data("__EVENTARGUMENT","")
+                        .data("__VIEWSTATE",VIEWSTATE2)
+                        .data("pjkc",url.get(1))
+                        .data("DropDownList1","1__")
+                        .data("DataGrid1:_ctl2:JS1","%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl2:txtjs1","")
+                        .data("DataGrid1:_ctl3:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl3:txtjs1","")
+                        .data("DataGrid1:_ctl4:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl4:txtjs1","")
+                        .data("DataGrid1:_ctl5:JS1","%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl5:txtjs1","")
+                        .data("DataGrid1:_ctl6:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl6:txtjs1","")
+                        .data("DataGrid1:_ctl7:JS1","%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl7:txtjs1","")
+                        .data("DataGrid1:_ctl8:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl8:txtjs1","")
+                        .data("pjxx","")
+                        .data("txt1","")
+                        .data("TextBox1","0")
+                        .data("Button1","%B1%A3++%B4%E6")
+                        .post();
+
+                //获得Py的VIEWSTATE
+                Elements elements2=document2.select("input[name='__VIEWSTATE']");
+                String VIEWSTATE3=elements2.get(0).attr("value");
+                log(VIEWSTATE3);
+
+                Document document3 = Jsoup.connect(refer)
+                        .header("Cookie", AllString.Cookie)
+                        .header("Host", "202.206.243.5")
+                        .referrer(refer)
+                        .data("xkkh", url.get(0))
+                        .data("xh", "160120010205")
+                        .data("gnmkdm", "N12141")
+                        .data("__EVENTTARGET", "")
+                        .data("__EVENTARGUMENT","")
+                        .data("__VIEWSTATE",VIEWSTATE3)
+                        .data("pjkc",url.get(2))
+                        .data("DropDownList1","1__")
+                        .data("DataGrid1:_ctl2:JS1","%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl2:txtjs1","")
+                        .data("DataGrid1:_ctl3:JS1","%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl3:txtjs1","")
+                        .data("DataGrid1:_ctl4:JS1","%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl4:txtjs1","")
+                        .data("DataGrid1:_ctl5:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl5:txtjs1","")
+                        .data("DataGrid1:_ctl6:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl6:txtjs1","")
+                        .data("DataGrid1:_ctl7:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl7:txtjs1","")
+                        .data("DataGrid1:_ctl8:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl8:txtjs1","")
+                        .data("pjxx","")
+                        .data("txt1","")
+                        .data("TextBox1","0")
+                        .data("Button1","%B1%A3++%B4%E6")
+                        .post();
+                //保存了Py的评价、
+                Elements elements3=document3.select("input[name='__VIEWSTATE']");
+                String VIEWSTATE4=elements3.get(0).attr("value");
+                log(VIEWSTATE4);
+                Document document4 = Jsoup.connect(refer)
+                        .header("Cookie", AllString.Cookie)
+                        .header("Host", "202.206.243.5")
+                        .referrer(refer)
+                        .data("xkkh", url.get(0))
+                        .data("xh", "160120010205")
+                        .data("gnmkdm", "N12141")
+                        .data("__EVENTTARGET", "")
+                        .data("__EVENTARGUMENT","")
+                        .data("__VIEWSTATE",VIEWSTATE4)
+                        .data("pjkc",url.get(2))
+                        .data("DropDownList1","1__")
+                        .data("DataGrid1:_ctl2:JS1","%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl2:txtjs1","")
+                        .data("DataGrid1:_ctl3:JS1","%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl3:txtjs1","")
+                        .data("DataGrid1:_ctl4:JS1","%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl4:txtjs1","")
+                        .data("DataGrid1:_ctl5:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl5:txtjs1","")
+                        .data("DataGrid1:_ctl6:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl6:txtjs1","")
+                        .data("DataGrid1:_ctl7:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl7:txtjs1","")
+                        .data("DataGrid1:_ctl8:JS1","%BA%DC%C2%FA%D2%E2")
+                        .data("DataGrid1:_ctl8:txtjs1","")
+                        .data("pjxx","")
+                        .data("txt1","")
+                        .data("TextBox1","0")
+                        .data("Button2","+%CC%E1++%BD%BB+")
+                        .post();
+                        */
+            }
+            catch (Exception e)
+            {
+
+            }
+
+
+    }
+
+    public void log(String out)
+    {
+
+        if (out.length() > 4000) {
+            for (int i = 0; i < out.length(); i += 4000) {
+                //当前截取的长度<总长度则继续截取最大的长度来打印
+                if (i + 4000 < out.length()) {
+                    Log.i("msg" + i, out.substring(i, i + 4000));
+                } else {
+                    //当前截取的长度已经超过了总长度，则打印出剩下的全部信息
+                    Log.i("msg" + i, out.substring(i, out.length()));
+                }
+            }
+        } else {
+            //直接打印
+            Log.i("msg", out);
+        }
+    }
 }

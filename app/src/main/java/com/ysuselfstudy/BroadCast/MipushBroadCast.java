@@ -37,6 +37,7 @@ public class MipushBroadCast extends PushMessageReceiver {
     @Override
     public void onNotificationMessageClicked(Context context, MiPushMessage miPushMessage) {
         Log.d(TAG, "onNotificationMessageClicked: 点击事件");
+        saved(miPushMessage);
         switch (miPushMessage.getContent())
         {
             case AllString.SHIWU :
@@ -47,7 +48,14 @@ public class MipushBroadCast extends PushMessageReceiver {
                 break;
         }
     }
-
+    public void saved(MiPushMessage miPushMessage)
+    {
+        DateTime dateTime=new DateTime();
+        String time=dateTime.getMonth()+"月"+dateTime.getDate()+"日";
+        String information=miPushMessage.getDescription();
+        MipushInfor mipushInfor = new MipushInfor(time, information);
+        mipushInfor.save();
+    }
     /***
      * 当消息到了的时候
      * @param context
@@ -56,11 +64,7 @@ public class MipushBroadCast extends PushMessageReceiver {
     @Override
     public void onNotificationMessageArrived(Context context, MiPushMessage miPushMessage) {
         Log.d(TAG, "onNotificationMessageArrived: 消息到了"+miPushMessage.toString());
-        DateTime dateTime=new DateTime();
-        String time=dateTime.getMonth()+"月"+dateTime.getDate()+"日";
-        String information=miPushMessage.getDescription();
-        MipushInfor mipushInfor = new MipushInfor(time, information);
-        mipushInfor.save();
+        saved(miPushMessage);
     }
 
     /**

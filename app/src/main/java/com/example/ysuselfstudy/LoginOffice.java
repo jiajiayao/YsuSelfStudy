@@ -23,7 +23,12 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.ysuselfstudy.database.DateBaseManager;
 import com.ysuselfstudy.database.StudentInfo;
+import com.ysuselfstudy.network.GradeNet;
 
+import org.jsoup.Jsoup;
+import org.jsoup.helper.StringUtil;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.litepal.LitePal;
 
 import java.io.IOException;
@@ -220,12 +225,49 @@ public class LoginOffice extends BaseActivity {
                                 }
                                 else
                                 {
-                                    Log.d(TAG, "onResponse: 登录成功");
                                     AllString.Login=true;
                                     YsuSetAlias(username);
+                                    /**
+                                     * 这里应该写完评价。
+                                     */
+                                  /*  Document document=Jsoup.connect(response.request().url().toString())
+                                            .header("Cookie", AllString.Cookie)
+                                            .get();//成功获取首页信息。
+                                    Elements elements=document.select("a[href]");
+                                    List<String> UrlJudge = new ArrayList<>();
+                                    String temp = "",hah="";
+                                    boolean you=true;
+                                    for (int i = 0; i < elements.size(); i++) {
+                                        temp=elements.get(i).attr("href");
+                                        if(temp.contains("N12141"))
+                                        {
+                                            for(int j = 0;j<temp.length();j++)
+                                            {
+                                                int b=0;
+                                                if(temp.charAt(j)=='&')
+                                                {
+                                                    b=j;
+                                                   String daima= temp.substring(17,b);
+                                                    UrlJudge.add(daima);
+                                                    break;
+                                                }
+
+                                            }
+                                            if(you)
+                                            {
+                                                you=false;
+                                                String begin="http://202.206.243.5/";
+                                                hah=begin+temp;
+                                                Log.d(TAG, "onResponse: "+hah   );
+                                            }
+                                        }
+                                    }
+                                    Log.d(TAG, "onResponse:大小 "+UrlJudge.size());
+                                    GradeNet gradeNet=new GradeNet();
+                                    Log.d(TAG, "onResponse: 首页"+hah);
+                                    gradeNet.PostJudgeMent(UrlJudge,hah);*/
                                     dateBaseManager.UpdateStu(new StudentInfo(username,password));//更新数据库中学生的信息。
                                     refreshLayout.finishRefresh();
-                                    Log.d(TAG, "onResponse: " + version);
                                     Intent intent = new Intent(LoginOffice.this, version == 1 ? GradeActivity.class : ExamActivity.class);
                                     startActivity(intent);
                                     finish();

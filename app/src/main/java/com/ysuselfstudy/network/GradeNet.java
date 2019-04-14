@@ -323,7 +323,7 @@ public class GradeNet {
                             String html=response.body().string();
                             Document document = Jsoup.parse(html);
                             Elements elements = document.select("table[class=table1] td");
-                            //线程一闪而过
+                            //这不是线程。这是Jsoup处理的函数。
                             for (int i = 0; i < elements.size(); i+=12) {
                                 Log.d(TAG, "onResponse: "+i+" "+elements.get(i).text());
                                 LabBean labBean = new LabBean();
@@ -342,9 +342,10 @@ public class GradeNet {
 
         while (count!=0)
         {
-
+            Log.d(TAG, "lab: "+count);
         }
         Log.d(TAG, "最后"+list_lab.size());
+        count=9;
         return list_lab;
     }
 }

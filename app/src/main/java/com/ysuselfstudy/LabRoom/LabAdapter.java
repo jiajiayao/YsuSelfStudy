@@ -38,10 +38,10 @@ public class LabAdapter extends RecyclerView.Adapter<LabAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         LabBean labBean = list.get(position);
-        holder.content.setText(labBean.getContent());
-        holder.location.setText(labBean.getRoom());
-        holder.time.setText(labBean.getTime());
-        holder.project.setText(labBean.getProject());
+        holder.content.setText("课题："+labBean.getContent());
+        holder.location.setText("地点："+labBean.getRoom());
+        holder.time.setText("时间："+labBean.getTime());
+        holder.project.setText("课程："+labBean.getProject());
     }
 
     @NonNull

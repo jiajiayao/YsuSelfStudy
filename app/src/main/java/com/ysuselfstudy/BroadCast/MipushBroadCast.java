@@ -38,15 +38,11 @@ public class MipushBroadCast extends PushMessageReceiver {
     public void onNotificationMessageClicked(Context context, MiPushMessage miPushMessage) {
         Log.d(TAG, "onNotificationMessageClicked: 点击事件");
         saved(miPushMessage);
-        switch (miPushMessage.getContent())
-        {
-            case AllString.SHIWU :
-                //打开我的信息主页。
+
                 Intent i = new Intent(context, InfoActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
-                break;
-        }
+
     }
     public void saved(MiPushMessage miPushMessage)
     {

@@ -1,12 +1,15 @@
 package com.example.ysuselfstudy;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -28,11 +31,23 @@ public class LabRoom extends AppCompatActivity {
     public RecyclerView recyclerView;
     public GradeNet gradeNet;
     public LabAdapter labAdapter;
+    private ActionBar actionBar;
+
     private static final String TAG = "LabRoom";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lab_room);
+        Toolbar toolbar=(androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
+
+        //状态栏添加返回按钮
+        setSupportActionBar(toolbar);
+        actionBar=getSupportActionBar();
+        if(actionBar!=null)
+        {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("实验课");
+        }
         gradeNet=new GradeNet();
         smartRefreshLayout = findViewById(R.id.lab_smart_refresh);
         smartRefreshLayout.setRefreshHeader(new BezierRadarHeader(this).setEnableHorizontalDrag(true));
@@ -78,4 +93,23 @@ public class LabRoom extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+                default:
+                    break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        list_lab.clear();
+        if(labAdapter!=null)
+             labAdapter.notifyDataSetChanged();
+        super.onBackPressed();
+    }
 }

@@ -289,7 +289,6 @@ public class LoginOffice extends BaseActivity {
                                         case 3:
                                             intent=new Intent(LoginOffice.this,LabRoom.class);
                                             break;
-
                                             default:
                                                 break;
 

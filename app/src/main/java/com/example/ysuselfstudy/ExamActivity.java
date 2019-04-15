@@ -36,6 +36,7 @@ public class ExamActivity extends BaseActivity {
     private ExamAdapter examAdapter;
     private  ActionBar actionBar;
     private static final String TAG = "ExamActivity";
+    boolean have=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +87,9 @@ public class ExamActivity extends BaseActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+
                         try {
+
                             String exam="http://202.206.243.5/xskscx.aspx?xh=" + xuehao + "&xm=%B8%DF%BA%E3%D4%B4&gnmkdm=N121604";
                             String referer="http://202.206.243.5/xs_main.aspx?xh="+xuehao;
                             Document connection = Jsoup.connect(exam)
@@ -104,6 +107,7 @@ public class ExamActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         Toast.makeText(ExamActivity.this,"请登录教务系统进行教学评价",Toast.LENGTH_LONG).show();
+                                        have=true;
                                     }
                                 });
                             }
@@ -137,7 +141,10 @@ public class ExamActivity extends BaseActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    if(!have)
                                     actionBar.setTitle("本学期有 "+ExamList.size()+" 门考试");
+                                    else
+                                        actionBar.setTitle("请登录教务系统评价");
                                     examAdapter.notifyDataSetChanged();
                                 }
                             });

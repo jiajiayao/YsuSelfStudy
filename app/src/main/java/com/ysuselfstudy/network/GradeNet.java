@@ -32,6 +32,8 @@ import okhttp3.Response;
 
 public class GradeNet {
     private static final String TAG = "GradeNet";
+    public OkHttpClient client;
+    public LoginOffice loginOffice=new LoginOffice();
     int count=9;
     public  List<LabBean> list_lab = new ArrayList<>();
     public List<GradeBean> Connect_Mark()
@@ -78,7 +80,33 @@ public class GradeNet {
 
     public void PostJudgeMent(List<String> url,String refer)
     {
-            try {
+       client=loginOffice.back();
+       FormBody.Builder builder=new FormBody.Builder();
+        builder.add("xkkh", url.get(0));
+               builder .add("xh","160120010205");
+               builder .add("gnmkdm","N12141");
+                FormBody formBody=builder.build();
+        Request da=new Request.Builder()
+                .post(formBody)
+                .url(refer)
+                .build();
+        Call haha=client.newCall(da);
+        haha.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String temp = response.body().string();
+                Document document = Jsoup.parse(temp);
+                Elements elements=document.select("input[name='__VIEWSTATE']");
+                String VIEWSTATE=elements.get(0).attr("value");
+                log(VIEWSTATE);
+            }
+        });
+       /*     try {
                 Document document = Jsoup.connect(refer)
                         .userAgent("Mozilla")
                         .header("Cookie", AllString.Cookie)
@@ -240,11 +268,12 @@ public class GradeNet {
                         .data("Button2","+%CC%E1++%BD%BB+")
                         .post();
                         */
-            }
-            catch (Exception e)
-            {
+        //    }*/
+          //  catch (Exception e)
+          //  {
 
-            }
+        //    }
+        //    */
 
 
     }
@@ -268,6 +297,10 @@ public class GradeNet {
         }
     }
 
+    /**
+     * 查询实验课的函数
+     * @return 实验课List
+     */
     public List<LabBean>  lab()
     {
         count=9;

@@ -8,13 +8,21 @@
 ---
 - 每日同步空教室的数据
 - 每日一张必应美图
-- 其余功能请自行发掘
+- 查询成绩
+- QQ登录
+- 考试查询
+- 实验课查询
+- 失物通知
+- 图书馆座位预约
+- 查看校历
+
 
 ## 界面预览
 ---
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0326/095129_cff6f116_1760493.png "Screenshot_2019-03-26-09-37-58-414_com.example.ys.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0326/095140_d21188ae_1760493.png "Screenshot_2019-03-26-09-38-01-102_com.example.ys.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0326/095153_595d7a81_1760493.png "Screenshot_2019-03-26-09-38-03-510_com.example.ys.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0414/232240_9c8339d3_1760493.png "6c97fbc6d453d4f081a1e68697ebc0e.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0414/232302_7a769d2c_1760493.png "544484577191775cfb07ab83d4d20a2.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0414/232323_529c5354_1760493.png "d17f9386e6e58b1be8cbd3cd1360b1b.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0414/232343_b63ce656_1760493.png "微信图片_20190414230758.png")
 
 ## 编译环境
 ---
@@ -25,6 +33,10 @@ Android Studio 3.3.2
 Jdk 11
 ## 更新日志
 ---
+**2019.4.13**
+- 新增了查看实验课的功能。
+- 发布了正式版。
+
 **2019.4.7**
 - 修复软件在低端的手机上加载数据库时间过长的问题。其实这是我在其他人的测试中发现的，毕竟不是每个人的手机都是骁龙845，O(∩_∩)O哈哈~
 
@@ -93,7 +105,9 @@ Jdk 11
 * ~~图书馆的登陆接口~~
 * ~~开启第一屏的欢迎~~
 * ~~加速空教室的获取速度~~
-* 状态栏的调整
+* ~~状态栏的调整~~
+* 分日期查询空教室
+* 部分界面接口不要写死了，比如学期。
 
 ## 鸣谢
 ---

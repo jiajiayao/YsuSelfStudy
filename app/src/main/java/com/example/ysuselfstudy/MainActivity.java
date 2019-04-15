@@ -43,8 +43,6 @@ import java.util.List;
 
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.ysuselfstudy.adapter.DemoPopup;
-import com.ysuselfstudy.network.GradeNet;
-import com.ysuselfstudy.software.APKVersionCodeUtils;
 import com.ysuselfstudy.tencent.BaseUiListener;
 import com.ysuselfstudy.time.RecommendRoom;
 import com.ysuselfstudy.time.WhereWhen;

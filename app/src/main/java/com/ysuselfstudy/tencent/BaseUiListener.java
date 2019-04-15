@@ -136,7 +136,11 @@ public class BaseUiListener implements IUiListener
     public void Loginout()
     {
         if(mTencent.isSessionValid())
-          mTencent.logout(context);
+        {
+            mTencent.logout(context);
+            dateBaseManager.delete_QQ();
+        }
+
     }
 
     public void talk(Context context1)

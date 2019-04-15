@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 
-public class PostMissingCard extends AppCompatActivity {
+public class PostMissingCard extends BaseActivity {
     EditText xuehao;
     EditText QQhao;
     EditText phone;

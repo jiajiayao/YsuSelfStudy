@@ -12,7 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
-public class ScrollingActivity extends AppCompatActivity {
+public class ScrollingActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

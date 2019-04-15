@@ -29,8 +29,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LabRoom"></activity>
+        <activity android:name=".LabRoom" android:screenOrientation="portrait"></activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -43,15 +44,21 @@
             android:theme="@android:style/Theme.Translucent" />
         <activity
             android:name=".XiaoLiActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/XiaoliActivity" />
         <activity android:name=".GradeActivity" />
         <activity
             android:name=".InfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/InfoActivity" />
         <activity
             android:name=".PostMissingCard"
+            android:screenOrientation="portrait"
             android:theme="@style/MissingCard" />
-        <activity android:name=".StartOver">
+        <activity android:name=".StartOver"
+            android:screenOrientation="portrait"
+            >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,11 +66,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".LibraryActivity"
             android:theme="@style/LibraryActivity" />
-        <activity android:name=".ExamActivity" />
-        <activity android:name=".LoginOffice" />
+        <activity android:name=".ExamActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".LoginOffice" android:screenOrientation="portrait" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".CardShow"
             android:label="结果集" /> <!-- 因为安卓版本问题，需要添加旧的说明 -->
         <uses-library
@@ -71,6 +80,7 @@
             android:required="false" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".MainActivity"
             android:label="燕习"
             android:theme="@style/MainActivity" />

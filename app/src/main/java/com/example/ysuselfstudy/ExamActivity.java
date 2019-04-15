@@ -94,6 +94,7 @@ public class ExamActivity extends BaseActivity {
                             String referer="http://202.206.243.5/xs_main.aspx?xh="+xuehao;
                             Document connection = Jsoup.connect(exam)
                                     .header("Cookie", AllString.Cookie)
+                                    .header("Host","202.206.243.5")
                                     .referrer(referer)
                                     .data("xh",xuehao)
                                     .data("xm","%B8%DF%BA%E3%D4%B4")

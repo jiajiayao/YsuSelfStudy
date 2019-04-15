@@ -11,7 +11,7 @@ import android.os.Bundle;
 
 import com.polites.android.GestureImageView;
 
-public class XiaoLiActivity extends AppCompatActivity {
+public class XiaoLiActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

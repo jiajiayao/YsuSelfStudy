@@ -24,7 +24,7 @@ import okhttp3.Response;
 public class Spider {
   private static final String TAG = "Spider";
   public MainActivity.YsuHandler tt=new MainActivity.YsuHandler();
-  private static DateBaseManager dateBaseManager=new DateBaseManager();
+  private DateBaseManager dateBaseManager=new DateBaseManager();
 
     /**
      * 从服务器爬取空教室
@@ -87,6 +87,7 @@ public class Spider {
     /**
      * 获取服务器上最新版的信息
      * @return 服务器最新编号
+     * 目前已经被废弃
      */
     public static int GetVersion()
     {

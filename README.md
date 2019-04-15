@@ -19,9 +19,8 @@
 
 ## 界面预览
 ---
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0414/232240_9c8339d3_1760493.png "6c97fbc6d453d4f081a1e68697ebc0e.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0414/232302_7a769d2c_1760493.png "544484577191775cfb07ab83d4d20a2.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0414/232323_529c5354_1760493.png "d17f9386e6e58b1be8cbd3cd1360b1b.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0414/232240_9c8339d3_1760493.png "6c97fbc6d453d4f081a1e68697ebc0e.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0414/232343_b63ce656_1760493.png "微信图片_20190414230758.png")
 
 ## 编译环境
@@ -114,14 +113,18 @@ Jdk 11
 
 ## 鸣谢
 ---
-[Okhttp](https://github.com/square/okhttp)
+[Okhttp](https://github.com/square/okhttp) 网络爬虫
 
-[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)
+[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) 下拉刷新
 
-[jsoup](https://github.com/jhy/jsoup)
+[jsoup](https://github.com/jhy/jsoup) 网络爬虫
 
-[BasePop](https://github.com/razerdp/BasePopup)
+[BasePop](https://github.com/razerdp/BasePopup) 底部弹出框
 
-[AnimatedSvgView](https://github.com/jaredrummler/AnimatedSvgView)
+[AnimatedSvgView](https://github.com/jaredrummler/AnimatedSvgView) 第一屏
 
+[Glide](https://github.com/bumptech/glide) 加载图片
 
+[glide-transformations](https://github.com/wasabeef/glide-transformations) 毛玻璃特效
+
+[gesture-imageview](https://github.com/jasonpolites/gesture-imageview) 手势放大

@@ -36,7 +36,7 @@ public class ExamActivity extends BaseActivity {
     private ExamAdapter examAdapter;
     private  ActionBar actionBar;
     private static final String TAG = "ExamActivity";
-    boolean have=false;
+    private static  boolean  have=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

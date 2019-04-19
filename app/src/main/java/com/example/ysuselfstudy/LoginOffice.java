@@ -289,6 +289,8 @@ public class LoginOffice extends BaseActivity {
                                         case 3:
                                             intent=new Intent(LoginOffice.this,LabRoom.class);
                                             break;
+                                        case 4:
+                                            intent = new Intent(LoginOffice.this, PostMissingCard.class);
                                             default:
                                                 break;
 

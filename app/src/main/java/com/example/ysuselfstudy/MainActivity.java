@@ -71,6 +71,7 @@ public class MainActivity extends BaseActivity {
     ArrayList<List> childlist;
     public BaseUiListener baseUiListener;
     public Spider spider;
+    private DateBaseManager dateBaseManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,14 +88,14 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.toolbar).setPadding(0, 96, 0, 0);
 
 
-
-
+        dateBaseManager = new DateBaseManager();
         spider=new Spider();
         baseUiListener=new BaseUiListener();
         baseUiListener.getActivity(MainActivity.this);
         baseUiListener.getContex(getApplicationContext());
         MainContext=getApplicationContext();
 
+        //注册Mipush通道
         if(shouldInit())
         {
             Log.d(TAG, "onCreate: 开始注册");
@@ -167,6 +168,8 @@ public class MainActivity extends BaseActivity {
 
         InitTime();
         initdata();
+
+        //侧边栏点击事件
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -183,7 +186,8 @@ public class MainActivity extends BaseActivity {
                         startActivity(intent_exam);
                         break;
                     case R.id.misscard:
-                        Intent intent_misscard=new Intent(MainActivity.this,PostMissingCard.class);
+                        Intent intent_misscard = new Intent(MainActivity.this, dateBaseManager.CheckStudent() ? PostMissingCard.class : LoginOffice.class);
+                        intent_misscard.putExtra("version", 4);
                         startActivity(intent_misscard);
                         break;
                     case R.id.update:

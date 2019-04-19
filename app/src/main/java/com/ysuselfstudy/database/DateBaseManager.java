@@ -105,4 +105,14 @@ public class DateBaseManager {
     {
         LitePal.deleteAll(Personel.class);
     }
+
+    /**
+     * 检查学生是否存了
+     */
+    public  boolean CheckStudent()
+    {
+        if (LitePal.count(StudentInfo.class) > 0)
+            return true;
+        return false;
+    }
 }

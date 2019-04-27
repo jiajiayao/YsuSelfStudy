@@ -5,6 +5,9 @@ import com.ysuselfstudy.tencent.Personel;
 import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
 
+/**
+ * 这是 推送的消息类。分为日期和时间
+ */
 public class MipushInfor extends LitePalSupport {
     public MipushInfor(String time,String information){
         this.time=time;

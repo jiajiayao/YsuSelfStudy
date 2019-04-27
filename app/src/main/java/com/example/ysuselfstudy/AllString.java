@@ -28,4 +28,5 @@ public class AllString {
     public static final int BEGIN_ACCESS = 1;
     public static final int BEGIN_STORE = 3;
     public static String LAB_URL = "";
+    public static String Hello = "盛年不重来，一日难再晨。及时当勉励，岁月不待人。欢迎使用燕习~";
 }

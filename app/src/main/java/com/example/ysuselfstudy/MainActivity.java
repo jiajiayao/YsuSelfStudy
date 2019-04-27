@@ -155,8 +155,6 @@ public class MainActivity extends BaseActivity {
         });
 
 
-        Log.d(TAG, "onCreate: 尝试"+LitePal.count(BiyingPic.class));
-
         //导航栏显式左滑图标
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

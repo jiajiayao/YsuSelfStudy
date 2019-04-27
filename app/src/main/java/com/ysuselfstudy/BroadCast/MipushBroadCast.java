@@ -15,6 +15,8 @@ import com.xiaomi.mipush.sdk.PushMessageReceiver;
 import com.ysuselfstudy.database.MipushInfor;
 import com.ysuselfstudy.time.DateTime;
 
+import java.util.Calendar;
+
 public class MipushBroadCast extends PushMessageReceiver {
 
     private static final String TAG = "MipushBroadCast";
@@ -47,7 +49,11 @@ public class MipushBroadCast extends PushMessageReceiver {
     public void saved(MiPushMessage miPushMessage)
     {
         DateTime dateTime=new DateTime();
-        String time=dateTime.getMonth()+"月"+dateTime.getDate()+"日";
+        Calendar c=Calendar.getInstance();
+        int hour=c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+        int secong=c.get(Calendar.SECOND);
+        String time=dateTime.getMonth()+"月"+dateTime.getDate()+"日"+hour+"点"+minute+"分"+secong+"秒";
         String information=miPushMessage.getDescription();
         MipushInfor mipushInfor = new MipushInfor(time, information);
         mipushInfor.save();

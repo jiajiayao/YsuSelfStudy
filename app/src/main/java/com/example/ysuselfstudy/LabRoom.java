@@ -77,6 +77,7 @@ public class LabRoom extends AppCompatActivity {
                           return;
                       }
                         Collections.sort(list_lab);
+                        Collections.reverse(list_lab);//逆序
                         Log.d(TAG, "run: "+list_lab.size());
                       runOnUiThread(new Runnable() {
                           @Override

@@ -35,11 +35,9 @@ public class DateBaseManager {
     /**
      * 删除日期表
      */
-    public void delete_Date()
-    {
+    public void delete_Date() {
         LitePal.deleteAll(DateTime.class);
     }
-
     /**
      * 设置日期表
      */
@@ -113,6 +111,13 @@ public class DateBaseManager {
     {
         if (LitePal.count(StudentInfo.class) > 0)
             return true;
+        return false;
+    }
+
+    public boolean CheckPic()
+    {
+        if(LitePal.count(BiyingPic.class)>0)
+              return  true;
         return false;
     }
 }

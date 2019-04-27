@@ -19,6 +19,9 @@ import com.ysuselfstudy.time.WhereWhen;
 import com.ysuselfstudy.adapter.CardAdapter;
 import com.ysuselfstudy.database.EmptyRoom;
 
+/**
+ * 空教室的相关显式逻辑。
+ */
 public class CardShow extends BaseActivity {
     private static final String TAG = "CardShow";
     private List<EmptyRoom> RoomList=new ArrayList<>();
@@ -55,6 +58,7 @@ public class CardShow extends BaseActivity {
        String position=obj.getWhere();
        int  begin=obj.getBegin_time();
        int  end=obj.getEnd_time();
+       //SQL语句的动态显式。
        String sql=" select room,nums,location from EmptyRoom where location = '"+position+"' and time="+begin+" ";
        for (int i=begin+2;i<=end;i+=2)
        {

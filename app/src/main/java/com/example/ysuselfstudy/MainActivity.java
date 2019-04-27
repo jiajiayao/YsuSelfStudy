@@ -4,9 +4,10 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -43,6 +44,7 @@ import java.util.List;
 
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.ysuselfstudy.adapter.DemoPopup;
+import com.ysuselfstudy.database.BiyingPic;
 import com.ysuselfstudy.tencent.BaseUiListener;
 import com.ysuselfstudy.time.RecommendRoom;
 import com.ysuselfstudy.time.WhereWhen;
@@ -52,12 +54,12 @@ import com.ysuselfstudy.database.School;
 import com.ysuselfstudy.database.SchoolBuilding;
 import com.ysuselfstudy.database.Spider;
 
-import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class MainActivity extends BaseActivity {
+
     private static final String TAG = "MainActivity";
-    public static Context MainContext;
+    public  static Context MainContext;
     private static ImageView image;
     private DrawerLayout mDrawerLayout;
     private static TextView TimeView;
@@ -65,8 +67,8 @@ public class MainActivity extends BaseActivity {
     private static View headerLayout;
     private Tencent  mTencent;
     private static ImageView BackgroundImageView;
-    private RecommendRoom recommendRoom=new RecommendRoom();
-    String address;
+    private RecommendRoom recommendRoom=new RecommendRoom();//这个类与空教室查询有关
+    String BiYingaddress;
     ArrayList<School> grouplist;
     ArrayList<List> childlist;
     public BaseUiListener baseUiListener;
@@ -89,11 +91,21 @@ public class MainActivity extends BaseActivity {
 
 
         dateBaseManager = new DateBaseManager();
-        spider=new Spider();
+        spider=new Spider();//初始化爬虫，这里已经简化为只爬必应链接了
+
+
+
+        //每日必应图片
+        image=(ImageView) findViewById(R.id.image);
+
+        //初始化必应图片和左边栏图片
+        loadImage(image);
+
+
         baseUiListener=new BaseUiListener();
         baseUiListener.getActivity(MainActivity.this);
-        baseUiListener.getContex(getApplicationContext());
-        MainContext=getApplicationContext();
+        baseUiListener.getContex(getApplicationContext());//初始化QQ登录
+        MainContext=getApplicationContext();//获取本类的全局变量
 
         //注册Mipush通道
         if(shouldInit())
@@ -122,7 +134,8 @@ public class MainActivity extends BaseActivity {
                             DateBaseManager a=new DateBaseManager();
                             if(!a.ChecekDate())
                             {
-                                spider.Search(getApplicationContext());
+                                //在search中会删除所有的空教室
+                                spider.Search();
                             }
 
                         }catch (Exception e)
@@ -141,20 +154,24 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        Toolbar toolbar=(Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        Log.d(TAG, "onCreate: 尝试"+LitePal.count(BiyingPic.class));
 
         //导航栏显式左滑图标
-        mDrawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
+        Toolbar toolbar=(Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         ActionBar actionBar=getSupportActionBar();
         if(actionBar != null)
         {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.mipmap.ic_menu);
         }
-        //每日必应图片
-        image=(ImageView) findViewById(R.id.image);
-        loadImage(image);
+
+
+       //初始化左边栏
+        mDrawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
+
+
 
 
         //时间的点击触发底部弹窗
@@ -166,7 +183,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        InitTime();
+        initTime();
         initdata();
 
         //侧边栏点击事件
@@ -209,6 +226,7 @@ public class MainActivity extends BaseActivity {
                         //startActivity(insten_setting);
 
                            baseUiListener.Loginout();
+                           //恢复左边栏默认模样
                         Glide.with(headerLayout.getContext()).load(R.drawable.back)
                                 .apply(bitmapTransform(new BlurTransformation(25, 3)))
                                 .into(BackgroundImageView);
@@ -299,18 +317,33 @@ public class MainActivity extends BaseActivity {
             @Override
             public void run() {
                 //子线程获取地址
-               address= Spider.SearchForBiYing();
+                BiyingPic biyingPic = new BiyingPic();
+                if(dateBaseManager.CheckPic()) {
+                    biyingPic = LitePal.findLast(BiyingPic.class);
+                    BiYingaddress = biyingPic.getUrl();
 
-                //切换到主线程进行更新
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Glide.with(MainActivity.this).
-                                load(address).
-                                //placeholder(R.drawable.placeorder).
-                                into(imageView);
-                    }
-                });
+                    //切换到主线程进行更新
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Glide.with(MainActivity.this).
+                                    load(BiYingaddress)
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .into(imageView);
+                        }
+                    });
+                }
+                else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Glide.with(MainActivity.this).
+                                    load(R.drawable.ic_error)
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .into(imageView);
+                        }
+                    });
+                }
             }
         }).start();
         //加载 侧边栏的头像，初始为 qq 企鹅
@@ -318,8 +351,6 @@ public class MainActivity extends BaseActivity {
         Glide.with(this).load(R.drawable.back)
                 .apply(bitmapTransform(new BlurTransformation(25, 3)))
                 .into(BackgroundImageView);
-
-
     }
 
     /**
@@ -374,7 +405,7 @@ public class MainActivity extends BaseActivity {
     /**
      *一进去就设置时间
      */
-    private  void InitTime()
+    private  void initTime()
     {
         Calendar calendar=Calendar.getInstance();
         int hours=calendar.get(Calendar.HOUR_OF_DAY);

@@ -29,10 +29,11 @@ public class Spider {
     /**
      * 从服务器爬取空教室
      */
-  public void  Search(Context context)
+  public void  Search()
     {
         //保证每次写入前都将数据库清空
         dateBaseManager.delete_EmptyRoom();
+
         Message msg1=new Message();
         msg1.what=AllString.BEGIN_ACCESS;
         tt.sendMessage(msg1);
@@ -57,6 +58,7 @@ public class Spider {
      * @param res
      */
     private void work(String res) {
+        SearchForBiYing();
         Gson gson=new Gson();
         List<EmptyRoom> list=gson.fromJson(res, new TypeToken<List<EmptyRoom>>(){}.getType());
         Log.d(TAG, "work: 开始存储");
@@ -69,7 +71,7 @@ public class Spider {
      * 必应的图片
      * @return 必应图片的链接
      */
-    public static String SearchForBiYing()
+    public static void SearchForBiYing()
     {
         Elements element = null;
         try {
@@ -78,10 +80,12 @@ public class Spider {
 
         }catch (Exception e)
         {
-            String jiuji="http://cn.bing.com/th?id=OHR.SpainRioTinto_ZH-CN9632593185_1920x1080.jpg&rf=NorthMale_1920x1081920x1080.jpg";
-            return jiuji;
+            Log.d(TAG, "SearchForBiYing: "+e.toString());
         }
-        return element.text();
+        BiyingPic biyingPic=new BiyingPic();
+       if(element==null) return;
+        biyingPic.setUrl(element.text());
+        biyingPic.save();
     }
 
     /**

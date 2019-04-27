@@ -53,6 +53,7 @@ public class PostMissingCard extends BaseActivity {
                     @Override
                     public void run() {
                         OkHttpClient okHttpClient=new OkHttpClient();
+                        //为将信息转为json格式
                         HashMap<String,String> map=new HashMap<>();
                         map.put("xuehao",Alias);
                         map.put("qq",ContactQQ);
@@ -61,6 +62,7 @@ public class PostMissingCard extends BaseActivity {
                         Gson gson=new Gson();
                         String data=gson.toJson(map);
 
+                        //发送请求
                         RequestBody formbody=RequestBody.create(JSON,data);
                         Request request=new Request.Builder()
                                 .post(formbody)
@@ -82,6 +84,10 @@ public class PostMissingCard extends BaseActivity {
             }
         });
     }
+
+    /**
+     * 初始化控件
+     */
     public void initView()
     {
         xuehao=findViewById(R.id.other_xuehao);

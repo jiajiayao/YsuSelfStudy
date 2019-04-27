@@ -11,6 +11,9 @@ import android.os.Bundle;
 
 import com.polites.android.GestureImageView;
 
+/**
+ * 校历的相关方法
+ */
 public class XiaoLiActivity extends BaseActivity {
 
     @Override

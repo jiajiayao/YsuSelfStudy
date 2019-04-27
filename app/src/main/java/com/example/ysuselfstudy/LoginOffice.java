@@ -291,6 +291,7 @@ public class LoginOffice extends BaseActivity {
                                             break;
                                         case 4:
                                             intent = new Intent(LoginOffice.this, PostMissingCard.class);
+                                            break;
                                             default:
                                                 break;
 

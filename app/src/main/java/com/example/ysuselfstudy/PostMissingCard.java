@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -46,6 +47,8 @@ public class PostMissingCard extends BaseActivity {
                 Alias=xuehao.getText().toString();
                 ContactQQ=QQhao.getText().toString();
                 ContactPhone=phone.getText().toString();
+                Snackbar.make(v, "发送成功", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {

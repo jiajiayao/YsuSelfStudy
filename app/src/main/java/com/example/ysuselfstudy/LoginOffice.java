@@ -146,6 +146,7 @@ public class LoginOffice extends BaseActivity {
                                 public void run() {
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
                                     imageView.setImageBitmap(bitmap);
+                                    yanzhengma.setText("");
                                 }
                             });
                         }

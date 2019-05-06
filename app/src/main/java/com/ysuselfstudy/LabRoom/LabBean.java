@@ -41,6 +41,9 @@ public class LabBean  implements Comparable<LabBean> {
 
     @Override
     public int compareTo(LabBean o) {
-        return this.getTime().compareTo(o. getTime());
+        if(this.getTime().length()==o.getTime().length())
+            return this.getTime().compareTo(o. getTime());
+        else
+            return this.getTime().length() - o.getTime().length();
     }
 }

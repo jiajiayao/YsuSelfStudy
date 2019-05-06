@@ -94,6 +94,9 @@ public class LabRoom extends AppCompatActivity {
         });
     }
 
+  //  public List<LabBean> OutList(List<LabBean> TestList) {
+      //  TestList.get(0).
+   // }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
